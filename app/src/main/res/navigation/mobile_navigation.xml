@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="app.wiserkronox.loyolasocios.view.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_data"
+        android:name="app.wiserkronox.loyolasocios.view.ui.home.ViewDataFragment"
+        android:label="@string/menu_datos"
+        tools:layout="@layout/fragment_view_data" />
+
+    <fragment
+        android:id="@+id/nav_pictures"
+        android:name="app.wiserkronox.loyolasocios.view.ui.home.ViewPicturesFragment"
+        android:label="@string/menu_pictures"
+        tools:layout="@layout/fragment_view_pictures" />
+
+    <fragment
+        android:id="@+id/nav_assembly"
+        android:name="app.wiserkronox.loyolasocios.view.ui.home.ListAssemblyFragment"
+        android:label="@string/menu_assembly"
+        tools:layout="@layout/fragment_list_assembly" />
+</navigation>
