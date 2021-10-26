@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/image_selfie"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_width="111dp"
+        android:layout_height="109dp"
         android:layout_marginTop="15dp"
         android:contentDescription="@string/label_selfie"
         android:src="@drawable/ic_portrait_24"
@@ -23,13 +23,12 @@
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="4dp"
         android:text="@string/text_wellcome"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/font_color_home"
         android:textStyle="bold"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -107,4 +106,63 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/btn_certificados"
+        android:layout_width="108dp"
+        android:layout_height="97dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:background="#8017B13F"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_inactive_status">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_marginTop="12dp"
+            android:contentDescription="TODO"
+            android:src="@drawable/btn_certificacion" />
+
+        <TextView
+            android:id="@+id/textView42"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_marginTop="1dp"
+            android:gravity="center"
+            android:text="CERTIFICADOS DE APORTACIÓN"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_credito"
+        android:layout_width="108dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="3dp"
+        android:background="#2015E60D"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_certificados">
+
+        <ImageView
+            android:id="@+id/ico_credito"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/btn_credito" />
+
+        <TextView
+            android:id="@+id/textView44"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:gravity="center"
+            android:text="@string/text_creditos"
+            android:textColor="#040404" />
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

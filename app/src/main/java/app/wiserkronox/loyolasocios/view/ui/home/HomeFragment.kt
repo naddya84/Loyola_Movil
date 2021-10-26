@@ -9,11 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import app.wiserkronox.loyolasocios.R
+import app.wiserkronox.loyolasocios.R.id.btn_credito
 import app.wiserkronox.loyolasocios.service.LoyolaApplication
 import app.wiserkronox.loyolasocios.service.model.User
 import app.wiserkronox.loyolasocios.service.repository.LoyolaService
@@ -35,6 +37,8 @@ class HomeFragment : Fragment() {
     private  lateinit var userStatus: ImageView
     private  lateinit var inActiveStatus: TextView
     private  lateinit var btnReview: Button
+    private  lateinit var btn_certificado: LinearLayout
+    private  lateinit var btn_credit: LinearLayout
 
     companion object {
         private const val TAG = "HomeFragment"
@@ -55,13 +59,19 @@ class HomeFragment : Fragment() {
         userStatus = root.findViewById(R.id.image_status_user)
         inActiveStatus = root.findViewById(R.id.text_inactive_status)
         btnReview = root.findViewById(R.id.btn_fix_data)
-
+        btn_certificado = root.findViewById(R.id.btn_certificados)
+        btn_credit = root.findViewById(btn_credito)
         val user = LoyolaApplication.getInstance()?.user
 
         btnReview.setOnClickListener{
             (activity as HomeActivity).fixData()
         }
-
+        btn_certificado.setOnClickListener{
+            (activity as HomeActivity).goCertificate()
+        }
+        btn_credit.setOnClickListener{
+            (activity as HomeActivity).goCredit()
+        }
         user?.let {
             userName.text = it.names+" "+it.last_name_1+" "+it.last_name_2
             userIDMember.text = it.id_member

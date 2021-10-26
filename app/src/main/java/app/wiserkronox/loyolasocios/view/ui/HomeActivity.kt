@@ -127,6 +127,21 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    fun goCertificate( ){
+        navController.navigate(R.id.nav_certificate, null, null);
+    }
+    fun goCredit( ){
+        navController.navigate(R.id.nav_credit, null, null);
+    }
+   /* fun openCertificate(){
+        val user = LoyolaApplication.getInstance()?.user
+        if( user != null ) {
+            val intent = Intent(this@HomeActivity, CertificadosFragment::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }*/
+
     /*********************************************************************************************
      * Funciones de conexion con el servidor
      */

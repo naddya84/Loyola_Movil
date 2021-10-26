@@ -28,4 +28,15 @@
         android:name="app.wiserkronox.loyolasocios.view.ui.home.ListAssemblyFragment"
         android:label="@string/menu_assembly"
         tools:layout="@layout/fragment_list_assembly" />
+
+    <fragment
+        android:id="@+id/nav_certificate"
+        android:name="app.wiserkronox.loyolasocios.view.ui.home.CertificateFragment"
+        android:label="Certificados de Aportación"
+        tools:layout="@layout/fragment_certificate" />
+    <fragment
+        android:id="@+id/nav_credit"
+        android:name="app.wiserkronox.loyolasocios.view.ui.home.CreditFragment"
+        android:label="Creditos"
+        tools:layout="@layout/fragment_credit" />
 </navigation>

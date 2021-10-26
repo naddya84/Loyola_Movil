@@ -133,4 +133,31 @@
     <string name="tecxt_inactive_state">UD. No está habilitado</string>
     <string name="text_icon_state">Estado del usuario</string>
 
+    <!--Textos Certificados socio-->
+    <string name="certificado_aportacion">CERTIFICADOS DE APORTACIÓN</string>
+    <string name="estado_cert">Estado</string>
+    <string name="monto_cert">Monto</string>
+    <string name="cantidad_cert">Cantidad</string>
+    <string name="fecha_apertura">Fecha Apertura</string>
+    <string name="nro_certificado">Nro. Certificado</string>
+    <string name="gestion">Gestión</string>
+    <!--Textos Credito socio-->
+    <string name="img_credito">Creditos</string>
+    <string name="creditos">Creditos</string>
+    <string name="nro_prestamo">Nro. prest:</string>
+    <string name="capital_credito">Capital:</string>
+    <string name="plazo_credito">Plazo:</string>
+    <string name="taza_credito">Taza:</string>
+    <string name="p_pago_credito">P Pago(k):</string>
+    <string name="f_pago_credito">F. Pago:</string>
+    <string name="fecha_v_credito">Fecha Vnt.</string>
+    <string name="capital_creditos">Capital</string>
+    <string name="intereses_credito">Intereses</string>
+    <string name="cuota_credito">Cuota</string>
+    <string name="cargos_credito">Cargos</string>
+    <string name="total_credito">Total</string>
+    <string name="saldo_credito">saldo</string>
+    <string name="btn_certificados">CERTIFICADOS DE OTORGACIÓN</string>
+    <string name="text_creditos">CREDITOS</string>
+
 </resources>
