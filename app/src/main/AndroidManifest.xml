@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="app.wiserkronox.loyolasocios">
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -16,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.LoyolaSocios">
+        android:theme="@style/Theme.LoyolaSocios"
+        tools:replace="android:allowBackup,android:usesCleartextTraffic">
 
         <activity
             android:name=".view.ui.MainActivity"

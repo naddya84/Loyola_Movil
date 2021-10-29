@@ -4,8 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TableLayout
+import android.widget.TableRow
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import app.wiserkronox.loyolasocios.R
+import app.wiserkronox.loyolasocios.service.LoyolaApplication
+import app.wiserkronox.loyolasocios.view.ui.MainActivity
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 
 class CreditFragment : Fragment() {
 
@@ -13,8 +22,67 @@ class CreditFragment : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+        var view = inflater.inflate(R.layout.fragment_credit, container, false)
+
+        var tableLayout = view.findViewById<TableLayout>(R.id.tableCredit)
+        tableLayout.setColumnStretchable(0,true)
+        tableLayout.setColumnStretchable(1,true)
+        tableLayout.setColumnStretchable(2,true)
+        tableLayout.setColumnStretchable(3,true)
+        tableLayout.setColumnStretchable(4,true)
+        tableLayout.setColumnStretchable(5,true)
+        tableLayout.setColumnStretchable(6,true)
+        tableLayout.bringToFront()
+
+        var user = LoyolaApplication.getInstance()?.user
+        val url: String = "${getString(R.string.host_service)}services/get_credit.php?u_id=${user!!.id_member}"
+        val queue = Volley.newRequestQueue(activity);
+        val creditRequest = JsonObjectRequest(
+            Request.Method.GET,
+            url,
+            null,
+            {jsonObject->
+
+                var data = jsonObject.getJSONArray("result")
+
+                for(i in 0 until data.length()) {
+
+                    var trow = TableRow(activity)
+                    var number = TextView(activity)
+                    var fechDes = TextView(activity)
+                    var monto = TextView(activity)
+                    var moneda = TextView(activity)
+                    var saldo = TextView(activity)
+                    var estado = TextView(activity)
+                    var fechCan = TextView(activity)
+
+                    number.text = data.getJSONObject(i).get("credNumero").toString()
+                    fechDes.text = data.getJSONObject(i).get("credFecDesem").toString()
+                    monto.text = data.getJSONObject(i).get("credMontoDesem").toString()
+                    moneda.text = data.getJSONObject(i).get("crediMoneda").toString()
+                    saldo.text = data.getJSONObject(i).get("crediSaldo").toString()
+                    estado.text = data.getJSONObject(i).get("crediEstado").toString()
+                    fechCan.text = data.getJSONObject(i).get("crediFecCancel").toString()
+
+                    trow.addView(number)
+                    trow.addView(fechDes)
+                    trow.addView(monto)
+                    trow.addView(moneda)
+                    trow.addView(saldo)
+                    trow.addView(estado)
+                    trow.addView(fechCan)
+
+                    tableLayout.addView(trow)
+                }
+            },
+            {volleyError->
+                Toast.makeText(activity,volleyError.message, Toast.LENGTH_SHORT).show()
+                println(volleyError.message)
+            })
+
+        queue.add(creditRequest)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_credit, container, false)
+        return view
     }
 
 }

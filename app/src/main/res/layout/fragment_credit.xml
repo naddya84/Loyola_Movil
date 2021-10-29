@@ -10,6 +10,7 @@
         android:layout_width="395dp"
         android:layout_height="408dp"
         android:layout_marginTop="16dp"
+        android:id="@+id/tableCredit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,12 +21,13 @@
             android:layout_width="335dp"
             android:layout_height="match_parent">
 
+            <!--Headers-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#147817"
-                android:text="@string/fecha_v_credito"
+                android:text="@string/credNumero"
                 android:textColor="#fff"
                 android:textSize="12sp" />
 
@@ -34,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#147817"
-                android:text="@string/capital_creditos"
+                android:text="@string/credFecDesem"
                 android:textColor="#fff"
                 android:textSize="12sp" />
 
@@ -43,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#147817"
-                android:text="@string/intereses_credito"
+                android:text="@string/credMontoDesem"
                 android:textColor="#fff"
                 android:textSize="12sp" />
 
@@ -52,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#147817"
-                android:text="@string/cuota_credito"
+                android:text="@string/crediMoneda"
                 android:textColor="#fff"
                 android:textSize="12sp" />
 
@@ -61,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#147817"
-                android:text="@string/cargos_credito"
+                android:text="@string/crediSaldo"
                 android:textColor="#fff"
                 android:textSize="12sp" />
 
@@ -70,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#147817"
-                android:text="@string/total_credito"
+                android:text="@string/crediEstado"
                 android:textColor="#fff"
                 android:textSize="12sp" />
 
@@ -79,10 +81,15 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#147817"
-                android:text="@string/saldo_credito"
+                android:text="@string/crediFecCancel"
                 android:textColor="#fff"
                 android:textSize="12sp" />
 
+            <!--Headers-->
+
+            <!--Rows-->
+
+            <!--Rows-->
         </TableRow>
     </TableLayout>
 
