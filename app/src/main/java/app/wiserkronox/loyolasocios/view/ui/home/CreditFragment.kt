@@ -1,6 +1,7 @@
 package app.wiserkronox.loyolasocios.view.ui.home
 
 import android.os.Bundle
+import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,10 +33,11 @@ class CreditFragment : Fragment() {
         tableLayout.setColumnStretchable(4,true)
         tableLayout.setColumnStretchable(5,true)
         tableLayout.setColumnStretchable(6,true)
-        tableLayout.bringToFront()
+
+
 
         var user = LoyolaApplication.getInstance()?.user
-        val url: String = "${getString(R.string.host_service)}services/get_credit.php?u_id=${user!!.id_member}"
+        val url: String = "${getString(R.string.host_service)}services/historia-cre-cly.php?docu-cage=${user!!.id_member}"
         val queue = Volley.newRequestQueue(activity);
         val creditRequest = JsonObjectRequest(
             Request.Method.GET,
@@ -55,7 +57,7 @@ class CreditFragment : Fragment() {
                     var saldo = TextView(activity)
                     var estado = TextView(activity)
                     var fechCan = TextView(activity)
-
+                    //Inser Value
                     number.text = data.getJSONObject(i).get("credNumero").toString()
                     fechDes.text = data.getJSONObject(i).get("credFecDesem").toString()
                     monto.text = data.getJSONObject(i).get("credMontoDesem").toString()
@@ -63,15 +65,20 @@ class CreditFragment : Fragment() {
                     saldo.text = data.getJSONObject(i).get("crediSaldo").toString()
                     estado.text = data.getJSONObject(i).get("crediEstado").toString()
                     fechCan.text = data.getJSONObject(i).get("crediFecCancel").toString()
+                    //Styles
 
-                    trow.addView(number)
-                    trow.addView(fechDes)
-                    trow.addView(monto)
-                    trow.addView(moneda)
-                    trow.addView(saldo)
-                    trow.addView(estado)
-                    trow.addView(fechCan)
+                    //Insert Row
+                    var params = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
+                    params.setMargins(13,10,13,10)
 
+                    trow.addView(number,params)
+                    trow.addView(fechDes,params)
+                    trow.addView(monto,params)
+                    trow.addView(moneda,params)
+                    trow.addView(saldo,params)
+                    trow.addView(estado,params)
+                    trow.addView(fechCan,params)
+                    //Insert row in table
                     tableLayout.addView(trow)
                 }
             },

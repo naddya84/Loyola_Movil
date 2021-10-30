@@ -168,11 +168,11 @@
     <string name="zoom_app_secret">zoom_app_secret</string>
     <string name="google_id_token">google_id_token</string>
     <!--Textos Credito-->
-    <string name="credNumero">N° Credito</string>
-    <string name="credFecDesem">Cred Fec Desem</string>
-    <string name="credMontoDesem">CredMontoDesem</string>
+    <string name="credNumero">NCredito</string>
+    <string name="credFecDesem">Fecha D</string>
+    <string name="credMontoDesem">Monto</string>
     <string name="crediMoneda">Moneda</string>
     <string name="crediSaldo">Saldo</string>
     <string name="crediEstado">Estado</string>
-    <string name="crediFecCancel">CrediFecCancel</string>
+    <string name="crediFecCancel">Fecha C</string>
 </resources>
