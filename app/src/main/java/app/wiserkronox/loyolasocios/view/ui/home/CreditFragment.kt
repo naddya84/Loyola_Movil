@@ -6,13 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import app.wiserkronox.loyolasocios.R
 import app.wiserkronox.loyolasocios.service.LoyolaApplication
 import app.wiserkronox.loyolasocios.view.ui.MainActivity
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+
 
 class CreditFragment : Fragment() {
 
@@ -61,7 +66,10 @@ class CreditFragment : Fragment() {
                     trow.addView(estado,params)
                     trow.addView(button,params)
                     button.setOnClickListener {
-                        println("Hey")
+                        val details = data.getJSONObject(i).toString()
+                        val bundle = Bundle()
+                        bundle.putString("data",details)
+                        view.findNavController().navigate(R.id.action_detaill, bundle)
                     }
                     //Insert row in table
                     tableLayout.addView(trow)

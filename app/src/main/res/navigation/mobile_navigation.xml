@@ -38,5 +38,25 @@
         android:id="@+id/nav_credit"
         android:name="app.wiserkronox.loyolasocios.view.ui.home.CreditFragment"
         android:label="Creditos"
-        tools:layout="@layout/fragment_credit" />
+        tools:layout="@layout/fragment_credit" >
+        <action
+            android:id="@+id/action_detaill"
+            app:destination="@+id/nav_credit_detaill"
+            >
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_credit_detaill"
+        android:name="app.wiserkronox.loyolasocios.view.ui.home.DetailCreditFragment"
+        android:label="Detalles de credito"
+        tools:layout="@layout/fragment_detail_credit"
+        >
+        <argument
+            android:name="detaills"
+            app:argType="string[]" />
+    </fragment>
+
+
 </navigation>
