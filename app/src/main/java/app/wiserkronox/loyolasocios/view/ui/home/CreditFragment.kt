@@ -1,5 +1,6 @@
 package app.wiserkronox.loyolasocios.view.ui.home
 
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Layout
 import android.view.LayoutInflater
@@ -34,7 +35,7 @@ class CreditFragment : Fragment() {
         tableLayout.setColumnStretchable(3,true)
 
         var user = LoyolaApplication.getInstance()?.user
-        val url: String = "${getString(R.string.host_service)}services/historia-cre-cly.php?docu-cage=${user!!.id_member}"
+        val url: String = "${getString(R.string.host_service)}services/historial_cred_cly.php?docu-cage=${user!!.id_member}"
         val queue = Volley.newRequestQueue(activity);
         val creditRequest = JsonObjectRequest(
             Request.Method.GET,
@@ -42,7 +43,7 @@ class CreditFragment : Fragment() {
             null,
             {jsonObject->
 
-                var data = jsonObject.getJSONArray("result")
+                var data = jsonObject.getJSONArray("result");
 
                 for(i in 0 until data.length()) {
 
@@ -50,13 +51,14 @@ class CreditFragment : Fragment() {
                     var number = TextView(activity)
                     var moneda = TextView(activity)
                     var estado = TextView(activity)
-                    var button = Button(activity)
+                    var button = TextView(activity)
 
                     //Inser Value
                     number.text = data.getJSONObject(i).get("credNumero").toString()
-                    moneda.text = data.getJSONObject(i).get("crediMoneda").toString()
-                    estado.text = data.getJSONObject(i).get("crediEstado").toString()
-                    button.text = "Ver Detalles"
+                    moneda.text = data.getJSONObject(i).get("credMoneda").toString()
+                    estado.text = data.getJSONObject(i).get("credEstado").toString()
+                    button.text = "Ver Detalle"
+                    button.setTextColor(Color.parseColor("#FF3700B3"))
                     //Insert Row
                     var params = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
                     params.setMargins(13,10,13,10)
@@ -67,6 +69,7 @@ class CreditFragment : Fragment() {
                     trow.addView(button,params)
                     button.setOnClickListener {
                         val details = data.getJSONObject(i).toString()
+                        println(details);
                         val bundle = Bundle()
                         bundle.putString("data",details)
                         view.findNavController().navigate(R.id.action_detaill, bundle)
