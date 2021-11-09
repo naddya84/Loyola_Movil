@@ -1,60 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/credit_fragment"
-    android:layout_height="match_parent">
-
-    <Button
-        android:id="@+id/btn_extracto_creditos"
-        android:layout_width="175dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="5dp"
-        android:backgroundTint="#FFF3F3F3"
-        android:text="EXTRACTO DE CREDITOS"
-        android:textColor="@color/black"
-        android:textSize="10dp"
-        app:cornerRadius="@dimen/zm_dialog_margin_12dp"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_plan_de_pagos"
-        android:layout_width="120dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="#FFF3F3F3"
-        android:text="PLAN DE PAGOS"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@color/black"
-        android:textSize="10dp"
-        app:cornerRadius="@dimen/zm_dialog_margin_12dp"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toEndOf="@+id/btn_extracto_creditos" />
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BCBCBC">
 
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="387dp"
-        android:layout_height="878dp"
+        android:layout_width="388dp"
+        android:layout_height="675dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_weight="1"
         android:fillViewport="true"
         android:scrollbarStyle="outsideInset"
         android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_extracto_creditos">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TableLayout
             android:id="@+id/tableCredit"
@@ -89,6 +57,7 @@
                     android:layout_weight="1"
                     android:background="@color/green_head"
                     android:text="@string/crediMoneda"
+                    android:textAlignment="center"
                     android:textColor="#fff"
                     android:textSize="12sp"
                     android:textStyle="bold" />
@@ -99,6 +68,7 @@
                     android:layout_weight="1"
                     android:background="@color/green_head"
                     android:text="@string/crediSaldo"
+                    android:textAlignment="center"
                     android:textColor="#fff"
                     android:textSize="12sp"
                     android:textStyle="bold" />
@@ -109,6 +79,7 @@
                     android:layout_weight="1"
                     android:background="@color/green_head"
                     android:text="@string/credAccion"
+                    android:textAlignment="center"
                     android:textColor="#fff"
                     android:textSize="12sp"
                     android:textStyle="bold" />

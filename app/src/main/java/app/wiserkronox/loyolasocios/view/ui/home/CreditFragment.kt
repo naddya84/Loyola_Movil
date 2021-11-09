@@ -1,17 +1,25 @@
 package app.wiserkronox.loyolasocios.view.ui.home
 
 import android.graphics.Color
+import android.graphics.Typeface
+import android.icu.lang.UCharacter
 import android.os.Bundle
 import android.text.Layout
+import android.util.TypedValue
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.os.bundleOf
+import androidx.core.view.marginTop
+import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import app.wiserkronox.loyolasocios.R
 import app.wiserkronox.loyolasocios.service.LoyolaApplication
 import app.wiserkronox.loyolasocios.view.ui.MainActivity
@@ -48,26 +56,77 @@ class CreditFragment : Fragment() {
                 for(i in 0 until data.length()) {
 
                     var trow = TableRow(activity)
-                    var number = TextView(activity)
-                    var moneda = TextView(activity)
-                    var estado = TextView(activity)
-                    var button = TextView(activity)
+                    var tableParams = TableLayout.LayoutParams()
+                    tableParams.setMargins(5,12,0,5)
 
+                    trow.layoutParams = tableParams
+
+                    var number = TextView(activity)
+                    number.gravity = Gravity.LEFT
+                    number.setTypeface(null, Typeface.BOLD)
+                    number.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
+
+                    var moneda = TextView(activity)
+                    moneda.gravity = Gravity.CENTER
+                    moneda.setTypeface(null, Typeface.BOLD)
+                    moneda.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
+
+
+                    var estado = TextView(activity)
+                    estado.gravity = Gravity.CENTER
+                    estado.setTypeface(null, Typeface.BOLD)
+                    estado.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
+
+                    var list = LinearLayout(activity)
+
+                    var btndetail = TextView(activity)
+                    btndetail.gravity = Gravity.CENTER
+                    btndetail.setTypeface(null, Typeface.BOLD)
+                    btndetail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
+
+                    var btnplanpagos = TextView(activity)
+                    btnplanpagos.gravity = Gravity.CENTER
+                    btnplanpagos.setTypeface(null, Typeface.BOLD)
+                    btnplanpagos.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
+
+                    var btnextractos = TextView(activity)
+                    btnextractos.gravity = Gravity.CENTER
+                    btnextractos.setTypeface(null, Typeface.BOLD)
+                    btnextractos.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
                     //Inser Value
+
                     number.text = data.getJSONObject(i).get("credNumero").toString()
                     moneda.text = data.getJSONObject(i).get("credMoneda").toString()
                     estado.text = data.getJSONObject(i).get("credEstado").toString()
-                    button.text = "Ver Detalle"
-                    button.setTextColor(Color.parseColor("#FF3700B3"))
-                    //Insert Row
-                    var params = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
-                    params.setMargins(13,10,13,10)
 
-                    trow.addView(number,params)
-                    trow.addView(moneda,params)
-                    trow.addView(estado,params)
-                    trow.addView(button,params)
-                    button.setOnClickListener {
+                    btndetail.text = "Ver Detalle"
+                    btndetail.setTextColor(Color.parseColor("#FF3700B3"))
+
+                    btnplanpagos.text = "Plan Pagos"
+                    btnplanpagos.setTextColor(Color.parseColor("#FF3700B3"))
+
+                    btnextractos.text = "Extractos"
+                    btnextractos.setTextColor(Color.parseColor("#FF3700B3"))
+
+                    //Insert Row
+
+                    var paramsl = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                    )
+
+                    list.orientation = LinearLayout.VERTICAL
+
+                    list.addView(btndetail,paramsl)
+                    list.addView(btnplanpagos,paramsl)
+                    list.addView(btnextractos,paramsl)
+
+                    trow.addView(number)
+                    trow.addView(moneda)
+                    trow.addView(estado)
+                    trow.addView(list)
+
+                    btndetail.setOnClickListener {
                         val details = data.getJSONObject(i).toString()
                         println(details);
                         val bundle = Bundle()
@@ -75,6 +134,7 @@ class CreditFragment : Fragment() {
                         view.findNavController().navigate(R.id.action_detaill, bundle)
                     }
                     //Insert row in table
+                    trow.setBackgroundColor(Color.parseColor("#FFFFFF"))
                     tableLayout.addView(trow)
                 }
             },
