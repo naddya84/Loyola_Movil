@@ -19,13 +19,13 @@ import com.android.volley.toolbox.Volley
 import org.json.JSONObject
 
 
-class PlanePayCreditFragment : Fragment() {
+class ExtractCreditFragment : Fragment() {
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        var view = inflater.inflate(R.layout.fragment_plane_pay_credit, container, false)
+        var view = inflater.inflate(R.layout.fragment_extract_credit, container, false)
 
         var args = this.arguments
         var data = args?.get("data")
@@ -41,15 +41,12 @@ class PlanePayCreditFragment : Fragment() {
         tableLayout.setColumnStretchable(2,true)
         tableLayout.setColumnStretchable(3,true)
         tableLayout.setColumnStretchable(4,true)
-        tableLayout.setColumnStretchable(5,true)
-        tableLayout.setColumnStretchable(6,true)
-        tableLayout.setColumnStretchable(7,true)
 
         var user = LoyolaApplication.getInstance()?.user //docu-cage
         var number = json.get("credNumero").toString() //cred-number
 
         //HEADER PLAN DE PAGOS
-        val url: String = "${getString(R.string.host_service)}services/plan_pago_cly.php?docu-cage=${user!!.id_member}&cred-number=${number}"
+        val url: String = "${getString(R.string.host_service)}services/extracto_credito.php?docu-cage=${user!!.id_member}&cred-number=${number}"
         val queue = Volley.newRequestQueue(activity)
 
         val planePayCreditRequest = JsonObjectRequest(
@@ -66,17 +63,13 @@ class PlanePayCreditFragment : Fragment() {
                     var nroPrest = view.findViewById<TextView>(R.id.txtNroPrest)
                     var capital = view.findViewById<TextView>(R.id.txtMontoDesm)
                     var plazo = view.findViewById<TextView>(R.id.txtPlazo)
-                    var tasa = view.findViewById<TextView>(R.id.txtEstado)
-                    var ppago = view.findViewById<TextView>(R.id.txtPPago)
-                    var fpago = view.findViewById<TextView>(R.id.txtFPago)
+                    var estado = view.findViewById<TextView>(R.id.txtEstado)
                     for (i in 0 until data.length()) {
 
                         nroPrest.text = data.getJSONObject(i).get("id_credito").toString()
                         capital.text = data.getJSONObject(i).get("credMontoDesem").toString()
                         plazo.text = data.getJSONObject(i).get("credPlazo").toString()
-                        tasa.text = data.getJSONObject(i).get("credTasa").toString()
-                        ppago.text = data.getJSONObject(i).get("credPeriPago").toString()
-                        fpago.text = data.getJSONObject(i).get("credForPago").toString()
+                        estado.text = data.getJSONObject(i).get("estado").toString()
 
                     }
                     //CONSULT TABLE
@@ -89,17 +82,17 @@ class PlanePayCreditFragment : Fragment() {
                         tableParams.setMargins(5, 12, 0, 5)
                         trow.layoutParams = tableParams
 
-                        var nro = TextView(activity)
-                        nro.gravity = Gravity.LEFT
-                        nro.setTypeface(null, Typeface.BOLD)
-                        nro.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                        nro.text = detail.getJSONObject(i).get("credNumCuota").toString()
-
                         var fechavct = TextView(activity)
                         fechavct.gravity = Gravity.LEFT
                         fechavct.setTypeface(null, Typeface.BOLD)
                         fechavct.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                        fechavct.text = detail.getJSONObject(i).get("credFecVenci").toString()
+                        fechavct.text = detail.getJSONObject(i).get("credFecPago").toString()
+
+                        var nro = TextView(activity)
+                        nro.gravity = Gravity.LEFT
+                        nro.setTypeface(null, Typeface.BOLD)
+                        nro.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
+                        nro.text = detail.getJSONObject(i).get("credNroTrans").toString()
 
                         var capital = TextView(activity)
                         capital.gravity = Gravity.CENTER
@@ -107,44 +100,24 @@ class PlanePayCreditFragment : Fragment() {
                         capital.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
                         capital.text = detail.getJSONObject(i).get("credMontoCapi").toString()
 
-                        var interes = TextView(activity)
-                        interes.gravity = Gravity.CENTER
-                        interes.setTypeface(null, Typeface.BOLD)
-                        interes.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                        interes.text = detail.getJSONObject(i).get("credMontoInte").toString()
-
-                        var cuota = TextView(activity)
-                        cuota.gravity = Gravity.CENTER
-                        cuota.setTypeface(null, Typeface.BOLD)
-                        cuota.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                        cuota.text = detail.getJSONObject(i).get("credTotaCuota").toString()
-
-                        var cargo = TextView(activity)
-                        cargo.gravity = Gravity.CENTER
-                        cargo.setTypeface(null, Typeface.BOLD)
-                        cargo.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                        cargo.text = detail.getJSONObject(i).get("credMontoCargos").toString()
-
-                        var total = TextView(activity)
-                        total.gravity = Gravity.CENTER
-                        total.setTypeface(null, Typeface.BOLD)
-                        total.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                        total.text = detail.getJSONObject(i).get("credTotalCuota").toString()
-
                         var saldo = TextView(activity)
                         saldo.gravity = Gravity.CENTER
                         saldo.setTypeface(null, Typeface.BOLD)
                         saldo.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                        saldo.text = detail.getJSONObject(i).get("credSaldoCredi").toString()
+                        saldo.text = detail.getJSONObject(i).get("credSaldoCapi").toString()
 
-                        trow.addView(nro)
+                        var btndetalle = TextView(activity)
+                        btndetalle.gravity = Gravity.CENTER
+                        btndetalle.setTypeface(null, Typeface.BOLD)
+                        btndetalle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
+                        btndetalle.text = "Ver detallado"
+                        btndetalle.setTextColor(Color.parseColor("#FF3700B3"))
+
                         trow.addView(fechavct)
+                        trow.addView(nro)
                         trow.addView(capital)
-                        trow.addView(interes)
-                        trow.addView(cuota)
-                        trow.addView(cargo)
-                        trow.addView(total)
                         trow.addView(saldo)
+                        trow.addView(btndetalle)
 
                         trow.setBackgroundColor(Color.parseColor("#FFFFFF"))
                         tableLayout.addView(trow)

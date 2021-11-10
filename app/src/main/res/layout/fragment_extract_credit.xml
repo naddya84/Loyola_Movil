@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/plane_pay_credit_layout"
+    android:id="@+id/extract_credit_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#BCBCBC">
@@ -24,34 +24,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#F3F3F3">
-
-                <TextView
-                    android:id="@+id/txtFPago"
-                    android:layout_width="130dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="130dp"
-                    android:text="FPago"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/txtPPago"
-                    android:layout_width="130dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="105dp"
-                    android:text="PPago"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/txtEstado"
@@ -106,36 +78,6 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/lblFPago"
-                    android:layout_width="120dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="130dp"
-                    android:text="F.Pago::"
-                    android:textColor="#0CAF02"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/txtFPago"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/lblPPago"
-                    android:layout_width="120dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="105dp"
-                    android:text="P.Pago (K):"
-                    android:textColor="#0CAF02"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/txtPPago"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -252,7 +194,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@color/green_head"
-                            android:text="No"
+                            android:text="Fech.Pago"
                             android:textColor="#fff"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -263,7 +205,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@color/green_head"
-                            android:text="Fecha Vcto"
+                            android:text="No.Trans"
                             android:textColor="#fff"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -281,64 +223,29 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/theadCapital"
+                            android:id="@+id/theadSaldoCap"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@color/green_head"
-                            android:text="Interes"
+                            android:text="Saldo Capital"
                             android:textAlignment="center"
                             android:textColor="#fff"
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/theadCapital"
+                            android:id="@+id/theadAccion"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@color/green_head"
-                            android:text="Cuota"
+                            android:text="Acción"
                             android:textAlignment="center"
                             android:textColor="#fff"
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/theadPenales"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:background="@color/green_head"
-                            android:text="Cargos"
-                            android:textAlignment="center"
-                            android:textColor="#fff"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/theadFormL"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:background="@color/green_head"
-                            android:text="Total"
-                            android:textAlignment="center"
-                            android:textColor="#fff"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/theadSaldo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:background="@color/green_head"
-                            android:text="Saldo"
-                            android:textAlignment="center"
-                            android:textColor="#fff"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
                     </TableRow>
 
                 </TableLayout>

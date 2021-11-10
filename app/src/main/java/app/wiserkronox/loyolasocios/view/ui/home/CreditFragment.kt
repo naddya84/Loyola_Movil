@@ -129,6 +129,13 @@ class CreditFragment : Fragment() {
                         bundle.putString("data",details)
                         view.findNavController().navigate(R.id.action_plane_pay_credit, bundle)
                     }
+
+                    btnextractos.setOnClickListener {
+                        val details = data.getJSONObject(i).toString()
+                        val bundle = Bundle()
+                        bundle.putString("data",details)
+                        view.findNavController().navigate(R.id.action_extract_credit, bundle)
+                    }
                     //Insert row in table
                     trow.setBackgroundColor(Color.parseColor("#FFFFFF"))
                     tableLayout.addView(trow)
