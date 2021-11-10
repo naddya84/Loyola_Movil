@@ -2,27 +2,17 @@ package app.wiserkronox.loyolasocios.view.ui.home
 
 import android.graphics.Color
 import android.graphics.Typeface
-import android.icu.lang.UCharacter
 import android.os.Bundle
-import android.text.Layout
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.os.bundleOf
-import androidx.core.view.marginTop
-import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import app.wiserkronox.loyolasocios.R
 import app.wiserkronox.loyolasocios.service.LoyolaApplication
-import app.wiserkronox.loyolasocios.view.ui.MainActivity
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
@@ -128,10 +118,16 @@ class CreditFragment : Fragment() {
 
                     btndetail.setOnClickListener {
                         val details = data.getJSONObject(i).toString()
-                        println(details);
                         val bundle = Bundle()
                         bundle.putString("data",details)
                         view.findNavController().navigate(R.id.action_detaill, bundle)
+                    }
+
+                    btnplanpagos.setOnClickListener {
+                        val details = data.getJSONObject(i).toString()
+                        val bundle = Bundle()
+                        bundle.putString("data",details)
+                        view.findNavController().navigate(R.id.action_plane_pay_credit, bundle)
                     }
                     //Insert row in table
                     trow.setBackgroundColor(Color.parseColor("#FFFFFF"))

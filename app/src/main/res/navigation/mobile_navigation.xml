@@ -39,10 +39,14 @@
         android:name="app.wiserkronox.loyolasocios.view.ui.home.CreditFragment"
         android:label="Creditos"
         tools:layout="@layout/fragment_credit" >
+
         <action
             android:id="@+id/action_detaill"
-            app:destination="@+id/nav_credit_detaill"
-            >
+            app:destination="@+id/nav_credit_detaill">
+        </action>
+        <action
+            android:id="@+id/action_plane_pay_credit"
+            app:destination="@id/nav_plane_pay_credit">
         </action>
 
     </fragment>
@@ -53,10 +57,14 @@
         android:label="Detalles de credito"
         tools:layout="@layout/fragment_detail_credit"
         >
-        <argument
-            android:name="detaills"
-            app:argType="string[]" />
     </fragment>
 
+    <fragment
+        android:id="@+id/nav_plane_pay_credit"
+        android:name="app.wiserkronox.loyolasocios.view.ui.home.PlanePayCreditFragment"
+        android:label="Plan de Pagos Crediticio"
+        tools:layout="@layout/fragment_plane_pay_credit"
+        >
+    </fragment>
 
 </navigation>
