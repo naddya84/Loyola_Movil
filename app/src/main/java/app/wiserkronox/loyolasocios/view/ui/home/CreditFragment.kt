@@ -1,14 +1,21 @@
 package app.wiserkronox.loyolasocios.view.ui.home
 
+import android.app.DownloadManager
+import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.CookieManager
+import android.webkit.URLUtil
 import android.widget.*
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import app.wiserkronox.loyolasocios.R
@@ -147,6 +154,26 @@ class CreditFragment : Fragment() {
             })
 
         queue.add(creditRequest)
+
+        //DowloadPdf
+        var btnDowloadPdf = view.findViewById<Button>(R.id.btnPdfHistorialCrediticio)
+
+        btnDowloadPdf.setOnClickListener {
+            var urlDowload : String = "${getString(R.string.host_service)}services/generate_pdf_crediticio.php?docu-cage=${user!!.id_member}"
+
+            var cookie = CookieManager.getInstance().getCookie(urlDowload.toString())
+            var request = DownloadManager.Request(Uri.parse(urlDowload))
+                .setTitle("crehistorial.pdf")
+                .setDescription("Descargando....")
+                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "crehistorial.pdf")
+                .addRequestHeader("cookie", cookie)
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                .setAllowedOverMetered(true)
+
+            var dm = activity?.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+            dm.enqueue(request)
+        }
+
         // Inflate the layout for this fragment
         return view
     }

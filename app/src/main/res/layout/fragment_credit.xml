@@ -7,91 +7,128 @@
     android:layout_height="match_parent"
     android:background="#BCBCBC">
 
-    <ScrollView
-        android:id="@+id/scrollView3"
-        android:layout_width="388dp"
-        android:layout_height="675dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_weight="1"
-        android:fillViewport="true"
-        android:scrollbarStyle="outsideInset"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TableLayout
-            android:id="@+id/tableCredit"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="658dp"
+            android:layout_height="50dp">
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.492"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.78">
+            <Button
+                android:id="@+id/btnPdfHistorialCrediticio"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="#C3C1C1"
+                android:text="PDF-Creditos"
+                android:textSize="10sp"
+                app:cornerRadius="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.11"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="7dp" />
 
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+            <Button
+                android:id="@+id/btnContactar"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="#C3C1C1"
+                android:text="Contactar"
+                android:textSize="10sp"
+                app:cornerRadius="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.71"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="7dp" />
 
-                <!--Headers-->
-                <TextView
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            android:id="@+id/scrollView3"
+            android:layout_width="388dp"
+            android:layout_height="675dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:fillViewport="true"
+            android:scrollbarStyle="outsideInset"
+            android:scrollbars="vertical">
+
+            <TableLayout
+                android:id="@+id/tableCredit"
+                android:layout_width="match_parent"
+                android:layout_height="658dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.492"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.78">
+
+                <TableRow
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@color/green_head"
-                    android:text="@string/credNumero"
-                    android:textColor="#fff"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/green_head"
-                    android:text="@string/crediMoneda"
-                    android:textAlignment="center"
-                    android:textColor="#fff"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                    <!--Headers-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/green_head"
+                        android:text="@string/credNumero"
+                        android:textColor="#fff"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/green_head"
-                    android:text="@string/crediSaldo"
-                    android:textAlignment="center"
-                    android:textColor="#fff"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/green_head"
+                        android:text="@string/crediMoneda"
+                        android:textAlignment="center"
+                        android:textColor="#fff"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@color/green_head"
-                    android:text="@string/credAccion"
-                    android:textAlignment="center"
-                    android:textColor="#fff"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/green_head"
+                        android:text="@string/crediSaldo"
+                        android:textAlignment="center"
+                        android:textColor="#fff"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
-                <!--Headers-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/green_head"
+                        android:text="@string/credAccion"
+                        android:textAlignment="center"
+                        android:textColor="#fff"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
-                <!--Rows-->
+                    <!--Headers-->
 
-                <!--Rows-->
-            </TableRow>
-        </TableLayout>
+                    <!--Rows-->
+
+                    <!--Rows-->
+                </TableRow>
+            </TableLayout>
 
 
-    </ScrollView>
+        </ScrollView>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

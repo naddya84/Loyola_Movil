@@ -1,13 +1,18 @@
 package app.wiserkronox.loyolasocios.view.ui.home
 
+import android.app.DownloadManager
+import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.CookieManager
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -163,6 +168,23 @@ class PlanePayCreditFragment : Fragment() {
 
         queue.add(planePayCreditRequest)
 
+        var btnGenerarPdf = view.findViewById<Button>(R.id.btnGenerarPdf)
+
+        btnGenerarPdf.setOnClickListener {
+            var urlDowload : String = "${getString(R.string.host_service)}services/generate_pdf_plan_pagos.php?docu-cage=${user!!.id_member}&cred-number=${number}"
+
+            var cookie = CookieManager.getInstance().getCookie(urlDowload.toString())
+            var request = DownloadManager.Request(Uri.parse(urlDowload))
+                .setTitle("crePlanPagos.pdf")
+                .setDescription("Descargando....")
+                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "crePlanPagos.pdf")
+                .addRequestHeader("cookie", cookie)
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                .setAllowedOverMetered(true)
+
+            var dm = activity?.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+            dm.enqueue(request)
+        }
 
         return view
     }
