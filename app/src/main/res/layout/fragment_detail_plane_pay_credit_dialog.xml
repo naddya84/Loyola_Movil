@@ -20,7 +20,7 @@
                 android:id="@+id/txtTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Detalle de extracto de credito"
+                android:text="Detalle de Plan de Pagos"
                 android:textAlignment="center"
                 android:textColor="#EEEEEE"
                 android:textSize="16sp"
@@ -52,7 +52,7 @@
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Fecha:"
+                        android:text="Fecha de Venct:"
                         android:textAlignment="viewStart"
                         android:textSize="16sp" />
 
@@ -76,7 +76,7 @@
 
                     <TextView
                         android:id="@+id/lblMontoCapi"
-                        android:layout_width="50dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Monto pagado a Capital:"
@@ -101,7 +101,7 @@
 
                     <TextView
                         android:id="@+id/lblMontoInteres"
-                        android:layout_width="50dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Monto pagado a interes:"
@@ -126,10 +126,10 @@
 
                     <TextView
                         android:id="@+id/lblTotalCuota"
-                        android:layout_width="50dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Monto cargos penales:"
+                        android:text="Total Cuota a pagar:"
                         android:textAlignment="viewStart"
                         android:textSize="16sp" />
 
@@ -151,10 +151,10 @@
 
                     <TextView
                         android:id="@+id/lblMontoCargos"
-                        android:layout_width="50dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Monto de cargos generales:"
+                        android:text="Monto de cargos adicionales:"
                         android:textAlignment="viewStart"
                         android:textSize="16sp" />
 
@@ -176,10 +176,10 @@
 
                     <TextView
                         android:id="@+id/lbltotalpagos"
-                        android:layout_width="50dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Total cuota pagada:"
+                        android:text="Total Cuota pagada:"
                         android:textAlignment="viewStart"
                         android:textSize="16sp" />
 
@@ -201,10 +201,10 @@
 
                     <TextView
                         android:id="@+id/lblSaldoCredi"
-                        android:layout_width="50dp"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Saldo Capital:"
+                        android:text="Saldo del Credito:"
                         android:textAlignment="viewStart"
                         android:textSize="16sp" />
 

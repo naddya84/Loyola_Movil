@@ -23,90 +23,34 @@
                 android:id="@+id/container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#F3F3F3">
-
-                <TextView
-                    android:id="@+id/txtEstado"
-                    android:layout_width="130dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="80dp"
-                    android:text="Tasa"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/txtPlazo"
-                    android:layout_width="130dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="55dp"
-                    android:text="Plazo"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                android:background="#D1D2D4">
 
                 <TextView
                     android:id="@+id/txtMontoDesm"
                     android:layout_width="130dp"
                     android:layout_height="25dp"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="50dp"
                     android:text="Capital"
                     android:textColor="#000000"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.485"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/txtNroPrest"
-                    android:layout_width="130dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="5dp"
-                    android:text="Nro.Prest."
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/lblEstado"
+                    android:id="@+id/lblNroPrest"
                     android:layout_width="120dp"
                     android:layout_height="25dp"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="80dp"
-                    android:text="Tasa:"
-                    android:textColor="#0CAF02"
+                    android:layout_marginTop="25dp"
+                    android:text="Nro.Prest.:"
+                    android:textColor="#0F784D"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/txtEstado"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/lblPlazo"
-                    android:layout_width="120dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="55dp"
-                    android:text="Plazo:"
-                    android:textColor="#0CAF02"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/txtPlazo"
+                    app:layout_constraintEnd_toStartOf="@+id/txtNroPrest"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -116,9 +60,9 @@
                     android:layout_width="120dp"
                     android:layout_height="25dp"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="50dp"
                     android:text="Capital:"
-                    android:textColor="#0CAF02"
+                    android:textColor="#0F784D"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/txtMontoDesm"
@@ -127,37 +71,103 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/lblNroPrest"
+                    android:id="@+id/lblPlazo"
                     android:layout_width="120dp"
                     android:layout_height="25dp"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="5dp"
-                    android:text="Nro.Prest.:"
-                    android:textColor="#0CAF02"
+                    android:layout_marginTop="75dp"
+                    android:text="Plazo:"
+                    android:textColor="#0F784D"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/txtNroPrest"
+                    app:layout_constraintEnd_toStartOf="@+id/txtPlazo"
                     app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/lblEstado"
+                    android:layout_width="120dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="100dp"
+                    android:text="Tasa:"
+                    android:textColor="#0F784D"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/txtEstado"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtEstado"
+                    android:layout_width="130dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="100dp"
+                    android:text="Tasa"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.485"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtPlazo"
+                    android:layout_width="130dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="75dp"
+                    android:text="Plazo"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.485"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtNroPrest"
+                    android:layout_width="130dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="25dp"
+                    android:text="Nro.Prest."
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.485"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/btnGenerarPdf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="5dp"
-                    android:text="Generar PDF"
+                    android:layout_width="150dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="#00A850"
+                    android:drawableLeft="@drawable/zm_ic_filetype_pdf"
+                    android:text="Descargar PDF"
+                    android:textSize="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/btnContacto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_width="150dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="#00A850"
                     android:text="Contactar"
+                    android:textSize="12dp"
+                    app:iconPadding="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btnGenerarPdf" />
 
@@ -206,18 +216,6 @@
                             android:layout_weight="1"
                             android:background="@color/green_head"
                             android:text="No.Trans"
-                            android:textColor="#fff"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/theadCapital"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:background="@color/green_head"
-                            android:text="Capital"
-                            android:textAlignment="center"
                             android:textColor="#fff"
                             android:textSize="12sp"
                             android:textStyle="bold" />

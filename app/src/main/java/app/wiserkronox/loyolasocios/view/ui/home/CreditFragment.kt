@@ -80,16 +80,19 @@ class CreditFragment : Fragment() {
                     btndetail.gravity = Gravity.CENTER
                     btndetail.setTypeface(null, Typeface.BOLD)
                     btndetail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
+                    btndetail.setTextColor(Color.parseColor("#4674D4"))
 
                     var btnplanpagos = TextView(activity)
                     btnplanpagos.gravity = Gravity.CENTER
                     btnplanpagos.setTypeface(null, Typeface.BOLD)
                     btnplanpagos.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
+                    btnplanpagos.setTextColor(Color.parseColor("#4674D4"))
 
                     var btnextractos = TextView(activity)
                     btnextractos.gravity = Gravity.CENTER
                     btnextractos.setTypeface(null, Typeface.BOLD)
                     btnextractos.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
+                    btnextractos.setTextColor(Color.parseColor("#4674D4"))
                     //Inser Value
 
                     number.text = data.getJSONObject(i).get("credNumero").toString()
@@ -102,11 +105,11 @@ class CreditFragment : Fragment() {
                     btnplanpagos.text = "Plan Pagos"
                     btnplanpagos.setTextColor(Color.parseColor("#FF3700B3"))
 
-                    btnextractos.text = "Extractos"
-                    btnextractos.setTextColor(Color.parseColor("#FF3700B3"))
+
 
                     //Insert Row
-
+                    btnextractos.text = "Extractos"
+                    btnextractos.setTextColor(Color.parseColor("#FF3700B3"))
                     var paramsl = LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -154,25 +157,6 @@ class CreditFragment : Fragment() {
             })
 
         queue.add(creditRequest)
-
-        //DowloadPdf
-        var btnDowloadPdf = view.findViewById<Button>(R.id.btnPdfHistorialCrediticio)
-
-        btnDowloadPdf.setOnClickListener {
-            var urlDowload : String = "${getString(R.string.host_service)}services/generate_pdf_crediticio.php?docu-cage=${user!!.id_member}"
-
-            var cookie = CookieManager.getInstance().getCookie(urlDowload.toString())
-            var request = DownloadManager.Request(Uri.parse(urlDowload))
-                .setTitle("crehistorial.pdf")
-                .setDescription("Descargando....")
-                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "crehistorial.pdf")
-                .addRequestHeader("cookie", cookie)
-                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                .setAllowedOverMetered(true)
-
-            var dm = activity?.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-            dm.enqueue(request)
-        }
 
         // Inflate the layout for this fragment
         return view

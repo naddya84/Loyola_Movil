@@ -100,12 +100,6 @@ class ExtractCreditFragment : Fragment() {
                         nro.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
                         nro.text = detail.getJSONObject(i).get("credNroTrans").toString()
 
-                        var capital = TextView(activity)
-                        capital.gravity = Gravity.CENTER
-                        capital.setTypeface(null, Typeface.BOLD)
-                        capital.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                        capital.text = detail.getJSONObject(i).get("credMontoCapi").toString()
-
                         var saldo = TextView(activity)
                         saldo.gravity = Gravity.CENTER
                         saldo.setTypeface(null, Typeface.BOLD)
@@ -117,7 +111,11 @@ class ExtractCreditFragment : Fragment() {
                         btndetalle.setTypeface(null, Typeface.BOLD)
                         btndetalle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
                         btndetalle.text = "Ver detallado"
-                        btndetalle.setTextColor(Color.parseColor("#FF3700B3"))
+                        btndetalle.setTextColor(Color.parseColor("#4674D4"))
+
+                        var icon = resources.getDrawable(R.drawable.btn_info)
+                        icon.setBounds(0,0,10*5,10*5)
+                        btndetalle.setCompoundDrawables(icon,null,null,null)
 
                         btndetalle.setOnClickListener {
                             var dialog = DetailExtractCreditDialogFragment()
@@ -130,7 +128,6 @@ class ExtractCreditFragment : Fragment() {
 
                         trow.addView(fechavct)
                         trow.addView(nro)
-                        trow.addView(capital)
                         trow.addView(saldo)
                         trow.addView(btndetalle)
 

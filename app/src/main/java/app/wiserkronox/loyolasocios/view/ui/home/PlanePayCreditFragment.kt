@@ -4,6 +4,7 @@ import android.app.DownloadManager
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -78,9 +79,9 @@ class PlanePayCreditFragment : Fragment() {
 
                         nroPrest.text = data.getJSONObject(i).get("id_credito").toString()
                         capital.text = data.getJSONObject(i).get("credMontoDesem").toString()
-                        plazo.text = data.getJSONObject(i).get("credPlazo").toString()
+                        plazo.text = data.getJSONObject(i).get("credPlazo").toString() + " MES(ES)"
                         tasa.text = data.getJSONObject(i).get("credTasa").toString()
-                        ppago.text = data.getJSONObject(i).get("credPeriPago").toString()
+                        ppago.text = data.getJSONObject(i).get("credPeriPago").toString() + " DIAS"
                         fpago.text = data.getJSONObject(i).get("credForPago").toString()
 
                     }
@@ -106,50 +107,38 @@ class PlanePayCreditFragment : Fragment() {
                         fechavct.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
                         fechavct.text = detail.getJSONObject(i).get("credFecVenci").toString()
 
-                        var capital = TextView(activity)
-                        capital.gravity = Gravity.CENTER
-                        capital.setTypeface(null, Typeface.BOLD)
-                        capital.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                        capital.text = detail.getJSONObject(i).get("credMontoCapi").toString()
-
-                        var interes = TextView(activity)
-                        interes.gravity = Gravity.CENTER
-                        interes.setTypeface(null, Typeface.BOLD)
-                        interes.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                        interes.text = detail.getJSONObject(i).get("credMontoInte").toString()
-
-                        var cuota = TextView(activity)
-                        cuota.gravity = Gravity.CENTER
-                        cuota.setTypeface(null, Typeface.BOLD)
-                        cuota.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                        cuota.text = detail.getJSONObject(i).get("credTotaCuota").toString()
-
-                        var cargo = TextView(activity)
-                        cargo.gravity = Gravity.CENTER
-                        cargo.setTypeface(null, Typeface.BOLD)
-                        cargo.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                        cargo.text = detail.getJSONObject(i).get("credMontoCargos").toString()
-
                         var total = TextView(activity)
                         total.gravity = Gravity.CENTER
                         total.setTypeface(null, Typeface.BOLD)
                         total.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
                         total.text = detail.getJSONObject(i).get("credTotalCuota").toString()
 
-                        var saldo = TextView(activity)
-                        saldo.gravity = Gravity.CENTER
-                        saldo.setTypeface(null, Typeface.BOLD)
-                        saldo.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                        saldo.text = detail.getJSONObject(i).get("credSaldoCredi").toString()
+                        var btnDetallado = TextView(activity)
+                        btnDetallado.gravity = Gravity.CENTER
+                        btnDetallado.setTypeface(null, Typeface.BOLD)
+                        btnDetallado.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
+                        btnDetallado.text = "Ver Detallado"
+                        btnDetallado.setTextColor(Color.parseColor("#4674D4"))
+                        btnDetallado.setPadding(25,25,25,25)
+
+                        var icon = resources.getDrawable(R.drawable.btn_info)
+                        icon.setBounds(0,0,10*5,10*5)
+                        btnDetallado.setCompoundDrawables(icon,null,null,null)
+
+
+                        btnDetallado.setOnClickListener {
+                            var dialog = DetailPlanePayCreditDialogFragment()
+                            val details = detail.getJSONObject(i).toString()
+                            val bundle = Bundle()
+                            bundle.putString("data",details)
+                            dialog.arguments = bundle
+                            dialog.show(childFragmentManager,"Texto")
+                        }
 
                         trow.addView(nro)
                         trow.addView(fechavct)
-                        trow.addView(capital)
-                        trow.addView(interes)
-                        trow.addView(cuota)
-                        trow.addView(cargo)
                         trow.addView(total)
-                        trow.addView(saldo)
+                        trow.addView(btnDetallado)
 
                         trow.setBackgroundColor(Color.parseColor("#FFFFFF"))
                         tableLayout.addView(trow)
