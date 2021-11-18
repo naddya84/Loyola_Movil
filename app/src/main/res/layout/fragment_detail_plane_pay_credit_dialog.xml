@@ -6,29 +6,50 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/lnlmainbody"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/header"
+        <LinearLayout
+            android:id="@+id/lnltitle"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#00A850">
+            android:layout_height="65dp"
+            android:background="#018843"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/icon_detail" />
 
             <TextView
-                android:id="@+id/txtTitle"
+                android:id="@+id/titleDialog"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Detalle de extracto"
+                android:textColor="#FFF" />
+
+            <TextView
+                android:id="@+id/titlecred"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Detalle de Plan de Pagos"
-                android:textAlignment="center"
-                android:textColor="#EEEEEE"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="CREDITO"
+                android:textColor="#FFF" />
+
+            <TextView
+                android:id="@+id/titlemoneda"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="bs."
+                android:textColor="#FFF" />
+
+        </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/body"
@@ -42,29 +63,70 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/lnlheader"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:background="#BDBDBD"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/txtFechaP"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Fecha de Venct:"
-                        android:textAlignment="viewStart"
-                        android:textSize="16sp" />
+                    <LinearLayout
+                        android:id="@+id/lnltitllelabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/txtNro"
-                        android:layout_width="10dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Nro.Trans:"
-                        android:textAlignment="center"
-                        android:textColor="#0F784D"
-                        android:textSize="16sp" />
+                        <TextView
+                            android:id="@+id/lblfecha"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Fecha de Vencimiento"
+                            android:textColor="#fff"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/lblnrotransc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="N°.Cuota"
+                            android:textAlignment="center"
+                            android:textColor="#fff"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lnlheader"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txtFechaP"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Fecha:"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtNro"
+                            android:layout_width="10dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Nro.Trans:"
+                            android:textAlignment="textEnd"
+                            android:textColor="#000"
+                            android:textSize="19dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -72,16 +134,19 @@
                     android:id="@+id/lnlmonto"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:background="#FFF"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/lblMontoCapi"
-                        android:layout_width="70dp"
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Monto pagado a Capital:"
-                        android:textAlignment="viewStart"
-                        android:textSize="16sp" />
+                        android:text="Pagado a Capital:"
+                        android:textAlignment="textEnd"
+                        android:textColor="#158553"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/txtMontoCapi"
@@ -89,24 +154,29 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="TextView"
-                        android:textAlignment="textEnd"
-                        android:textSize="16sp" />
+                        android:textAlignment="textStart"
+                        android:textColor="#000"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/lnlInteres"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:background="#fff"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/lblMontoInteres"
-                        android:layout_width="70dp"
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Monto pagado a interes:"
-                        android:textAlignment="viewStart"
-                        android:textSize="16sp" />
+                        android:text="Pagado a Interes:"
+                        android:textAlignment="textEnd"
+                        android:textColor="#158553"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/txtMontoInteres"
@@ -114,24 +184,29 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="TextView"
-                        android:textAlignment="textEnd"
-                        android:textSize="16sp" />
+                        android:textAlignment="textStart"
+                        android:textColor="#000"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/lnlPenal"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:background="#fff"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/lblTotalCuota"
-                        android:layout_width="70dp"
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Total Cuota a pagar:"
-                        android:textAlignment="viewStart"
-                        android:textSize="16sp" />
+                        android:text="Total cuota:"
+                        android:textAlignment="textEnd"
+                        android:textColor="#158553"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/txtTotalCuota"
@@ -139,24 +214,29 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="TextView"
-                        android:textAlignment="textEnd"
-                        android:textSize="16sp" />
+                        android:textAlignment="textStart"
+                        android:textColor="#000"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/lnlMontoCargos"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:background="#fff"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/lblMontoCargos"
-                        android:layout_width="70dp"
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Monto de cargos adicionales:"
-                        android:textAlignment="viewStart"
-                        android:textSize="16sp" />
+                        android:text="Cargos Generales:"
+                        android:textAlignment="textEnd"
+                        android:textColor="#158553"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/txtMontoCargos"
@@ -164,24 +244,29 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="TextView"
-                        android:textAlignment="textEnd"
-                        android:textSize="16sp" />
+                        android:textAlignment="textStart"
+                        android:textColor="#000"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/lnlTotalPago"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:background="#FFF"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/lbltotalpagos"
-                        android:layout_width="70dp"
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Total Cuota pagada:"
-                        android:textAlignment="viewStart"
-                        android:textSize="16sp" />
+                        android:text="Total Cuota Pagada:"
+                        android:textAlignment="textEnd"
+                        android:textColor="#158553"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/txtTotalpago"
@@ -189,24 +274,29 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="TextView"
-                        android:textAlignment="textEnd"
-                        android:textSize="16sp" />
+                        android:textAlignment="textStart"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/lnlSaldoCapital"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:background="#FFF"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/lblSaldoCredi"
-                        android:layout_width="70dp"
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Saldo del Credito:"
-                        android:textAlignment="viewStart"
-                        android:textSize="16sp" />
+                        android:text="Saldo Credito:"
+                        android:textAlignment="textEnd"
+                        android:textColor="#158553"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/txtSaldoCredi"
@@ -214,25 +304,32 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="TextView"
-                        android:textAlignment="textEnd"
-                        android:textSize="16sp" />
+                        android:textAlignment="textStart"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
-            </LinearLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutfooter"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFF">
 
-            <Button
-                android:id="@+id/btnCloseDialog"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="#00A850"
-                android:text="Cerrar"
-                app:layout_constraintBottom_toBottomOf="@+id/lnlbodyinformation"
-                app:layout_constraintTop_toBottomOf="@+id/lnlbodyinformation"
-                app:layout_constraintVertical_bias="0.51" />
+                    <Button
+                        android:id="@+id/btnCloseDialog"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:background="#00A850"
+                        android:text="Cerrar"
+                        android:textColor="#FFFFFF"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

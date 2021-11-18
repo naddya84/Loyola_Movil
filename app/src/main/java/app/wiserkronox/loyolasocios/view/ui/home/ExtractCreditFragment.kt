@@ -4,18 +4,17 @@ import android.app.DownloadManager
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.util.TypedValue
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.CookieManager
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import app.wiserkronox.loyolasocios.R
 import app.wiserkronox.loyolasocios.service.LoyolaApplication
@@ -37,16 +36,34 @@ class ExtractCreditFragment : Fragment() {
         var data = args?.get("data")
         var json = JSONObject(data.toString())
 
+        //HEADER INFORMATION
+        var lnlheader = view.findViewById<LinearLayout>(R.id.lnlheader_extract)
+        var lnlheaderinformation = view.findViewById<LinearLayout>(R.id.lnlheaderinformation)
 
-        var tableParams = TableLayout.LayoutParams()
-        tableParams.setMargins(5,12,0,5)
+        var bg = resources.getDrawable(R.drawable.tags_rounded_corners_bottoms)
+        bg.setTint(Color.WHITE)
 
-        var tableLayout = view.findViewById<TableLayout>(R.id.tblPlanePayCredit)
-        tableLayout.setColumnStretchable(0,true)
-        tableLayout.setColumnStretchable(1,true)
-        tableLayout.setColumnStretchable(2,true)
-        tableLayout.setColumnStretchable(3,true)
-        tableLayout.setColumnStretchable(4,true)
+        lnlheaderinformation.background = bg
+
+        var shape = GradientDrawable()
+        shape.setColor(Color.parseColor("#008945"))
+        shape.cornerRadius = 20f
+        lnlheader.background = shape
+
+        var nrocred = view.findViewById<TextView>(R.id.txtnrocredito)
+
+        var bg_moneda = resources.getDrawable(R.drawable.circle_text_view)
+        bg_moneda.setBounds(0,0,100,100)
+
+        var moneda = view.findViewById<TextView>(R.id.txtmonedacredito)
+        moneda.setTextColor(Color.WHITE)
+        moneda.setTypeface(null, Typeface.BOLD)
+        moneda.setBackgroundResource(R.drawable.circle_text_view)
+
+
+
+        nrocred.text = json.get("credNumero").toString()
+        moneda.text = json.get("credMoneda").toString()
 
         var user = LoyolaApplication.getInstance()?.user //docu-cage
         var number = json.get("credNumero").toString() //cred-number
@@ -65,74 +82,213 @@ class ExtractCreditFragment : Fragment() {
                 if(status == false) {
 
                     var data = jsonObject.getJSONArray("result");
-                    //HEADER INFORMATION
-                    var nroPrest = view.findViewById<TextView>(R.id.txtNroPrest)
-                    var capital = view.findViewById<TextView>(R.id.txtMontoDesm)
-                    var plazo = view.findViewById<TextView>(R.id.txtPlazo)
-                    var estado = view.findViewById<TextView>(R.id.txtEstado)
+
+
                     for (i in 0 until data.length()) {
+                        var capital = view.findViewById<TextView>(R.id.txtcapitalextract)
+                        var plaso = view.findViewById<TextView>(R.id.txtplasoextract)
+                        var tasa = view.findViewById<TextView>(R.id.txttasaextract)
 
-                        nroPrest.text = data.getJSONObject(i).get("id_credito").toString()
-                        capital.text = data.getJSONObject(i).get("credMontoDesem").toString()
-                        plazo.text = data.getJSONObject(i).get("credPlazo").toString()
-                        estado.text = data.getJSONObject(i).get("estado").toString()
-
+                        capital.text = data.getJSONObject(i).get("credMontoDesem").toString() + " "+ moneda.text +"."
+                        plaso.text = data.getJSONObject(i).get("credPlazo").toString()
+                        tasa.text = data.getJSONObject(i).get("estado").toString()
                     }
                     //CONSULT TABLE
                     var detail = jsonObject.getJSONArray("detail");
+                    var lnlmainbodydetails = view.findViewById<LinearLayout>(R.id.lnlbodydetails)
 
                     for (i in 0 until detail.length()) {
 
-                        var trow = TableRow(activity)
-                        var tableParams = TableLayout.LayoutParams()
-                        tableParams.setMargins(5, 12, 0, 5)
-                        trow.layoutParams = tableParams
+                        var lnlbodydetails = LinearLayout(activity)
+                        lnlbodydetails.orientation = LinearLayout.VERTICAL
 
-                        var fechavct = TextView(activity)
-                        fechavct.gravity = Gravity.LEFT
-                        fechavct.setTypeface(null, Typeface.BOLD)
-                        fechavct.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                        fechavct.text = detail.getJSONObject(i).get("credFecPago").toString()
+                        var paramslnlody = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            340
+                        )
 
-                        var nro = TextView(activity)
-                        nro.gravity = Gravity.LEFT
-                        nro.setTypeface(null, Typeface.BOLD)
-                        nro.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                        nro.text = detail.getJSONObject(i).get("credNroTrans").toString()
+                        paramslnlody.setMargins(20,25,20,25)
 
-                        var saldo = TextView(activity)
-                        saldo.gravity = Gravity.CENTER
-                        saldo.setTypeface(null, Typeface.BOLD)
-                        saldo.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                        saldo.text = detail.getJSONObject(i).get("credSaldoCapi").toString()
+                        lnlbodydetails.setLayoutParams(paramslnlody)
 
-                        var btndetalle = TextView(activity)
-                        btndetalle.gravity = Gravity.CENTER
-                        btndetalle.setTypeface(null, Typeface.BOLD)
-                        btndetalle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                        btndetalle.text = "Ver detallado"
-                        btndetalle.setTextColor(Color.parseColor("#4674D4"))
 
-                        var icon = resources.getDrawable(R.drawable.btn_info)
-                        icon.setBounds(0,0,10*5,10*5)
-                        btndetalle.setCompoundDrawables(icon,null,null,null)
+                        //HEADER
+                        var bgheader = resources.getDrawable(R.drawable.tags_rounded_corners_tops)
+                        bgheader.setTint(Color.parseColor("#BCBCBC"))
 
-                        btndetalle.setOnClickListener {
+                        var paramsHeader = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            140
+                        )
+
+                        var lnlbodyhearder = LinearLayout(activity)
+                        lnlbodyhearder.orientation = LinearLayout.VERTICAL
+                        lnlbodyhearder.setLayoutParams(paramsHeader)
+
+                        var lnltitle = LinearLayout(activity)
+                        lnltitle.orientation = LinearLayout.HORIZONTAL
+                        lnltitle.setPadding(10,10,0,0)
+
+                        var lnltitleinformation = LinearLayout(activity)
+                        lnltitleinformation.orientation = LinearLayout.HORIZONTAL
+                        lnltitleinformation.setPadding(10,10,0,0)
+
+                        var paramslbls = LinearLayout.LayoutParams(
+                            620,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                        )
+
+                        var lblfecha = TextView(activity)
+                        lblfecha.text = "Fecha de pago"
+                        lblfecha.setLayoutParams(paramslbls)
+                        lblfecha.setTextColor(Color.WHITE)
+                        lblfecha.setTypeface(null, Typeface.BOLD)
+
+
+                        var lblnrotrans = TextView(activity)
+                        lblnrotrans.text = "N°.Transacción"
+                        lblnrotrans.setLayoutParams(paramslbls)
+                        lblnrotrans.setTextColor(Color.WHITE)
+                        lblnrotrans.setTypeface(null, Typeface.BOLD)
+
+                        lnltitle.addView(lblfecha)
+                        lnltitle.addView(lblnrotrans)
+
+                        //Information
+                        var txtfecha = TextView(activity)
+                        txtfecha.text = detail.getJSONObject(i).get("credFecPago").toString()
+                        txtfecha.setTextColor(Color.BLACK)
+                        txtfecha.setTypeface(null, Typeface.BOLD)
+                        txtfecha.setLayoutParams(paramslbls)
+
+                        var txtnrotrans = TextView(activity)
+                        txtnrotrans.text = detail.getJSONObject(i).get("credNroTrans").toString()
+                        txtnrotrans.setTextColor(Color.BLACK)
+                        txtnrotrans.setTypeface(null, Typeface.BOLD)
+                        txtnrotrans.setLayoutParams(paramslbls)
+
+                        lnltitleinformation.addView(txtfecha)
+                        lnltitleinformation.addView(txtnrotrans)
+
+                        //Create Header
+                        lnlbodyhearder.background = bgheader
+                        lnlbodyhearder.addView(lnltitle)
+                        lnlbodyhearder.addView(lnltitleinformation)
+
+
+                        var bgdivbody = resources.getDrawable(R.drawable.tags_rounded_corners_bottoms)
+                        bgdivbody.setTint(Color.parseColor("#FFFFFF"))
+
+                        var lnldivbody = LinearLayout(activity)
+                        lnldivbody.orientation = LinearLayout.HORIZONTAL
+                        lnldivbody.background = bgdivbody
+                        lnldivbody.setLayoutParams(
+                            LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.MATCH_PARENT
+                            )
+                        )
+
+                        //INFORMATION PARAMS
+                        var paramsinformation = LinearLayout.LayoutParams(
+                            350,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                        )
+
+                        var paramstxts = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                        )
+
+                        paramstxts.setMargins(10,2,10,0)
+
+                        //LNL FOR LABELS
+                        var lnllabels = LinearLayout(activity)
+                        lnllabels.orientation = LinearLayout.VERTICAL
+                        lnllabels.setLayoutParams(paramsinformation)
+
+                        var lbldetailcapital = TextView(activity)
+                        lbldetailcapital.text = "Capital: "
+                        lbldetailcapital.setTypeface(null, Typeface.BOLD)
+                        lbldetailcapital.setTextColor(Color.parseColor("#018645"))
+                        lbldetailcapital.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
+                        lbldetailcapital.setLayoutParams(paramstxts)
+
+                        var lbldetailsaldocapital = TextView(activity)
+                        lbldetailsaldocapital.text = "Saldo Capital:"
+                        lbldetailsaldocapital.setTypeface(null, Typeface.BOLD)
+                        lbldetailsaldocapital.setTextColor(Color.parseColor("#018645"))
+                        lbldetailsaldocapital.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
+                        lbldetailsaldocapital.setLayoutParams(paramstxts)
+
+                        //Values
+                        var lnltexts = LinearLayout(activity)
+                        lnltexts.orientation = LinearLayout.VERTICAL
+                        lnltexts.setLayoutParams(paramsinformation)
+
+                        var txtdetailCapital = TextView(activity)
+                        txtdetailCapital.text = detail.getJSONObject(i).get("credMontoCapi").toString() + " " + moneda.text +"."
+                        txtdetailCapital.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
+                        txtdetailCapital.setTypeface(null, Typeface.BOLD)
+                        txtdetailCapital.setTextColor(Color.BLACK)
+                        txtdetailCapital.setLayoutParams(paramstxts)
+
+                        var txtsaldocapitaldetail = TextView(activity)
+                        txtsaldocapitaldetail.text = detail.getJSONObject(i).get("credSaldoCapi").toString() + " " + moneda.text + "."
+                        txtsaldocapitaldetail.setTypeface(null, Typeface.BOLD)
+                        txtsaldocapitaldetail.setTextColor(Color.BLACK)
+                        txtsaldocapitaldetail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
+                        txtsaldocapitaldetail.setLayoutParams(paramstxts)
+
+                        var shape = GradientDrawable()
+                        shape.cornerRadius = 25F
+                        shape.setColor(Color.parseColor("#00AB45"))
+
+
+                        var icon_detail = resources.getDrawable(R.drawable.icon_detail)
+                        icon_detail.setBounds(0,0,60,60)
+                        icon_detail.setTint(Color.WHITE)
+
+                        var btnDetalle = Button(activity)
+                        btnDetalle.text = "DETALLES"
+                        btnDetalle.background = shape
+                        btnDetalle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
+                        btnDetalle.setTextColor(Color.parseColor("#FFFFFD"))
+                        btnDetalle.setCompoundDrawables(null,icon_detail,null,null)
+                        btnDetalle.setLayoutParams(
+                            LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                            )
+                        )
+
+                        btnDetalle.setOnClickListener {
                             var dialog = DetailExtractCreditDialogFragment()
                             val details = detail.getJSONObject(i).toString()
                             val bundle = Bundle()
                             bundle.putString("data",details)
+                            bundle.putString("moneda", json.get("credMoneda").toString())
+                            bundle.putString("nrotrans", json.get("credNumero").toString())
                             dialog.arguments = bundle
                             dialog.show(childFragmentManager,"Texto")
                         }
 
-                        trow.addView(fechavct)
-                        trow.addView(nro)
-                        trow.addView(saldo)
-                        trow.addView(btndetalle)
+                        lnltexts.addView(txtdetailCapital)
+                        lnltexts.addView(txtsaldocapitaldetail)
 
-                        trow.setBackgroundColor(Color.parseColor("#FFFFFF"))
-                        tableLayout.addView(trow)
+                        lnllabels.addView(lbldetailcapital)
+                        lnllabels.addView(lbldetailsaldocapital)
+
+                        //Add body
+                        lnldivbody.addView(lnllabels)
+                        lnldivbody.addView(lnltexts)
+                        lnldivbody.addView(btnDetalle)
+                        //Add header to body
+                        lnlbodydetails.addView(lnlbodyhearder,paramsHeader)
+                        lnlbodydetails.addView(lnldivbody)
+                        //Add Detail to main body
+                        lnlmainbodydetails.addView(lnlbodydetails)
+
                     }
                 } else {
                     findNavController().popBackStack()
@@ -148,7 +304,36 @@ class ExtractCreditFragment : Fragment() {
 
         queue.add(planePayCreditRequest)
 
-        var btnGenerarPdf = view.findViewById<Button>(R.id.btnGenerarPdf)
+
+        var icon_download = resources.getDrawable(R.drawable.icon_download)
+        icon_download.setBounds(0,0,50,50)
+        icon_download.setTint(Color.WHITE)
+
+        var paramsButtons = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            150)
+
+        paramsButtons.setMargins(10,10,5,10)
+
+        var btnGenerarPdf = view.findViewById<Button>(R.id.btngenerarpdf)
+        btnGenerarPdf.setTextSize(TypedValue.COMPLEX_UNIT_SP, 8F)
+        btnGenerarPdf.setTextColor(Color.parseColor("#FFFFFD"))
+        btnGenerarPdf.setLayoutParams(paramsButtons)
+        btnGenerarPdf.setCompoundDrawables(null,icon_download,null,null)
+
+
+        var btnContactar = view.findViewById<Button>(R.id.btncontactar)
+        btnContactar.setTextSize(TypedValue.COMPLEX_UNIT_SP, 8F)
+        btnContactar.setTextColor(Color.parseColor("#FFFFFD"))
+        btnContactar.setLayoutParams(paramsButtons)
+        btnContactar.setCompoundDrawables(null,icon_download,null,null)
+
+        var shapeCorner = GradientDrawable()
+        shapeCorner.cornerRadius = 25f
+        shapeCorner.setColor(Color.parseColor("#00AB45"))
+
+        btnGenerarPdf.background = shapeCorner
+        btnContactar.background = shapeCorner
 
         btnGenerarPdf.setOnClickListener {
             var urlDowload : String = "${getString(R.string.host_service)}services/generate_pdf_extractos.php?docu-cage=${user!!.id_member}&cred-number=${number}"

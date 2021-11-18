@@ -1,21 +1,16 @@
 package app.wiserkronox.loyolasocios.view.ui.home
 
-import android.app.DownloadManager
-import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
-import android.net.Uri
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.os.Environment
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.CookieManager
-import android.webkit.URLUtil
 import android.widget.*
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import app.wiserkronox.loyolasocios.R
@@ -23,7 +18,6 @@ import app.wiserkronox.loyolasocios.service.LoyolaApplication
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-
 
 class CreditFragment : Fragment() {
 
@@ -33,11 +27,8 @@ class CreditFragment : Fragment() {
     ): View? {
         var view = inflater.inflate(R.layout.fragment_credit, container, false)
 
-        var tableLayout = view.findViewById<TableLayout>(R.id.tableCredit)
-        tableLayout.setColumnStretchable(0,true)
-        tableLayout.setColumnStretchable(1,true)
-        tableLayout.setColumnStretchable(2,true)
-        tableLayout.setColumnStretchable(3,true)
+        var mainBody = view.findViewById<LinearLayout>(R.id.layoutmainbody)
+        mainBody.setPadding(30,30,30,30)
 
         var user = LoyolaApplication.getInstance()?.user
         val url: String = "${getString(R.string.host_service)}services/historial_cred_cly.php?docu-cage=${user!!.id_member}"
@@ -52,103 +43,156 @@ class CreditFragment : Fragment() {
 
                 for(i in 0 until data.length()) {
 
-                    var trow = TableRow(activity)
-                    var tableParams = TableLayout.LayoutParams()
-                    tableParams.setMargins(5,12,0,5)
+                    var lnlBody = LinearLayout(activity)
+                    lnlBody.orientation = LinearLayout.HORIZONTAL
 
-                    trow.layoutParams = tableParams
+                    var params = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        280,
+                        1f)
+
+                    params.setMargins(0,30,0,20)
 
                     var number = TextView(activity)
-                    number.gravity = Gravity.LEFT
+                    var bg = resources.getDrawable(R.drawable.tags_rounded_corners)
+                    bg.setTint(Color.parseColor("#008945"))
+                    number.background = bg
+                    number.text = "CREDITO\n"+ data.getJSONObject(i).get("credNumero").toString()
+                    number.gravity = Gravity.CENTER
                     number.setTypeface(null, Typeface.BOLD)
                     number.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
+                    number.setTextColor(Color.parseColor("#FFFFFD"))
+                    number.setLayoutParams(LinearLayout.LayoutParams(
+                        230,
+                        LinearLayout.LayoutParams.MATCH_PARENT
+                    ))
+
+                    var lnlsection = LinearLayout(activity)
+                    lnlsection.orientation = LinearLayout.VERTICAL
+
+                    var paramsSection = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        0f
+                    )
+                    //Body left
+                    lnlBody.setLayoutParams(params)
+                    lnlBody.addView(number)
+                    lnlBody.addView(lnlsection,paramsSection)
+
+
+                    var bgmoneda = resources.getDrawable(R.drawable.tags_rounded_corners_top_right)
+                    bgmoneda.setTint(Color.parseColor("#BCBCBC"))
 
                     var moneda = TextView(activity)
-                    moneda.gravity = Gravity.CENTER
-                    moneda.setTypeface(null, Typeface.BOLD)
-                    moneda.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
+                    moneda.text = "Moneda: "+data.getJSONObject(i).get("credMoneda").toString()+"."
+                    moneda.background = bgmoneda
+                    moneda.setPadding(40,0,0,0)
+                    moneda.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
 
 
-                    var estado = TextView(activity)
-                    estado.gravity = Gravity.CENTER
-                    estado.setTypeface(null, Typeface.BOLD)
-                    estado.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
+                    var bgSection = resources.getDrawable(R.drawable.tags_rounded_corners_bottom_right)
+                    bgSection.setTint(Color.parseColor("#EFEFEF"))
 
-                    var list = LinearLayout(activity)
+                    var lnlSectionInformation = LinearLayout(activity)
+                    lnlSectionInformation.orientation = LinearLayout.HORIZONTAL
+                    lnlSectionInformation.background = bgSection
 
-                    var btndetail = TextView(activity)
-                    btndetail.gravity = Gravity.CENTER
-                    btndetail.setTypeface(null, Typeface.BOLD)
-                    btndetail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                    btndetail.setTextColor(Color.parseColor("#4674D4"))
+                    var paramsButtons = LinearLayout.LayoutParams(
+                        208,
+                        LinearLayout.LayoutParams.WRAP_CONTENT)
 
-                    var btnplanpagos = TextView(activity)
-                    btnplanpagos.gravity = Gravity.CENTER
-                    btnplanpagos.setTypeface(null, Typeface.BOLD)
-                    btnplanpagos.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                    btnplanpagos.setTextColor(Color.parseColor("#4674D4"))
+                    paramsButtons.setMargins(15,20,15,20)
 
-                    var btnextractos = TextView(activity)
-                    btnextractos.gravity = Gravity.CENTER
-                    btnextractos.setTypeface(null, Typeface.BOLD)
-                    btnextractos.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                    btnextractos.setTextColor(Color.parseColor("#4674D4"))
-                    //Inser Value
+                    var shape = GradientDrawable()
+                    shape.cornerRadius = 25F
+                    shape.setColor(Color.parseColor("#00AB45"))
 
-                    number.text = data.getJSONObject(i).get("credNumero").toString()
-                    moneda.text = data.getJSONObject(i).get("credMoneda").toString()
-                    estado.text = data.getJSONObject(i).get("credEstado").toString()
+                    var icon_detail = resources.getDrawable(R.drawable.icon_detail)
+                    icon_detail.setBounds(0,0,63,63)
+                    icon_detail.setTint(Color.WHITE)
 
-                    btndetail.text = "Ver Detalle"
-                    btndetail.setTextColor(Color.parseColor("#FF3700B3"))
+                    var btnDetalle = Button(activity)
+                    btnDetalle.background = shape
+                    btnDetalle.text = "DETALLE"
+                    btnDetalle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
+                    btnDetalle.setTextColor(Color.parseColor("#FFFFFD"))
+                    btnDetalle.setLayoutParams(paramsButtons)
+                    btnDetalle.setCompoundDrawables(null,icon_detail,null,null)
 
-                    btnplanpagos.text = "Plan Pagos"
-                    btnplanpagos.setTextColor(Color.parseColor("#FF3700B3"))
-
-
-
-                    //Insert Row
-                    btnextractos.text = "Extractos"
-                    btnextractos.setTextColor(Color.parseColor("#FF3700B3"))
-                    var paramsl = LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                    )
-
-                    list.orientation = LinearLayout.VERTICAL
-
-                    list.addView(btndetail,paramsl)
-                    list.addView(btnplanpagos,paramsl)
-                    list.addView(btnextractos,paramsl)
-
-                    trow.addView(number)
-                    trow.addView(moneda)
-                    trow.addView(estado)
-                    trow.addView(list)
-
-                    btndetail.setOnClickListener {
+                    btnDetalle.setOnClickListener {
                         val details = data.getJSONObject(i).toString()
                         val bundle = Bundle()
                         bundle.putString("data",details)
                         view.findNavController().navigate(R.id.action_detaill, bundle)
                     }
 
-                    btnplanpagos.setOnClickListener {
+                    var icon_plane_play = resources.getDrawable(R.drawable.icon_plane_pay)
+                    icon_plane_play.setBounds(0,0,63,63)
+                    icon_plane_play.setTint(Color.WHITE)
+
+                    var btnPlanPagos = Button(activity)
+                    btnPlanPagos.background = shape
+                    btnPlanPagos.text = "PLAN DE PAGOS"
+                    btnPlanPagos.setTextColor(Color.parseColor("#FFFFFD"))
+                    btnPlanPagos.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
+                    btnPlanPagos.setLayoutParams(paramsButtons)
+                    btnPlanPagos.setCompoundDrawables(null,icon_plane_play,null,null)
+
+                    btnPlanPagos.setOnClickListener {
                         val details = data.getJSONObject(i).toString()
                         val bundle = Bundle()
                         bundle.putString("data",details)
                         view.findNavController().navigate(R.id.action_plane_pay_credit, bundle)
                     }
 
-                    btnextractos.setOnClickListener {
+                    var icon_extract = resources.getDrawable(R.drawable.icon_extract)
+                    icon_extract.setBounds(0,0,63,63)
+                    icon_extract.setTint(Color.WHITE)
+
+                    var btnExtracto = Button(activity)
+                    btnExtracto.background = shape
+                    btnExtracto.text = "EXTRACTO"
+                    btnExtracto.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
+                    btnExtracto.setTextColor(Color.parseColor("#FFFFFD"))
+                    btnExtracto.setLayoutParams(paramsButtons)
+                    btnExtracto.setCompoundDrawables(null,icon_extract,null,null)
+
+                    btnExtracto.setOnClickListener {
                         val details = data.getJSONObject(i).toString()
                         val bundle = Bundle()
                         bundle.putString("data",details)
                         view.findNavController().navigate(R.id.action_extract_credit, bundle)
                     }
+
+                    var check = ImageView(activity)
+                    var type = data.getJSONObject(i).get("credEstado").toString()
+                    if(type == "Vigente") {
+                        check.setBackgroundResource(R.drawable.icon_check)
+                    } else {
+                        check.setBackgroundResource(R.drawable.icon_no_check)
+                    }
+
+                    check.setLayoutParams(LinearLayout.LayoutParams(50,50))
+
+                    //Actions Buttons
+                    var paramsInformation = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        265,
+                        1f)
+
+                    lnlSectionInformation.setPadding(10)
+                    lnlSectionInformation.setLayoutParams(paramsInformation)
+                    lnlSectionInformation.addView(btnDetalle)
+                    lnlSectionInformation.addView(btnPlanPagos)
+                    lnlSectionInformation.addView(btnExtracto)
+                    lnlSectionInformation.addView(check)
+                    //Body Right
+                    lnlsection.addView(moneda)
+                    lnlsection.addView(lnlSectionInformation)
                     //Insert row in table
-                    trow.setBackgroundColor(Color.parseColor("#FFFFFF"))
-                    tableLayout.addView(trow)
+                    mainBody.addView(lnlBody)
+
                 }
             },
             {volleyError->
