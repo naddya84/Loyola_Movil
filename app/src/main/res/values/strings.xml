@@ -159,5 +159,21 @@
     <string name="saldo_credito">saldo</string>
     <string name="btn_certificados">CERTIFICADOS DE OTORGACIÓN</string>
     <string name="text_creditos">CREDITOS</string>
-
+    <string name="photo_directory">/directory</string>
+    <string name="host_service">http://192.168.1.2/loyola_web/</string>
+    <string name="home_service">services/</string>
+    <string name="home_aplication">img/</string>
+    <string name="dir_photo_service">photo_service/</string>
+    <string name="zoom_app_key">zoom_app_key</string>
+    <string name="zoom_app_secret">zoom_app_secret</string>
+    <string name="google_id_token">google_id_token</string>
+    <!--Textos Credito-->
+    <string name="credNumero">Credito</string>
+    <string name="credFecDesem">Fecha D</string>
+    <string name="credMontoDesem">Monto</string>
+    <string name="crediMoneda">Moneda</string>
+    <string name="crediSaldo">Saldo</string>
+    <string name="crediEstado">Estado</string>
+    <string name="crediFecCancel">Fecha C</string>
+    <string name="credAccion">Acción</string>
 </resources>
