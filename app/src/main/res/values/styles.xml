@@ -97,5 +97,4 @@
     <style name="MySpinnerDatePicker" parent="android:Widget.Material.DatePicker">
         <item name="android:datePickerMode">spinner</item>
     </style>
-
 </resources>

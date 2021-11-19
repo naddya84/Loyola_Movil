@@ -12,9 +12,10 @@ import kotlinx.coroutines.launch
 @Database(
     entities = arrayOf(
         User::class,
-        Assembly::class
+        Assembly::class,
+        Course::class
     ),
-    version = 11,
+    version = 12,
     exportSchema = false
 )
 
@@ -22,6 +23,7 @@ import kotlinx.coroutines.launch
 
     abstract fun userDao(): UserDao
     abstract fun assemblyDao(): AssemblyDao
+    abstract fun courseDao(): CourseDao
 
     companion object {
         @Volatile

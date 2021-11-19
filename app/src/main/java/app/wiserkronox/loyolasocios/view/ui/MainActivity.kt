@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var requestUpload: RequestQueue
 
     companion object {
-        private const val TAG = "MainActivity"
+        const val TAG = "MainActivity"
         private val REQUEST_FOR_PHOTO = 101
         val FLAG_UPDATE_USER_DATA = "update_data"
     }

@@ -1,15 +1,13 @@
 package app.wiserkronox.loyolasocios.service.repository
 
 import androidx.annotation.WorkerThread
-import app.wiserkronox.loyolasocios.service.model.Assembly
-import app.wiserkronox.loyolasocios.service.model.AssemblyDao
-import app.wiserkronox.loyolasocios.service.model.User
-import app.wiserkronox.loyolasocios.service.model.UserDao
+import app.wiserkronox.loyolasocios.service.model.*
 import kotlinx.coroutines.flow.Flow
 
 class LoyolaRepository(
     private val userDao: UserDao,
-    private val assemblyDao: AssemblyDao) {
+    private val assemblyDao: AssemblyDao,
+    private val courseDao: CourseDao) {
 
     val allUsers: Flow<List<User>> = userDao.getUsers()
 
@@ -86,4 +84,35 @@ class LoyolaRepository(
 
     fun getAllAssemblysStatus(status: String): List<Assembly> {
         return assemblyDao.getAllAssemblysStatus(status)
-    }}
+    }
+/*************************************************************************************
+ * Funciones para la instancia de cursos
+ */
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun updateCourse(course: Course): Int {
+        return courseDao.updateC( course )
+    }
+    val allCourses: Flow<List<Course>> = courseDao.getCourses()
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun getAllCourses(): List<Course> {
+        return courseDao.getAllCourses()
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun insertAllCourses(courses: List<Course>): List<Long>{
+        return courseDao.insertAllCourses( courses )
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun deleteAllCourses(){
+        courseDao.deleteAll()
+    }
+    fun getAllCoursesStatus(status: String): List<Course> {
+        return courseDao.getAllCoursesStatus(status)
+    }
+}
