@@ -22,19 +22,26 @@ import com.google.gson.Gson
 
 class CertificateFragment : Fragment() {
 
+    private lateinit var progressBar:ProgressBar
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         var user = LoyolaApplication.getInstance()?.user
-        getCertificaCly(user!!.id_member)
-
         var view = inflater.inflate(R.layout.fragment_certificate, container, false)
 
+        getCertificaCly(user!!.id_member)
         // Inflate the layout for this fragment
 //        return inflater.inflate(R.layout.fragment_certificate, container, false)
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        progressBar = view.findViewById(R.id.certificates_progresbar)
+        progressBar.visibility = View.VISIBLE
     }
 
     private fun getCertificaCly(docuCage:String ="") {
@@ -49,11 +56,13 @@ class CertificateFragment : Fragment() {
                 val certificates = responseObject.result
                 val recyclerView = requireView().findViewById<RecyclerView>(R.id.recycler_view)
                 recyclerView.adapter = CertificateAdapter(requireContext(), certificates)
+                progressBar.visibility = View.INVISIBLE
             },
             { error ->
                 Toast.makeText(activity, "Error de conexión con el servidor", Toast.LENGTH_SHORT).show()
                 println(error.message)
                 error.printStackTrace()
+                progressBar.visibility = View.INVISIBLE
             }
         )
         LoyolaService.getInstance(requireContext()).addToRequestQueue(request)
