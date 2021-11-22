@@ -166,8 +166,8 @@
                 android:layout_height="97dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
-                android:background="#17C310"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@drawable/shape_radius_layout">
 
                 <ImageView
                     android:id="@+id/ico_credito"
@@ -194,8 +194,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
-                android:background="#17C310"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@drawable/shape_radius_layout">
 
                 <ImageView
                     android:id="@+id/imageView6"

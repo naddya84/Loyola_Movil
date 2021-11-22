@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Socio Loyola</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
     <!-- Textos del fragmento inicio de sesion -->
@@ -27,7 +26,6 @@
     <string name="text_email_label">Escriba la dirección de su correo electrónico</string>
     <string name="text_password_label">Contraseña</string>
     <string name="hint_email_1">Correo Electrónico</string>
-    <string name="hint_email_2">Confirme su correo electrónico</string>
     <string name="hint_password_1">Ingrese su Clave</string>
     <string name="hint_password_2">Confirme la Clave</string>
     <string name="btn_cancel">Cancelar</string>
@@ -36,8 +34,6 @@
 
     <!-- Textos para el Home del Cliente -->
     <string name="title_activity_home">Socio Loyola</string>
-    <string name="navigation_drawer_open">Abrir Menú</string>
-    <string name="navigation_drawer_close">Cerrar Menú</string>
     <string name="nav_header_title">Socios Loyola</string>
     <string name="nav_header_subtitle">Cooperativa de Ahorro y Crédito Loyola</string>
     <string name="nav_header_desc">Cooperativa de Ahorro y Crédito Loyolar</string>
@@ -89,7 +85,6 @@
     <string name="subtitle_picture">Autentificación Socio</string>
     <string name="hint_id_member">Número de Socio</string>
     <string name="text_valid_id">Número de Socio VALIDO</string>
-    <string name="text_novalid_id">Número de Socio INVALIDO</string>
     <string name="subtitle_pictures_id">Añada la foto de su carnet de identidad</string>
     <string name="btn_upload_picture_1">Subir Anverso</string>
     <string name="btn_upload_picture_2">Subir Reverso</string>
@@ -130,50 +125,29 @@
     <string name="no_assembly">No se encontraron registros</string>
     <string name="btn_login_zoom">Ingresar ZOOM</string>
     <string name="text_active_state">UD. Está habilitado</string>
-    <string name="tecxt_inactive_state">UD. No está habilitado</string>
     <string name="text_icon_state">Estado del usuario</string>
 
     <!--Textos Certificados socio-->
-    <string name="certificado_aportacion">CERTIFICADOS DE APORTACIÓN</string>
-    <string name="estado_cert">Estado</string>
     <string name="monto_cert">Monto</string>
     <string name="cantidad_cert">Cantidad</string>
     <string name="fecha_apertura">Fecha Apertura</string>
     <string name="nro_certificado">Nro. Certificado</string>
     <string name="gestion">Gestión</string>
+
     <!--Textos Credito socio-->
-    <string name="img_credito">Creditos</string>
-    <string name="creditos">Creditos</string>
-    <string name="nro_prestamo">Nro. prest:</string>
-    <string name="capital_credito">Capital:</string>
-    <string name="plazo_credito">Plazo:</string>
-    <string name="taza_credito">Taza:</string>
-    <string name="p_pago_credito">P Pago(k):</string>
-    <string name="f_pago_credito">F. Pago:</string>
-    <string name="fecha_v_credito">Fecha Vnt.</string>
-    <string name="capital_creditos">Capital</string>
-    <string name="intereses_credito">Intereses</string>
-    <string name="cuota_credito">Cuota</string>
-    <string name="cargos_credito">Cargos</string>
-    <string name="total_credito">Total</string>
-    <string name="saldo_credito">saldo</string>
-    <string name="btn_certificados">CERTIFICADOS DE OTORGACIÓN</string>
     <string name="text_creditos">CREDITOS</string>
-    <string name="photo_directory">/directory</string>
-    <string name="host_service">http://192.168.1.2/loyola_web/</string>
-    <string name="home_service">services/</string>
-    <string name="home_aplication">img/</string>
-    <string name="dir_photo_service">photo_service/</string>
-    <string name="zoom_app_key">zoom_app_key</string>
-    <string name="zoom_app_secret">zoom_app_secret</string>
-    <string name="google_id_token">google_id_token</string>
-    <!--Textos Credito-->
-    <string name="credNumero">Credito</string>
-    <string name="credFecDesem">Fecha D</string>
-    <string name="credMontoDesem">Monto</string>
-    <string name="crediMoneda">Moneda</string>
-    <string name="crediSaldo">Saldo</string>
-    <string name="crediEstado">Estado</string>
-    <string name="crediFecCancel">Fecha C</string>
-    <string name="credAccion">Acción</string>
+
+    <!--Textos Curso socio-->
+    <string name="date_s">Fecha Inicio</string>
+    <string name="date_e">Fecha Fin</string>
+    <string name="photo_course">Foto</string>
+    <string name="expositores">Expositores</string>
+    <string name="type">Tipo</string>
+    <string name="locate">Lugar</string>
+    <string name="url">URL</string>
+    <string name="code">Codigo</string>
+    <string name="password">Password</string>
+    <string name="text_name_c">TextView</string>
+    <string name="fecha_inicio">Fecha Inicio:</string>
+    <string name="text_horario">horarios</string>
 </resources>

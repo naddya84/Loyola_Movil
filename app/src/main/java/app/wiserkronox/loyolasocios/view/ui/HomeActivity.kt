@@ -22,10 +22,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import app.wiserkronox.loyolasocios.R
 import app.wiserkronox.loyolasocios.service.LoyolaApplication
+import app.wiserkronox.loyolasocios.service.model.Course
 import app.wiserkronox.loyolasocios.service.model.User
-import com.android.volley.Request
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
+import app.wiserkronox.loyolasocios.service.repository.LoyolaService
+import com.android.volley.*
+import com.android.volley.toolbox.HttpHeaderParser
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -136,14 +137,10 @@ class HomeActivity : AppCompatActivity() {
     fun goCredit( ){
         navController.navigate(R.id.nav_credit, null, null);
     }
-   /* fun openCertificate(){
-        val user = LoyolaApplication.getInstance()?.user
-        if( user != null ) {
-            val intent = Intent(this@HomeActivity, CertificadosFragment::class.java)
-            startActivity(intent)
-            finish()
-        }
-    }*/
+    fun goCourse( ){
+        navController.navigate(R.id.nav_course, null, null);
+    }
+
 
     /*********************************************************************************************
      * Funciones de conexion con el servidor
@@ -209,5 +206,70 @@ class HomeActivity : AppCompatActivity() {
         params.meetingNo = zoom_code
         params.password = zomm_password
         meetingService.joinMeetingWithParams(this, params, options)
+    }
+    fun downloadDocumentCourse(output_directory: String, url_document: String, course: Course){
+
+        val imageRequest = InputStreamVolleyRequest(
+                Request.Method.GET,
+                url_document,
+                { response -> // response listener
+                    val name = "curso.pdf"
+                    val outputStream = openFileOutput(name, Context.MODE_PRIVATE);
+                    outputStream.write(response);
+                    outputStream.close();
+                    Toast.makeText(this, "Descarga completada.", Toast.LENGTH_LONG).show();
+                },
+                { error -> // error listener
+                    Log.d(MainActivity.TAG, error.message.toString())
+                    Log.d(MainActivity.TAG, url_document)
+                },
+                null
+        )
+        LoyolaService.getInstance(this).addToRequestQueue(imageRequest)
+    }
+}
+/**********************************************************************************************
+ * Donwload document PDF course
+ */
+internal class InputStreamVolleyRequest(
+        method: Int,
+        mUrl: String?,
+        listener: Response.Listener<ByteArray>,
+        errorListener: Response.ErrorListener?,
+        params: HashMap<String, String>?) : Request<ByteArray?>(method, mUrl, errorListener) {
+    private val mListener: Response.Listener<ByteArray>
+    private val mParams: Map<String, String>
+
+    //create a static map for directly accessing headers
+    var responseHeaders: Map<String, String>? = null
+
+    @Throws(AuthFailureError::class)
+    override fun getParams(): Map<String, String>? {
+        return mParams
+    }
+
+    override fun deliverResponse(response: ByteArray?) {
+        mListener.onResponse(response)
+    }
+
+    override fun parseNetworkResponse(response: NetworkResponse): Response<ByteArray?> {
+
+        //Initialise local responseHeaders map with response headers received
+        responseHeaders = response.headers
+
+        //Pass the response data here
+        return Response.success(response.data, HttpHeaderParser.parseCacheHeaders(response))
+    }
+
+    init {
+        // TODO Auto-generated constructor stub
+        // this request would never use cache.
+        setShouldCache(false)
+        mListener = listener
+        if (params != null) {
+            mParams = params
+        } else {
+            mParams = hashMapOf<String, String>()
+        }
     }
 }

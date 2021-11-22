@@ -19,13 +19,12 @@
             android:id="@+id/photo_course"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="TODO"
             android:visibility="visible"
             cardView:layout_constraintEnd_toEndOf="parent"
             cardView:layout_constraintHorizontal_bias="1.0"
             cardView:layout_constraintStart_toStartOf="parent"
-            cardView:srcCompat="@drawable/img_curso"
-            tools:layout_editor_absoluteY="0dp" />
+            cardView:layout_constraintTop_toTopOf="parent"
+            cardView:srcCompat="@drawable/img_curso" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -261,14 +260,6 @@
                     android:text="@string/password"
                     android:textSize="12sp" />
             </LinearLayout>
-
-            <ProgressBar
-                android:id="@+id/progress_download_pdf"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
-                tools:visibility="gone" />
 
             <Button
                 android:id="@+id/pdf_curso"
