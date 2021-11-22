@@ -38,7 +38,7 @@ class CertificateFragment : Fragment() {
     }
 
     private fun getCertificaCly(docuCage:String ="") {
-        val url: String = " ${getString(R.string.host_service)}services/certifica-cly.php?docu-cage=${docuCage}"
+        val url: String = " ${getString(R.string.host_service)}${getString(R.string.home_service)}certifica-cly.php?docu-cage=${docuCage}"
 
         var request = StringRequest(
             Request.Method.GET,
@@ -51,7 +51,7 @@ class CertificateFragment : Fragment() {
                 recyclerView.adapter = CertificateAdapter(requireContext(), certificates)
             },
             { error ->
-                Toast.makeText(activity, error.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Error de conexión con el servidor", Toast.LENGTH_SHORT).show()
                 println(error.message)
                 error.printStackTrace()
             }

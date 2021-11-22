@@ -115,7 +115,7 @@ class CertificateAdapter(
 
         }
 
-        val uri ="${context.resources.getString(R.string.host_service)}services/certifica-cly-pdf.php?docu-cage=${docuCage}"
+        val uri ="${context.resources.getString(R.string.host_service)}${context.getString(R.string.home_service)}certifica-cly-pdf.php?docu-cage=${docuCage}"
         var request = DownloadManager.Request(Uri.parse(uri))
             .setTitle("certificados-loyola.pdf")
             .setDescription("Descargando....")
