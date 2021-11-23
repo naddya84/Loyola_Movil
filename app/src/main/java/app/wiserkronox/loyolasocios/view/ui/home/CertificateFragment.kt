@@ -29,33 +29,33 @@ class CertificateFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var user = LoyolaApplication.getInstance()?.user
-        var view = inflater.inflate(R.layout.fragment_certificate, container, false)
-
-        getCertificaCly(user!!.id_member)
         // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_certificate, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_certificate, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         progressBar = view.findViewById(R.id.certificates_progresbar)
         progressBar.visibility = View.VISIBLE
+
+        var user = LoyolaApplication.getInstance()?.user
+        getCertificaCly(user!!.id_member)
     }
 
     private fun getCertificaCly(docuCage:String ="") {
         val url: String = " ${getString(R.string.host_service)}${getString(R.string.home_service)}certifica-cly.php?docu-cage=${docuCage}"
 
+        val recyclerView = requireView().findViewById<RecyclerView>(R.id.recycler_view)
+        recyclerView.adapter = CertificateAdapter(requireContext(), emptyList())
         var request = StringRequest(
             Request.Method.GET,
             url,
             { response ->
                 var responseObject = Gson().fromJson(response.toString(), CertificateRequestModel::class.java)
-
                 val certificates = responseObject.result
-                val recyclerView = requireView().findViewById<RecyclerView>(R.id.recycler_view)
-                recyclerView.adapter = CertificateAdapter(requireContext(), certificates)
+
+                var certificateAdapter = CertificateAdapter(requireContext(), certificates)
+                recyclerView.adapter = certificateAdapter
                 progressBar.visibility = View.INVISIBLE
             },
             { error ->
