@@ -33,16 +33,23 @@ class CertificateAdapter(
     class CertificateViewHolder(
         private val view: View
     ): RecyclerView.ViewHolder(view) {
-        val labelGestion: TextView = view.findViewById(R.id.label_gestion)
-        val textGestion: TextView = view.findViewById(R.id.textview_gestion)
+        val label_certificate_year: TextView = view.findViewById(R.id.label_year)
+        val text_certificate_year: TextView = view.findViewById(R.id.text_year)
 
-        val textCerNumber: TextView = view.findViewById(R.id.certificate_number)
-        val txtFecAport: TextView = view.findViewById(R.id.certificate_fec_aporte)
-        val textCantidad: TextView = view.findViewById(R.id.certificate_cant)
-        val textMonto: TextView = view.findViewById(R.id.certificate_monto)
+        val textlabel_certificate_number: TextView = view.findViewById(R.id.textlabel_number)
+        val text_certificate_number: TextView = view.findViewById(R.id.text_number)
 
-        val imageViewStatus: ImageView = view.findViewById(R.id.certificate_status)
-        val exportPdfButton: Button = view.findViewById(R.id.export_pdf_button)
+        val textlabel_certificate_date: TextView = view.findViewById(R.id.textlabel_date)
+        val text_certificate_opening_date: TextView = view.findViewById(R.id.text_opening_date)
+
+        val textlabel_certificate_amount: TextView = view.findViewById(R.id.textlabel_amount)
+        val text_certificate_amount: TextView = view.findViewById(R.id.text_amount)
+
+        val textlabel_certificate_cost: TextView = view.findViewById(R.id.textlabel_amount)
+        val text_certificate_cost: TextView = view.findViewById(R.id.text_cost)
+
+        val image_certificate_state: ImageView = view.findViewById(R.id.image_status)
+        val button_export_pdf: Button = view.findViewById(R.id.button_export_pdf)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CertificateViewHolder {
@@ -54,46 +61,68 @@ class CertificateAdapter(
 
     override fun onBindViewHolder(holder: CertificateViewHolder, position: Int) {
         val item = dataset[position]
-        holder.textGestion.text = item.certGestion.toString()
+        holder.text_certificate_year.text = item.certGestion.toString()
 
-        holder.textCerNumber.text = item.certNumero.toString()
-        holder.txtFecAport.text = item.certFecApert
-        holder.textCantidad.text = item.certCanti.toString()
-        holder.textMonto.text = item.certMonto
+        holder.text_certificate_number.text = item.certNumero.toString()
+        holder.text_certificate_opening_date.text = item.certFecApert
+        holder.text_certificate_amount.text = item.certCanti.toString()
+        holder.text_certificate_cost.text = item.certMonto
 
         when(item.certEstado) {
             "VIGENTE"-> {
-                holder.imageViewStatus.setImageResource(R.drawable.ic_round_enabled)
+                holder.image_certificate_state.setImageResource(R.drawable.ic_round_enabled)
+
+                holder.label_certificate_year.setTextColor(ContextCompat.getColor(context, R.color.white))
+                holder.text_certificate_year.setTextColor(ContextCompat.getColor(context, R.color.white))
+
+                holder.textlabel_certificate_number.setTextColor(ContextCompat.getColor(context, R.color.green_kelp))
+                holder.text_certificate_number.setTextColor(ContextCompat.getColor(context, R.color.green_kelp))
+
+                holder.textlabel_certificate_date.setTextColor(ContextCompat.getColor(context, R.color.black))
+                holder.text_certificate_opening_date.setTextColor(ContextCompat.getColor(context, R.color.black))
+
+                holder.textlabel_certificate_amount.setTextColor(ContextCompat.getColor(context, R.color.black))
+                holder.text_certificate_amount.setTextColor(ContextCompat.getColor(context, R.color.black))
+
+                holder.textlabel_certificate_cost.setTextColor(ContextCompat.getColor(context, R.color.black))
+                holder.text_certificate_cost.setTextColor(ContextCompat.getColor(context, R.color.black))
+
+                holder.button_export_pdf.isEnabled = true
+                holder.button_export_pdf.setBackgroundColor(ContextCompat.getColor(context, R.color.green_kelp))
+                holder.button_export_pdf.setTextColor(ContextCompat.getColor(context, R.color.white))
             }
             "CADUCO" -> {
                 // card disabled styles
-                holder.imageViewStatus.setImageResource(R.drawable.ic_round_disabled)
+                holder.image_certificate_state.setImageResource(R.drawable.ic_round_disabled)
 
-                holder.labelGestion.setTextColor(Color.parseColor("#FF80C4A5"))
-                holder.textGestion.setTextColor(Color.parseColor("#FF80C4A5"))
+                holder.label_certificate_year.setTextColor(Color.parseColor("#FF80C4A5"))
+                holder.text_certificate_year.setTextColor(Color.parseColor("#FF80C4A5"))
 
+                holder.textlabel_certificate_number.setTextColor(Color.parseColor("#FF77BB9C"))
+                holder.text_certificate_number.setTextColor(Color.parseColor("#FF77BB9C"))
 
-                holder.textCerNumber.setTextColor(Color.parseColor("#FF77BB9C"))
+                holder.textlabel_certificate_date.setTextColor(Color.parseColor("#FFA0A0A0"))
+                holder.text_certificate_opening_date.setTextColor(Color.parseColor("#FFA0A0A0"))
 
-                holder.txtFecAport.setTextColor(Color.parseColor("#FFA0A0A0"))
+                holder.textlabel_certificate_amount.setTextColor(Color.parseColor("#FFA0A0A0"))
+                holder.text_certificate_amount.setTextColor(Color.parseColor("#FFA0A0A0"))
 
-                holder.textCantidad.setTextColor(Color.parseColor("#FFA0A0A0"))
+                holder.textlabel_certificate_cost.setTextColor(Color.parseColor("#FFA0A0A0"))
+                holder.text_certificate_cost.setTextColor(Color.parseColor("#FFA0A0A0"))
 
-                holder.textMonto.setTextColor(Color.parseColor("#FFA0A0A0"))
-
-                holder.exportPdfButton.setBackgroundColor(Color.parseColor("#FF77CB9E"))
+                holder.button_export_pdf.isEnabled = false
+                holder.button_export_pdf.setBackgroundColor(Color.parseColor("#FF77CB9E"))
+                holder.button_export_pdf.setTextColor(ContextCompat.getColor(context, R.color.white))
             }
         }
 
-        holder.exportPdfButton.setOnClickListener {
-            println("Download")
+        holder.button_export_pdf.setOnClickListener {
             val STORAGE_PERMISSION_CODE = 101
             if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
                 ActivityCompat.requestPermissions(context as Activity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), STORAGE_PERMISSION_CODE)
             } else {
-                var user = LoyolaApplication.getInstance()?.user
-                this.getCertificaClyPdf(user!!.id_member.toString())
-
+                val user = LoyolaApplication.getInstance()?.user
+                this.getCertificaClyPdf(user!!.id_member)
             }
 
         }
@@ -116,7 +145,7 @@ class CertificateAdapter(
         }
 
         val uri ="${context.resources.getString(R.string.host_service)}${context.getString(R.string.home_service)}certifica-cly-pdf.php?docu-cage=${docuCage}"
-        var request = DownloadManager.Request(Uri.parse(uri))
+        val request = DownloadManager.Request(Uri.parse(uri))
             .setTitle("certificados-loyola.pdf")
             .setDescription("Descargando....")
             .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "certificados-loyola.pdf")

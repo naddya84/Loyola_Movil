@@ -35,7 +35,7 @@ class CertificateFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        progressBar = view.findViewById(R.id.certificates_progresbar)
+        progressBar = view.findViewById(R.id.progresbar_certificates)
         progressBar.visibility = View.VISIBLE
 
         var user = LoyolaApplication.getInstance()?.user
@@ -45,7 +45,7 @@ class CertificateFragment : Fragment() {
     private fun getCertificaCly(docuCage:String ="") {
         val url: String = " ${getString(R.string.host_service)}${getString(R.string.home_service)}certifica-cly.php?docu-cage=${docuCage}"
 
-        val recyclerView = requireView().findViewById<RecyclerView>(R.id.recycler_view)
+        val recyclerView = requireView().findViewById<RecyclerView>(R.id.recyclerview_certificates)
         recyclerView.adapter = CertificateAdapter(requireContext(), emptyList())
         var request = StringRequest(
             Request.Method.GET,

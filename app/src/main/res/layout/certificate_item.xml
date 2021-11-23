@@ -23,7 +23,7 @@
             card_view:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/label_gestion"
+                android:id="@+id/label_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -31,13 +31,13 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textAppearance="?attr/textAppearanceOverline"
-                card_view:layout_constraintBottom_toBottomOf="@id/textview_gestion"
+                card_view:layout_constraintBottom_toBottomOf="@id/text_year"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textview_gestion"
+                android:id="@+id/text_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2011"
@@ -59,7 +59,7 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/textview_label_number"
+                android:id="@+id/textlabel_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Certificado:"
@@ -69,57 +69,57 @@
                 card_view:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
-                android:id="@+id/certificate_number"
+                android:id="@+id/text_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?attr/textAppearanceSubtitle1"
                 android:textStyle="bold"
                 android:textColor="@color/green_kelp"
                 android:paddingLeft="4dp"
-                card_view:layout_constraintStart_toEndOf="@id/textview_label_number"
+                card_view:layout_constraintStart_toEndOf="@id/textlabel_number"
                 card_view:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
-                android:id="@+id/textview_label_date"
+                android:id="@+id/textlabel_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fecha Aporte:"
                 card_view:layout_constraintStart_toStartOf="parent"
-                card_view:layout_constraintTop_toBottomOf="@+id/textview_label_number"/>
+                card_view:layout_constraintTop_toBottomOf="@+id/textlabel_number"/>
 
             <TextView
-                android:id="@+id/certificate_fec_aporte"
+                android:id="@+id/text_opening_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="4dp"
                 android:textStyle="bold"
-                card_view:layout_constraintStart_toEndOf="@+id/textview_label_date"
-                card_view:layout_constraintTop_toBottomOf="@+id/certificate_number" />
+                card_view:layout_constraintStart_toEndOf="@+id/textlabel_date"
+                card_view:layout_constraintTop_toBottomOf="@+id/text_number" />
 
             <TextView
-                android:id="@+id/textview_label_cant"
+                android:id="@+id/textlabel_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cantidad:"
                 card_view:layout_constraintStart_toStartOf="parent"
-                card_view:layout_constraintTop_toBottomOf="@+id/textview_label_date"/>
+                card_view:layout_constraintTop_toBottomOf="@+id/textlabel_date"/>
 
             <TextView
-                android:id="@+id/certificate_cant"
+                android:id="@+id/text_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="4dp"
                 android:textStyle="bold"
-                card_view:layout_constraintStart_toEndOf="@+id/textview_label_cant"
-                card_view:layout_constraintTop_toBottomOf="@+id/certificate_fec_aporte" />
+                card_view:layout_constraintStart_toEndOf="@+id/textlabel_amount"
+                card_view:layout_constraintTop_toBottomOf="@+id/text_opening_date" />
 
             <TextView
-                android:id="@+id/certificate_monto"
+                android:id="@+id/text_cost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 card_view:layout_constraintStart_toStartOf="parent"
-                card_view:layout_constraintTop_toBottomOf="@+id/textview_label_cant"/>
+                card_view:layout_constraintTop_toBottomOf="@+id/textlabel_amount"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -127,11 +127,11 @@
                 android:text="Bs."
                 android:textStyle="bold"
                 android:paddingLeft="4dp"
-                card_view:layout_constraintStart_toEndOf="@+id/certificate_monto"
-                card_view:layout_constraintTop_toBottomOf="@+id/certificate_cant"/>
+                card_view:layout_constraintStart_toEndOf="@+id/text_cost"
+                card_view:layout_constraintTop_toBottomOf="@+id/text_amount"/>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/export_pdf_button"
+                android:id="@+id/button_export_pdf"
                 android:layout_width="wrap_content"
                 android:minWidth="0dp"
                 android:layout_height="wrap_content"
@@ -147,10 +147,11 @@
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:icon="@drawable/ic_download_pdf"
+                card_view:iconTint="@color/white"
                 card_view:cornerRadius="20dp"/>
 
             <ImageView
-                android:id="@+id/certificate_status"
+                android:id="@+id/image_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 card_view:layout_constraintTop_toTopOf="parent"
