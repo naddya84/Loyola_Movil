@@ -119,10 +119,6 @@ class ListCourseFragment : Fragment(), ListCourseCallback {
                     }
                 }
             }
-
-            actives?.let {
-                populateCourseList(actives)
-            }
         }
     }
 
@@ -143,6 +139,10 @@ class ListCourseFragment : Fragment(), ListCourseCallback {
     fun backUpdate(course: Course){
         GlobalScope.launch {
             LoyolaApplication.getInstance()?.repository?. updateCourse(course)
+            val actives = LoyolaApplication.getInstance()?.repository?.getAllCoursesStatus("activo")
+            actives?.let {
+                populateCourseList(actives)
+            }
         }
     }
 
@@ -175,7 +175,6 @@ class ListCourseFragment : Fragment(), ListCourseCallback {
         }
     }
     override fun downloadDocument(course: Course) {
-        loader.visibility = ProgressBar.VISIBLE
         (activity as HomeActivity).downloadDocumentCourse(getOutputDirectory(activity as AppCompatActivity).toString(), course.document, course)
     }
 }

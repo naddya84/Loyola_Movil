@@ -35,6 +35,8 @@ class AdapterCourse internal constructor(private val courseList: List<Course>,va
         if( !course.photo.startsWith("http") && !course.photo.equals("")) {
             holder.photo_course.visibility = View.VISIBLE
             holder.photo_course.setImageURI(Uri.parse(course.photo))
+        } else {
+            holder.photo_course.visibility = View.GONE
         }
         holder.name_c.text = course.name
         holder.date_s.text = course.start_date
@@ -44,20 +46,19 @@ class AdapterCourse internal constructor(private val courseList: List<Course>,va
             holder.schedule.text = course.schedule
         }
         holder.type.text = course.type
-        if(course.type == "virtual"){
-            holder.cont_url.visibility = LinearLayout.VISIBLE
+        if(course.type.equals("Virtual")) {
+            holder.cont_locate.visibility = View.GONE
             holder.url.text = course.url
             holder.code.text = course.code
             holder.password.text = course.password
-            holder.desc_locate.visibility = TextView.GONE
-            holder.locate.visibility = TextView.GONE
-            holder.desc_locate.visibility = TextView.GONE
+
         } else {
             holder.locate.text = course.location
-            holder.cont_password.visibility = LinearLayout.GONE
-            holder.cont_codes.visibility = LinearLayout.GONE
-            holder.cont_url.visibility = LinearLayout.GONE
+            holder.cont_password.visibility = View.GONE
+            holder.cont_codes.visibility = View.GONE
+            holder.cont_url.visibility = View.GONE
         }
+
         if( !course.document.isEmpty() ) {
             holder.download_pdf.visibility = Button.VISIBLE
             holder.download_pdf.setOnClickListener {
@@ -84,7 +85,7 @@ class AdapterCourse internal constructor(private val courseList: List<Course>,va
         val url: TextView = itemView.findViewById(R.id.text_url)
         val code: TextView = itemView.findViewById(R.id.text_code)
         val password: TextView = itemView.findViewById(R.id.text_password)
-        val desc_locate: TextView = itemView.findViewById(R.id.desc_lugar)
+        val cont_locate: LinearLayout = itemView.findViewById(R.id.cont_location)
         val cont_password: LinearLayout = itemView.findViewById(R.id.cont_password)
         val cont_codes: LinearLayout = itemView.findViewById(R.id.cont_code)
         val cont_url: LinearLayout = itemView.findViewById(R.id.cont_url)
