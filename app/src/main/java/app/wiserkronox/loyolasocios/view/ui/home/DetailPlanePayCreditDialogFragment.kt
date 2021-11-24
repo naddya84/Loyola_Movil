@@ -20,10 +20,10 @@ class DetailPlanePayCreditDialogFragment : DialogFragment() {
     override fun onStart() {
         super.onStart()
         dialog?.window?.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT)
-        var snap = GradientDrawable()
-        snap.cornerRadius = 60F
+        val snapbg = GradientDrawable()
+        snapbg.cornerRadius = 60F
 
-        dialog?.window?.setBackgroundDrawable(snap)
+        dialog?.window?.setBackgroundDrawable(snapbg)
     }
 
     override fun onCreateView(
@@ -31,49 +31,49 @@ class DetailPlanePayCreditDialogFragment : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view : View = inflater.inflate(R.layout.fragment_detail_plane_pay_credit_dialog, container, false)
+        val view : View = inflater.inflate(R.layout.fragment_detail_plane_pay_credit_dialog, container, false)
 
-        var args = this.arguments
-        var data = args?.get("data")
-        var json = JSONObject(data.toString())
+        val args = this.arguments
+        val data = args?.get("data")
+        val json = JSONObject(data.toString())
 
-        var ncred = view.findViewById<TextView>(R.id.titlecred)
-        ncred.text = "CREDITO\n"+args?.get("nrotrans").toString()
+        val ncred = view.findViewById<TextView>(R.id.titlecred)
+        ncred.text = ("CREDITO\n"+args?.get("nrotrans").toString())
 
-        var moneda = view.findViewById<TextView>(R.id.titlemoneda)
-        moneda.text = args?.get("moneda").toString() + "."
+        val moneda = view.findViewById<TextView>(R.id.titlemoneda)
+        moneda.text = (args?.get("moneda").toString() + ".")
 
-        var fecha = view.findViewById<TextView>(R.id.txtFechaP)
-        fecha.text = "Fecha: " + json.get("credFecVenci").toString()
+        val fecha = view.findViewById<TextView>(R.id.txtFechaP)
+        fecha.text = ("Fecha: " + json.get("credFecVenci").toString())
 
-        var nro = view.findViewById<TextView>(R.id.txtNro)
-        nro.text = "N°: "+ json.get("credNumCuota").toString()
+        val nro = view.findViewById<TextView>(R.id.txtNro)
+        nro.text = ("N°: "+ json.get("credNumCuota").toString())
 
-        var montocapi = view.findViewById<TextView>(R.id.txtMontoCapi)
-        montocapi.text = json.get("credMontoCapi").toString() + " " + moneda.text
+        val montocapi = view.findViewById<TextView>(R.id.txtMontoCapi)
+        montocapi.text = (json.get("credMontoCapi").toString() + " " + moneda.text)
 
-        var montointer = view.findViewById<TextView>(R.id.txtMontoInteres)
-        montointer.text = json.get("credMontoInte").toString()+ " " + moneda.text
+        val montointer = view.findViewById<TextView>(R.id.txtMontoInteres)
+        montointer.text = (json.get("credMontoInte").toString()+ " " + moneda.text)
 
-        var montopenal = view.findViewById<TextView>(R.id.txtTotalCuota)
-        montopenal.text = json.get("credTotaCuota").toString()+ " " + moneda.text
+        val montopenal = view.findViewById<TextView>(R.id.txtTotalCuota)
+        montopenal.text = (json.get("credTotaCuota").toString()+ " " + moneda.text)
 
-        var montocargo = view.findViewById<TextView>(R.id.txtMontoCargos)
-        montocargo.text = json.get("credMontoCargos").toString()+ " " + moneda.text
+        val montocargo = view.findViewById<TextView>(R.id.txtMontoCargos)
+        montocargo.text = (json.get("credMontoCargos").toString()+ " " + moneda.text)
 
-        var totalpago = view.findViewById<TextView>(R.id.txtTotalpago)
-        totalpago.text = json.get("credTotalCuota").toString()+ " " + moneda.text
+        val totalpago = view.findViewById<TextView>(R.id.txtTotalpago)
+        totalpago.text = (json.get("credTotalCuota").toString()+ " " + moneda.text)
 
-        var saldocargo = view.findViewById<TextView>(R.id.txtSaldoCredi)
-        saldocargo.text = json.get("credSaldoCredi").toString()+ " " + moneda.text
+        val saldocargo = view.findViewById<TextView>(R.id.txtSaldoCredi)
+        saldocargo.text = (json.get("credSaldoCredi").toString()+ " " + moneda.text)
 
 
-        var spanbutton = GradientDrawable()
+        val spanbutton = GradientDrawable()
         spanbutton.cornerRadius = 20f
         spanbutton.setColor(Color.parseColor("#00AB45"))
 
-        var button = view.findViewById<Button>(R.id.btnCloseDialog)
-        button.text = "CERRAR"
+        val button = view.findViewById<Button>(R.id.btnCloseDialog)
+        button.text = ("CERRAR").toString()
         button.setTypeface(null, Typeface.BOLD)
         button.setTextColor(Color.parseColor("#FFFFFF"))
         button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)

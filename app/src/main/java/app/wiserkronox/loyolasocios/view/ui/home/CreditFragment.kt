@@ -10,9 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import app.wiserkronox.loyolasocios.R
 import app.wiserkronox.loyolasocios.service.LoyolaApplication
 import com.android.volley.Request
@@ -25,179 +27,208 @@ class CreditFragment : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        var view = inflater.inflate(R.layout.fragment_credit, container, false)
+        val view = inflater.inflate(R.layout.fragment_credit, container, false)
 
-        var mainBody = view.findViewById<LinearLayout>(R.id.layoutmainbody)
+        val mainBody = view.findViewById<LinearLayout>(R.id.layoutmainbody)
         mainBody.setPadding(30,30,30,30)
 
-        var user = LoyolaApplication.getInstance()?.user
-        val url: String = "${getString(R.string.host_service)}services/historial_cred_cly.php?docu-cage=${user!!.id_member}"
-        val queue = Volley.newRequestQueue(activity);
+        val user = LoyolaApplication.getInstance()?.user
+        val url = "${getString(R.string.host_service)}services/historial_cred_cly.php?docu-cage=${user!!.id_member}"
+        val queue = Volley.newRequestQueue(activity)
         val creditRequest = JsonObjectRequest(
             Request.Method.GET,
             url,
             null,
             {jsonObject->
+                val error = jsonObject.get("error")
 
-                var data = jsonObject.getJSONArray("result");
+                if(error == true) {
+                    val msg = jsonObject.get("msg").toString()
+                    Toast.makeText(activity,msg, Toast.LENGTH_SHORT).show()
+                    val progressbar = view.findViewById<ProgressBar>(R.id.progressbar_credit)
+                    progressbar.visibility = View.INVISIBLE
+                    findNavController().popBackStack()
 
-                for(i in 0 until data.length()) {
+                } else {
+                    val data = jsonObject.getJSONArray("result")
 
-                    var lnlBody = LinearLayout(activity)
-                    lnlBody.orientation = LinearLayout.HORIZONTAL
+                    for(i in 0 until data.length()) {
 
-                    var params = LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        280,
-                        1f)
+                        val lnlBody = LinearLayout(activity)
+                        lnlBody.orientation = LinearLayout.HORIZONTAL
 
-                    params.setMargins(0,30,0,20)
+                        val params = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            280,
+                            1f)
 
-                    var number = TextView(activity)
-                    var bg = resources.getDrawable(R.drawable.tags_rounded_corners)
-                    bg.setTint(Color.parseColor("#008945"))
-                    number.background = bg
-                    number.text = "CREDITO\n"+ data.getJSONObject(i).get("credNumero").toString()
-                    number.gravity = Gravity.CENTER
-                    number.setTypeface(null, Typeface.BOLD)
-                    number.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                    number.setTextColor(Color.parseColor("#FFFFFD"))
-                    number.setLayoutParams(LinearLayout.LayoutParams(
-                        230,
-                        LinearLayout.LayoutParams.MATCH_PARENT
-                    ))
+                        params.setMargins(0,30,0,20)
 
-                    var lnlsection = LinearLayout(activity)
-                    lnlsection.orientation = LinearLayout.VERTICAL
+                        val number = TextView(activity)
 
-                    var paramsSection = LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        0f
-                    )
-                    //Body left
-                    lnlBody.setLayoutParams(params)
-                    lnlBody.addView(number)
-                    lnlBody.addView(lnlsection,paramsSection)
+                        val bg = GradientDrawable()
+                        bg.cornerRadius = 25F
+                        bg.setColor(Color.parseColor("#008945"))
+
+                        number.background = bg
+                        number.text = ("CREDITO\n"+ data.getJSONObject(i).get("credNumero").toString())
+                        number.gravity = Gravity.CENTER
+                        number.setTypeface(null, Typeface.BOLD)
+                        number.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
+                        number.setTextColor(Color.parseColor("#FFFFFD"))
+                        number.setLayoutParams(LinearLayout.LayoutParams(
+                            230,
+                            LinearLayout.LayoutParams.MATCH_PARENT
+                        ))
+
+                        val lnlsection = LinearLayout(activity)
+                        lnlsection.orientation = LinearLayout.VERTICAL
+
+                        val paramsSection = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            0f
+                        )
+                        //Body left
+                        lnlBody.setLayoutParams(params)
+                        lnlBody.addView(number)
+                        lnlBody.addView(lnlsection,paramsSection)
+
+                        val bgmoneda = GradientDrawable()
+                        bgmoneda.cornerRadii = floatArrayOf(
+                            0f,0f,
+                            20f,20f,
+                            0f,0f,
+                            0f,0f
+                        )
+                        bgmoneda.setTint(Color.parseColor("#BCBCBC"))
+
+                        val moneda = TextView(activity)
+                        moneda.text = ("Moneda: "+data.getJSONObject(i).get("credMoneda").toString()+".")
+                        moneda.background = bgmoneda
+                        moneda.setPadding(40,0,0,0)
+                        moneda.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
 
 
-                    var bgmoneda = resources.getDrawable(R.drawable.tags_rounded_corners_top_right)
-                    bgmoneda.setTint(Color.parseColor("#BCBCBC"))
+                        val bgSection = GradientDrawable()
+                        bgSection.cornerRadii = floatArrayOf(
+                            0f,0f,
+                            0f,0f,
+                            20f,20f,
+                            0f,0f
+                        )
+                        bgSection.setTint(Color.parseColor("#EFEFEF"))
 
-                    var moneda = TextView(activity)
-                    moneda.text = "Moneda: "+data.getJSONObject(i).get("credMoneda").toString()+"."
-                    moneda.background = bgmoneda
-                    moneda.setPadding(40,0,0,0)
-                    moneda.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
+                        val lnlSectionInformation = LinearLayout(activity)
+                        lnlSectionInformation.orientation = LinearLayout.HORIZONTAL
+                        lnlSectionInformation.background = bgSection
 
+                        val paramsButtons = LinearLayout.LayoutParams(
+                            208,
+                            LinearLayout.LayoutParams.WRAP_CONTENT)
 
-                    var bgSection = resources.getDrawable(R.drawable.tags_rounded_corners_bottom_right)
-                    bgSection.setTint(Color.parseColor("#EFEFEF"))
+                        paramsButtons.setMargins(15,20,15,20)
 
-                    var lnlSectionInformation = LinearLayout(activity)
-                    lnlSectionInformation.orientation = LinearLayout.HORIZONTAL
-                    lnlSectionInformation.background = bgSection
+                        val shape = GradientDrawable()
+                        shape.cornerRadius = 25F
+                        shape.setColor(Color.parseColor("#00AB45"))
 
-                    var paramsButtons = LinearLayout.LayoutParams(
-                        208,
-                        LinearLayout.LayoutParams.WRAP_CONTENT)
+                        val icon_detail = ResourcesCompat.getDrawable(resources,R.drawable.icon_detail,context?.theme)
+                        icon_detail?.setBounds(0,0,63,63)
+                        icon_detail?.setTint(Color.WHITE)
 
-                    paramsButtons.setMargins(15,20,15,20)
+                        val btnDetalle = Button(activity)
+                        btnDetalle.background = shape
+                        btnDetalle.text = ("DETALLE").toString()
+                        btnDetalle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
+                        btnDetalle.setTextColor(Color.parseColor("#FFFFFD"))
+                        btnDetalle.setLayoutParams(paramsButtons)
+                        btnDetalle.setCompoundDrawables(null,icon_detail,null,null)
 
-                    var shape = GradientDrawable()
-                    shape.cornerRadius = 25F
-                    shape.setColor(Color.parseColor("#00AB45"))
+                        btnDetalle.setOnClickListener {
+                            val details = data.getJSONObject(i).toString()
+                            val bundle = Bundle()
+                            bundle.putString("data",details)
+                            view.findNavController().navigate(R.id.action_detaill, bundle)
+                        }
 
-                    var icon_detail = resources.getDrawable(R.drawable.icon_detail)
-                    icon_detail.setBounds(0,0,63,63)
-                    icon_detail.setTint(Color.WHITE)
+                        val icon_plane_play = ResourcesCompat.getDrawable(resources,R.drawable.icon_plane_pay,context?.theme)
+                        icon_plane_play?.setBounds(0,0,63,63)
+                        icon_plane_play?.setTint(Color.WHITE)
 
-                    var btnDetalle = Button(activity)
-                    btnDetalle.background = shape
-                    btnDetalle.text = "DETALLE"
-                    btnDetalle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
-                    btnDetalle.setTextColor(Color.parseColor("#FFFFFD"))
-                    btnDetalle.setLayoutParams(paramsButtons)
-                    btnDetalle.setCompoundDrawables(null,icon_detail,null,null)
+                        val btnPlanPagos = Button(activity)
+                        btnPlanPagos.background = shape
+                        btnPlanPagos.text = ("PLAN DE PAGOS").toString()
+                        btnPlanPagos.setTextColor(Color.parseColor("#FFFFFD"))
+                        btnPlanPagos.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
+                        btnPlanPagos.setLayoutParams(paramsButtons)
+                        btnPlanPagos.setCompoundDrawables(null,icon_plane_play,null,null)
 
-                    btnDetalle.setOnClickListener {
-                        val details = data.getJSONObject(i).toString()
-                        val bundle = Bundle()
-                        bundle.putString("data",details)
-                        view.findNavController().navigate(R.id.action_detaill, bundle)
+                        btnPlanPagos.setOnClickListener {
+                            val details = data.getJSONObject(i).toString()
+                            val bundle = Bundle()
+                            bundle.putString("data",details)
+                            view.findNavController().navigate(R.id.action_plane_pay_credit, bundle)
+                        }
+
+                        val icon_extract = ResourcesCompat.getDrawable(resources,R.drawable.icon_extract,context?.theme)
+                        icon_extract?.setBounds(0,0,63,63)
+                        icon_extract?.setTint(Color.WHITE)
+
+                        val btnExtracto = Button(activity)
+                        btnExtracto.background = shape
+                        btnExtracto.text = ("EXTRACTO").toString()
+                        btnExtracto.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
+                        btnExtracto.setTextColor(Color.parseColor("#FFFFFD"))
+                        btnExtracto.setLayoutParams(paramsButtons)
+                        btnExtracto.setCompoundDrawables(null,icon_extract,null,null)
+
+                        btnExtracto.setOnClickListener {
+                            val details = data.getJSONObject(i).toString()
+                            val bundle = Bundle()
+                            bundle.putString("data",details)
+                            view.findNavController().navigate(R.id.action_extract_credit, bundle)
+                        }
+
+                        val check = ImageView(activity)
+                        val type = data.getJSONObject(i).get("credEstado").toString()
+                        if(type == "Vigente") {
+                            check.setBackgroundResource(R.drawable.icon_check)
+                        } else {
+                            check.setBackgroundResource(R.drawable.icon_no_check)
+                        }
+
+                        check.setLayoutParams(LinearLayout.LayoutParams(50,50))
+
+                        //Actions Buttons
+                        val paramsInformation = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            265,
+                            1f)
+
+                        lnlSectionInformation.setPadding(10)
+                        lnlSectionInformation.setLayoutParams(paramsInformation)
+                        lnlSectionInformation.addView(btnDetalle)
+                        lnlSectionInformation.addView(btnPlanPagos)
+                        lnlSectionInformation.addView(btnExtracto)
+                        lnlSectionInformation.addView(check)
+                        //Body Right
+                        lnlsection.addView(moneda)
+                        lnlsection.addView(lnlSectionInformation)
+                        //Insert row in table
+                        mainBody.addView(lnlBody)
+                        val progressbar = view.findViewById<ProgressBar>(R.id.progressbar_credit)
+                        progressbar.visibility = View.INVISIBLE
+
                     }
-
-                    var icon_plane_play = resources.getDrawable(R.drawable.icon_plane_pay)
-                    icon_plane_play.setBounds(0,0,63,63)
-                    icon_plane_play.setTint(Color.WHITE)
-
-                    var btnPlanPagos = Button(activity)
-                    btnPlanPagos.background = shape
-                    btnPlanPagos.text = "PLAN DE PAGOS"
-                    btnPlanPagos.setTextColor(Color.parseColor("#FFFFFD"))
-                    btnPlanPagos.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
-                    btnPlanPagos.setLayoutParams(paramsButtons)
-                    btnPlanPagos.setCompoundDrawables(null,icon_plane_play,null,null)
-
-                    btnPlanPagos.setOnClickListener {
-                        val details = data.getJSONObject(i).toString()
-                        val bundle = Bundle()
-                        bundle.putString("data",details)
-                        view.findNavController().navigate(R.id.action_plane_pay_credit, bundle)
-                    }
-
-                    var icon_extract = resources.getDrawable(R.drawable.icon_extract)
-                    icon_extract.setBounds(0,0,63,63)
-                    icon_extract.setTint(Color.WHITE)
-
-                    var btnExtracto = Button(activity)
-                    btnExtracto.background = shape
-                    btnExtracto.text = "EXTRACTO"
-                    btnExtracto.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
-                    btnExtracto.setTextColor(Color.parseColor("#FFFFFD"))
-                    btnExtracto.setLayoutParams(paramsButtons)
-                    btnExtracto.setCompoundDrawables(null,icon_extract,null,null)
-
-                    btnExtracto.setOnClickListener {
-                        val details = data.getJSONObject(i).toString()
-                        val bundle = Bundle()
-                        bundle.putString("data",details)
-                        view.findNavController().navigate(R.id.action_extract_credit, bundle)
-                    }
-
-                    var check = ImageView(activity)
-                    var type = data.getJSONObject(i).get("credEstado").toString()
-                    if(type == "Vigente") {
-                        check.setBackgroundResource(R.drawable.icon_check)
-                    } else {
-                        check.setBackgroundResource(R.drawable.icon_no_check)
-                    }
-
-                    check.setLayoutParams(LinearLayout.LayoutParams(50,50))
-
-                    //Actions Buttons
-                    var paramsInformation = LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        265,
-                        1f)
-
-                    lnlSectionInformation.setPadding(10)
-                    lnlSectionInformation.setLayoutParams(paramsInformation)
-                    lnlSectionInformation.addView(btnDetalle)
-                    lnlSectionInformation.addView(btnPlanPagos)
-                    lnlSectionInformation.addView(btnExtracto)
-                    lnlSectionInformation.addView(check)
-                    //Body Right
-                    lnlsection.addView(moneda)
-                    lnlsection.addView(lnlSectionInformation)
-                    //Insert row in table
-                    mainBody.addView(lnlBody)
-
                 }
+
             },
             {volleyError->
                 Toast.makeText(activity,volleyError.message, Toast.LENGTH_SHORT).show()
                 println(volleyError.message)
+                val progressbar = view.findViewById<ProgressBar>(R.id.progressbar_credit)
+                progressbar.visibility = View.INVISIBLE
             })
 
         queue.add(creditRequest)
@@ -206,4 +237,9 @@ class CreditFragment : Fragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val progressbar = view.findViewById<ProgressBar>(R.id.progressbar_credit)
+        progressbar.visibility = View.VISIBLE
+    }
 }
