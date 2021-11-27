@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import app.wiserkronox.loyolasocios.R
 import org.json.JSONObject
+import java.text.SimpleDateFormat
 
 class DetailPlanePayCreditDialogFragment : DialogFragment() {
 
@@ -44,10 +45,14 @@ class DetailPlanePayCreditDialogFragment : DialogFragment() {
         moneda.text = (args?.get("moneda").toString() + ".")
 
         val fecha = view.findViewById<TextView>(R.id.txtFechaP)
-        fecha.text = ("Fecha: " + json.get("credFecVenci").toString())
+        val dateformat = SimpleDateFormat("dd-MMM-yyyy")
+        val dateparse = SimpleDateFormat("yyyy-MM-dd")
+        val date = dateformat.format(dateparse.parse(json.get("credFecVenci").toString()))
+
+        fecha.text = date
 
         val nro = view.findViewById<TextView>(R.id.txtNro)
-        nro.text = ("N°: "+ json.get("credNumCuota").toString())
+        nro.text = (json.get("credNumCuota").toString())
 
         val montocapi = view.findViewById<TextView>(R.id.txtMontoCapi)
         montocapi.text = (json.get("credMontoCapi").toString() + " " + moneda.text)

@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import app.wiserkronox.loyolasocios.R
 import org.json.JSONObject
+import java.text.SimpleDateFormat
 
 class DetailExtractCreditDialogFragment : DialogFragment() {
 
@@ -46,10 +47,14 @@ class DetailExtractCreditDialogFragment : DialogFragment() {
         moneda.text = (args?.get("moneda").toString() + ".")
 
         val fecha = view.findViewById<TextView>(R.id.txtFechaP)
-        fecha.text = ("Fecha: " + json.get("credFecPago").toString())
+        val dateformat = SimpleDateFormat("dd-MMM-yyyy")
+        val dateparse = SimpleDateFormat("yyyy-MM-dd")
+        val date = dateformat.format(dateparse.parse(json.get("credFecPago").toString()))
+
+        fecha.text = date
 
         val nro = view.findViewById<TextView>(R.id.txtNro)
-        nro.text = ("N°: "+ json.get("credNroTrans").toString())
+        nro.text = (json.get("credNroTrans").toString())
 
         val montocapi = view.findViewById<TextView>(R.id.txtMontoCapi)
         montocapi.text = (json.get("credMontoCapi").toString() + " " + moneda.text)
@@ -68,7 +73,6 @@ class DetailExtractCreditDialogFragment : DialogFragment() {
 
         val saldocargo = view.findViewById<TextView>(R.id.txtSaldoCredi)
         saldocargo.text = (json.get("credSaldoCapi").toString() + " " + moneda.text)
-
 
         val spanbutton = GradientDrawable()
         spanbutton.cornerRadius = 20f

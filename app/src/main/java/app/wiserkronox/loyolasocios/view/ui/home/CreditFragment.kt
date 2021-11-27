@@ -33,7 +33,7 @@ class CreditFragment : Fragment() {
         mainBody.setPadding(30,30,30,30)
 
         val user = LoyolaApplication.getInstance()?.user
-        val url = "${getString(R.string.host_service)}services/historial_cred_cly.php?docu-cage=${user!!.id_member}"
+        val url = "${getString(R.string.host_service)}services/credit_history.php?docu-cage=${user!!.id_member}"
         val queue = Volley.newRequestQueue(activity)
         val creditRequest = JsonObjectRequest(
             Request.Method.GET,
@@ -64,21 +64,54 @@ class CreditFragment : Fragment() {
 
                         params.setMargins(0,30,0,20)
 
+                        val lnlleftinformation = LinearLayout(activity)
+                        lnlleftinformation.orientation = LinearLayout.VERTICAL
+
                         val number = TextView(activity)
+                        val state = TextView(activity)
 
                         val bg = GradientDrawable()
-                        bg.cornerRadius = 25F
+                        bg.cornerRadii = floatArrayOf(
+                            20f,20f,
+                            0f,0f,
+                            0f,0f,
+                            20f,20f
+                        )
                         bg.setColor(Color.parseColor("#008945"))
 
-                        number.background = bg
                         number.text = ("CREDITO\n"+ data.getJSONObject(i).get("credNumero").toString())
                         number.gravity = Gravity.CENTER
                         number.setTypeface(null, Typeface.BOLD)
                         number.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
                         number.setTextColor(Color.parseColor("#FFFFFD"))
                         number.setLayoutParams(LinearLayout.LayoutParams(
-                            230,
-                            LinearLayout.LayoutParams.MATCH_PARENT
+                            220,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                        ))
+
+                        state.text = ("Estado\n"+ data.getJSONObject(i).get("credEstado").toString())
+                        state.gravity = Gravity.CENTER
+                        state.setTypeface(null, Typeface.BOLD)
+                        state.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
+
+                        if(data.getJSONObject(i).get("credEstado").toString() == "Castigado") {
+                            state.setTextColor(Color.RED)
+                        }
+                        if(data.getJSONObject(i).get("credEstado").toString() == "Retraso") {
+                            state.setTextColor(Color.RED)
+                        }
+                        if(data.getJSONObject(i).get("credEstado").toString() == "Ejecución") {
+                            state.setTextColor(Color.RED)
+                        }
+                        if(data.getJSONObject(i).get("credEstado").toString() == "Cancelado") {
+                            state.setTextColor(Color.RED)
+                        }
+                        if(data.getJSONObject(i).get("credEstado").toString() == "Activo") {
+                            state.setTextColor(Color.parseColor("#2ed111"))
+                        }
+                        state.setLayoutParams(LinearLayout.LayoutParams(
+                            220,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
                         ))
 
                         val lnlsection = LinearLayout(activity)
@@ -87,11 +120,21 @@ class CreditFragment : Fragment() {
                         val paramsSection = LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,
                             LinearLayout.LayoutParams.MATCH_PARENT,
-                            0f
                         )
+
+                        val paramsLeft = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                        )
+
                         //Body left
+                        lnlleftinformation.setPadding(5)
+                        lnlleftinformation.gravity = Gravity.CENTER
+                        lnlleftinformation.background = bg
+                        lnlleftinformation.addView(number)
+                        lnlleftinformation.addView(state)
                         lnlBody.setLayoutParams(params)
-                        lnlBody.addView(number)
+                        lnlBody.addView(lnlleftinformation,paramsLeft)
                         lnlBody.addView(lnlsection,paramsSection)
 
                         val bgmoneda = GradientDrawable()
@@ -104,7 +147,7 @@ class CreditFragment : Fragment() {
                         bgmoneda.setTint(Color.parseColor("#BCBCBC"))
 
                         val moneda = TextView(activity)
-                        moneda.text = ("Moneda: "+data.getJSONObject(i).get("credMoneda").toString()+".")
+                        moneda.text = ("Moneda: "+data.getJSONObject(i).get("credMontoDesem").toString()+" "+data.getJSONObject(i).get("credMoneda").toString()+".")
                         moneda.background = bgmoneda
                         moneda.setPadding(40,0,0,0)
                         moneda.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
@@ -192,7 +235,7 @@ class CreditFragment : Fragment() {
 
                         val check = ImageView(activity)
                         val type = data.getJSONObject(i).get("credEstado").toString()
-                        if(type == "Vigente") {
+                        if(type == "Activo") {
                             check.setBackgroundResource(R.drawable.icon_check)
                         } else {
                             check.setBackgroundResource(R.drawable.icon_no_check)
