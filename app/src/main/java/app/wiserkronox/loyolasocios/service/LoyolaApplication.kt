@@ -12,7 +12,14 @@ class LoyolaApplication : Application () {
     val applicationScope = CoroutineScope(SupervisorJob())
 
     val dataBase by lazy { AppRoomDataBase.getDataBase(this, applicationScope) }
-    val repository by lazy { LoyolaRepository(dataBase.userDao(), dataBase.assemblyDao(), dataBase.courseDao()) }
+    val repository by lazy {
+        LoyolaRepository(
+            dataBase.userDao(),
+            dataBase.assemblyDao(),
+            dataBase.courseDao(),
+            dataBase.certificateDao()
+        )
+    }
 
     var user: User? = null
 

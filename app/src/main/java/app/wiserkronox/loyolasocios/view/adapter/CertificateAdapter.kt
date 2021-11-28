@@ -1,4 +1,4 @@
-package app.wiserkronox.loyolasocios.view.ui.home
+package app.wiserkronox.loyolasocios.view.adapter
 
 import android.app.Activity
 import android.app.DownloadManager
@@ -22,11 +22,11 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import app.wiserkronox.loyolasocios.R
 import app.wiserkronox.loyolasocios.service.LoyolaApplication
-import app.wiserkronox.loyolasocios.service.model.CertificateModel
+import app.wiserkronox.loyolasocios.service.model.Certificate
 
 class CertificateAdapter(
     private val context: Context,
-    private val dataset: List<CertificateModel>
+    private val dataset: List<Certificate>
 ):RecyclerView.Adapter<CertificateAdapter.CertificateViewHolder>() {
 
 
@@ -61,14 +61,14 @@ class CertificateAdapter(
 
     override fun onBindViewHolder(holder: CertificateViewHolder, position: Int) {
         val item = dataset[position]
-        holder.text_certificate_year.text = item.certGestion.toString()
+        holder.text_certificate_year.text = item.year.toString()
 
-        holder.text_certificate_number.text = item.certNumero.toString()
-        holder.text_certificate_opening_date.text = item.certFecApert
-        holder.text_certificate_amount.text = item.certCanti.toString()
-        holder.text_certificate_cost.text = item.certMonto
+        holder.text_certificate_number.text = item.number.toString()
+        holder.text_certificate_opening_date.text = item.opening_date
+        holder.text_certificate_amount.text = item.amount.toString()
+        holder.text_certificate_cost.text = item.cost.toString()
 
-        when(item.certEstado) {
+        when(item.state) {
             "VIGENTE"-> {
                 holder.image_certificate_state.setImageResource(R.drawable.ic_round_enabled)
 

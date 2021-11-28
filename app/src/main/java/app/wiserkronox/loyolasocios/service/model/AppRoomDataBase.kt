@@ -13,9 +13,10 @@ import kotlinx.coroutines.launch
     entities = arrayOf(
         User::class,
         Assembly::class,
-        Course::class
+        Course::class,
+        Certificate::class
     ),
-    version = 12,
+    version = 13,
     exportSchema = false
 )
 
@@ -24,6 +25,7 @@ import kotlinx.coroutines.launch
     abstract fun userDao(): UserDao
     abstract fun assemblyDao(): AssemblyDao
     abstract fun courseDao(): CourseDao
+    abstract fun certificateDao():CertificateDao
 
     companion object {
         @Volatile

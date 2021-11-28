@@ -1,28 +1,23 @@
 package app.wiserkronox.loyolasocios.view.ui.home
 
-import android.app.DownloadManager
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.CookieManager
-import android.widget.*
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import app.wiserkronox.loyolasocios.R
 import app.wiserkronox.loyolasocios.service.LoyolaApplication
-import app.wiserkronox.loyolasocios.service.model.CertificateRequestModel
-import app.wiserkronox.loyolasocios.service.repository.LoyolaService
-import com.android.volley.Request
-import com.android.volley.toolbox.StringRequest
-import com.google.gson.Gson
+import app.wiserkronox.loyolasocios.service.repository.CertificateRest
+import app.wiserkronox.loyolasocios.view.adapter.CertificateAdapter
+import app.wiserkronox.loyolasocios.view.ui.HomeActivity
 
 class CertificateFragment : Fragment() {
 
     private lateinit var progressBar:ProgressBar
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,42 +25,37 @@ class CertificateFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_certificate, container, false)
+        var root = inflater.inflate(R.layout.fragment_certificate, container, false)
+        progressBar = root.findViewById(R.id.progresbar_certificates)
+        recyclerView = root.findViewById(R.id.recyclerview_certificates)
+        recyclerView.adapter = CertificateAdapter(requireContext(), emptyList())
+        return  root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        progressBar = view.findViewById(R.id.progresbar_certificates)
         progressBar.visibility = View.VISIBLE
 
         var user = LoyolaApplication.getInstance()?.user
-        getCertificaCly(user!!.id_member)
-    }
-
-    private fun getCertificaCly(docuCage:String ="") {
-        val url: String = " ${getString(R.string.host_service)}${getString(R.string.home_service)}certifica-cly.php?docu-cage=${docuCage}"
-
-        val recyclerView = requireView().findViewById<RecyclerView>(R.id.recyclerview_certificates)
-        recyclerView.adapter = CertificateAdapter(requireContext(), emptyList())
-        var request = StringRequest(
-            Request.Method.GET,
-            url,
-            { response ->
-                var responseObject = Gson().fromJson(response.toString(), CertificateRequestModel::class.java)
-                val certificates = responseObject.result
-
-                var certificateAdapter = CertificateAdapter(requireContext(), certificates)
-                recyclerView.adapter = certificateAdapter
+        CertificateRest(requireActivity()).getCertificates(
+            user!!.id_member,
+            {
+                certificates->
                 progressBar.visibility = View.INVISIBLE
+                if (certificates != null) {
+                    recyclerView.adapter = CertificateAdapter(requireContext(), certificates)
+                }
+
             },
-            { error ->
+            {
+                error, certificates ->
                 Toast.makeText(activity, "Error de conexión con el servidor", Toast.LENGTH_SHORT).show()
-                println(error.message)
-                error.printStackTrace()
                 progressBar.visibility = View.INVISIBLE
+                if (certificates?.size == 0)
+                    (activity as HomeActivity).goHome()
+                recyclerView.adapter = CertificateAdapter(requireContext(), certificates!!)
+
             }
         )
-        LoyolaService.getInstance(requireContext()).addToRequestQueue(request)
     }
-
 }
