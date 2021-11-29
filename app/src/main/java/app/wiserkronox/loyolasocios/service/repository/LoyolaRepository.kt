@@ -7,7 +7,9 @@ import kotlinx.coroutines.flow.Flow
 class LoyolaRepository(
     private val userDao: UserDao,
     private val assemblyDao: AssemblyDao,
-    private val courseDao: CourseDao) {
+    private val courseDao: CourseDao,
+    private val certificateDao: CertificateDao
+) {
 
     val allUsers: Flow<List<User>> = userDao.getUsers()
 
@@ -114,5 +116,25 @@ class LoyolaRepository(
     }
     fun getAllCoursesStatus(status: String): List<Course> {
         return courseDao.getAllCoursesStatus(status)
+    }
+
+    /*************************************************************************************
+     * Funciones para la instancia de certificados
+     */
+    @Suppress("RedundantSuspendModifier")
+    suspend fun getAllCertificates():List<Certificate> {
+        return  certificateDao.getAllCertificates()
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun insertAllCertificates(certificates: List<Certificate>): List<Long>{
+        return certificateDao.insertAllCertificates(certificates)
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun deleteAllCertificates(){
+        certificateDao.deleteAll()
     }
 }
