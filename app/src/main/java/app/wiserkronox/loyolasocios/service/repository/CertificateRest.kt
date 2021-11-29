@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 
 class CertificateRest(val context: Activity){
     companion object {
-        const val GET_CERTIFICATES = "certifica-cly.php"
+        const val GET_CERTIFICATES = "get_certificates.php"
         const val GET_CERTIFICATE_PDF = "get_certificate_pdf.php"
         const val GET_CERTIFICATES_PDF = "certifica-cly-pdf.php"
         const val STORAGE_PERMISSION_CODE = 101
@@ -40,7 +40,7 @@ class CertificateRest(val context: Activity){
         onSuccess:(List<Certificate>?)->Unit,
         onError:(err:VolleyError, List<Certificate>?)->Unit
     ) {
-        val url = "${getCertificateURL()}?docu-cage=$docuCage"
+        val url = "${getCertificateURL()}?docu_cage=$docuCage"
 
         var request = StringRequest(
             Request.Method.GET,
