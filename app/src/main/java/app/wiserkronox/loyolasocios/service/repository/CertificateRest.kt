@@ -26,6 +26,8 @@ import kotlinx.coroutines.launch
 class CertificateRest(val context: Activity){
     companion object {
         const val GET_CERTIFICATES = "certifica-cly.php"
+        const val GET_CERTIFICATE_PDF = "get_certificate_pdf.php"
+        const val GET_CERTIFICATES_PDF = "certifica-cly-pdf.php"
         const val STORAGE_PERMISSION_CODE = 101
     }
 
@@ -84,7 +86,6 @@ class CertificateRest(val context: Activity){
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(context as Activity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), STORAGE_PERMISSION_CODE)
         } else {
-
             val new = object: BroadcastReceiver() {
                 override fun onReceive(p0: Context?, p1: Intent?) {
                     val id = p1?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
@@ -95,7 +96,7 @@ class CertificateRest(val context: Activity){
 
             }
 
-            val uri ="${context.resources.getString(R.string.host_service)}${context.getString(R.string.home_service)}certifica-cly-pdf.php?docu-cage=${docuCage}"
+            val uri ="${context.resources.getString(R.string.host_service)}${context.getString(R.string.home_service)}$GET_CERTIFICATES_PDF?docu-cage=${docuCage}"
             val request = DownloadManager.Request(Uri.parse(uri))
                 .setTitle("certificados-loyola.pdf")
                 .setDescription("Descargando....")
@@ -110,4 +111,36 @@ class CertificateRest(val context: Activity){
         }
         return  dowloadid
     }
+
+    fun getCertificatePdf(certificateNumber: String =""):Long {
+        var dowloadid:Long = 0
+        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(context as Activity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), STORAGE_PERMISSION_CODE)
+        } else {
+            val new = object: BroadcastReceiver() {
+                override fun onReceive(p0: Context?, p1: Intent?) {
+                    val id = p1?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+                    if (id == dowloadid){
+                        Toast.makeText(context, "Descarga completada", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+            }
+
+            val uri ="${context.resources.getString(R.string.host_service)}${context.getString(R.string.home_service)}$GET_CERTIFICATE_PDF?certificate_number=${certificateNumber}"
+            val request = DownloadManager.Request(Uri.parse(uri))
+                .setTitle("certificado-$certificateNumber.pdf")
+                .setDescription("Descargando....")
+                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "certificado-$certificateNumber.pdf")
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                .setAllowedOverMetered(true)
+
+            val dowloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+            dowloadid = dowloadManager.enqueue(request)
+
+            context.registerReceiver(new, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+        }
+        return  dowloadid
+    }
+
 }

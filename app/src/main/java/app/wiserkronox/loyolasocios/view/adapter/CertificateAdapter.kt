@@ -1,28 +1,19 @@
 package app.wiserkronox.loyolasocios.view.adapter
 
 import android.app.Activity
-import android.app.DownloadManager
-import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.content.pm.PackageManager
 import android.graphics.Color
-import android.net.Uri
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import app.wiserkronox.loyolasocios.R
-import app.wiserkronox.loyolasocios.service.LoyolaApplication
 import app.wiserkronox.loyolasocios.service.model.Certificate
+import app.wiserkronox.loyolasocios.service.repository.CertificateRest
 
 class CertificateAdapter(
     private val context: Context,
@@ -117,46 +108,11 @@ class CertificateAdapter(
         }
 
         holder.button_export_pdf.setOnClickListener {
-            val STORAGE_PERMISSION_CODE = 101
-            if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                ActivityCompat.requestPermissions(context as Activity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), STORAGE_PERMISSION_CODE)
-            } else {
-                val user = LoyolaApplication.getInstance()?.user
-                this.getCertificaClyPdf(user!!.id_member)
-            }
-
+            CertificateRest(context as Activity).getCertificatePdf(item.number.toString())
         }
     }
 
     override fun getItemCount(): Int {
         return dataset.size
     }
-
-    private fun getCertificaClyPdf(docuCage:String =""):Long {
-        var dowloadid:Long = 0
-        val new = object: BroadcastReceiver() {
-            override fun onReceive(p0: Context?, p1: Intent?) {
-                val id = p1?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
-                if (id == dowloadid){
-                    Toast.makeText(context, "Descarga completada", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-        }
-
-        val uri ="${context.resources.getString(R.string.host_service)}${context.getString(R.string.home_service)}certifica-cly-pdf.php?docu-cage=${docuCage}"
-        val request = DownloadManager.Request(Uri.parse(uri))
-            .setTitle("certificados-loyola.pdf")
-            .setDescription("Descargando....")
-            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "certificados-loyola.pdf")
-            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-            .setAllowedOverMetered(true)
-
-        val dowloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        dowloadid = dowloadManager.enqueue(request)
-
-        context.registerReceiver(new, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
-        return  dowloadid
-    }
-
 }
