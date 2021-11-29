@@ -27,7 +27,7 @@ class CertificateRest(val context: Activity){
     companion object {
         const val GET_CERTIFICATES = "get_certificates.php"
         const val GET_CERTIFICATE_PDF = "get_certificate_pdf.php"
-        const val GET_CERTIFICATES_PDF = "certifica-cly-pdf.php"
+        const val GET_CERTIFICATES_PDF = "get_certificates_pdf.php"
         const val STORAGE_PERMISSION_CODE = 101
     }
 
@@ -96,7 +96,7 @@ class CertificateRest(val context: Activity){
 
             }
 
-            val uri ="${context.resources.getString(R.string.host_service)}${context.getString(R.string.home_service)}$GET_CERTIFICATES_PDF?docu-cage=${docuCage}"
+            val uri ="${context.resources.getString(R.string.host_service)}${context.getString(R.string.home_service)}$GET_CERTIFICATES_PDF?docu_cage=${docuCage}"
             val request = DownloadManager.Request(Uri.parse(uri))
                 .setTitle("certificados-loyola.pdf")
                 .setDescription("Descargando....")
