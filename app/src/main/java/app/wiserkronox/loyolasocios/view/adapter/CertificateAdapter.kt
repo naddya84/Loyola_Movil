@@ -3,6 +3,7 @@ package app.wiserkronox.loyolasocios.view.adapter
 import android.app.Activity
 import android.content.Context
 import android.graphics.Color
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,12 @@ import androidx.recyclerview.widget.RecyclerView
 import app.wiserkronox.loyolasocios.R
 import app.wiserkronox.loyolasocios.service.model.Certificate
 import app.wiserkronox.loyolasocios.service.repository.CertificateRest
+import java.math.RoundingMode
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class CertificateAdapter(
     private val context: Context,
@@ -55,9 +62,19 @@ class CertificateAdapter(
         holder.text_certificate_year.text = item.year.toString()
 
         holder.text_certificate_number.text = item.number.toString()
-        holder.text_certificate_opening_date.text = item.opening_date
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            holder.text_certificate_opening_date.text = LocalDate.parse(item.opening_date).format(
+                DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+        }
+        else {
+            holder.text_certificate_opening_date.text = item.opening_date
+        }
         holder.text_certificate_amount.text = item.amount.toString()
-        holder.text_certificate_cost.text = item.cost.toString()
+
+        val money = DecimalFormat(
+            "#,###.00", DecimalFormatSymbols.getInstance(Locale("es", "BOL")))
+        money.roundingMode = RoundingMode.CEILING
+        holder.text_certificate_cost.text = money.format(item.cost)
 
         when(item.state) {
             "VIGENTE"-> {
