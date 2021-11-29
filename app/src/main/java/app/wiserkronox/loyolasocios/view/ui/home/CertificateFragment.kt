@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -18,6 +19,7 @@ class CertificateFragment : Fragment() {
 
     private lateinit var progressBar:ProgressBar
     private lateinit var recyclerView: RecyclerView
+    private lateinit var buttonDowloadListPdf: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,6 +28,11 @@ class CertificateFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var root = inflater.inflate(R.layout.fragment_certificate, container, false)
+        buttonDowloadListPdf = root.findViewById(R.id.button_certificates_list_topdf)
+        buttonDowloadListPdf.setOnClickListener {
+            val user = LoyolaApplication.getInstance()?.user
+            CertificateRest(requireActivity()).getListCertificatesToPdf(user!!.id_member)
+        }
         progressBar = root.findViewById(R.id.progresbar_certificates)
         recyclerView = root.findViewById(R.id.recyclerview_certificates)
         recyclerView.adapter = CertificateAdapter(requireContext(), emptyList())
