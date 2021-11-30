@@ -79,7 +79,7 @@ class ExtractCreditFragment : Fragment() {
         val number = json.get("id").toString() //cred-number
 
         //HEADER PLAN DE PAGOS
-        val url = "${getString(R.string.host_service)}services/get_credit_extract.php?docu-cage=${user!!.id_member}&cred-number=${number}"
+        val url = "${getString(R.string.host_service)}${getString(R.string.home_aplication)}services/get_credit_extract.php?docu-cage=${user!!.id_member}&cred-number=${number}"
         val queue = Volley.newRequestQueue(activity)
 
         val planePayCreditRequest = JsonObjectRequest(
@@ -407,7 +407,7 @@ class ExtractCreditFragment : Fragment() {
                     }
                 }
 
-                val url_dowload = "${getString(R.string.host_service)}services/get_credit_extract_pdf.php?docu-cage=${user!!.id_member}&cred-number=${number}"
+                val url_dowload = "${getString(R.string.host_service)}${getString(R.string.home_aplication)}services/get_credit_extract_pdf.php?docu-cage=${user!!.id_member}&cred-number=${number}"
 
                 val cookie = CookieManager.getInstance().getCookie(url_dowload)
                 val request = DownloadManager.Request(Uri.parse(url_dowload))

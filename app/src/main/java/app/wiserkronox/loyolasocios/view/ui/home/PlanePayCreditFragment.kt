@@ -14,7 +14,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.util.TypedValue
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -83,7 +82,7 @@ class PlanePayCreditFragment : Fragment() {
         val number = json.get("id").toString() //cred-number
 
         //HEADER PLAN DE PAGOS
-        val url: String = "${getString(R.string.host_service)}services/get_credit_plan_pay.php?docu-cage=${user!!.id_member}&cred-number=${number}"
+        val url: String = "${getString(R.string.host_service)}${getString(R.string.home_aplication)}services/get_credit_plan_pay.php?docu-cage=${user!!.id_member}&cred-number=${number}"
         val queue = Volley.newRequestQueue(activity)
 
         val planePayCreditRequest = JsonObjectRequest(

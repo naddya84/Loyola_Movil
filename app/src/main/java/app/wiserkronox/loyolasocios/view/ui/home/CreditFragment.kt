@@ -33,7 +33,7 @@ class CreditFragment : Fragment() {
         mainBody.setPadding(30,30,30,30)
 
         val user = LoyolaApplication.getInstance()?.user
-        val url = "${getString(R.string.host_service)}services/get_credit_history.php?docu-cage=${user!!.id_member}"
+        val url = "${getString(R.string.host_service)}${getString(R.string.home_aplication)}services/get_credit_history.php?docu-cage=${user!!.id_member}"
         val queue = Volley.newRequestQueue(activity)
         val creditRequest = JsonObjectRequest(
             Request.Method.GET,
