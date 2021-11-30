@@ -29,8 +29,8 @@ class CreditFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_credit, container, false)
 
-        val mainBody = view.findViewById<LinearLayout>(R.id.layoutmainbody)
-        mainBody.setPadding(30,30,30,30)
+        val main_body = view.findViewById<LinearLayout>(R.id.layout_main_body_credit_extract_dialog)
+        main_body.setPadding(30,30,30,30)
 
         val user = LoyolaApplication.getInstance()?.user
         val url = "${getString(R.string.host_service)}services/get_credit_history.php?docu-cage=${user!!.id_member}"
@@ -54,8 +54,8 @@ class CreditFragment : Fragment() {
 
                     for(i in 0 until data.length()) {
 
-                        val lnlBody = LinearLayout(activity)
-                        lnlBody.orientation = LinearLayout.HORIZONTAL
+                        val lnl_body = LinearLayout(activity)
+                        lnl_body.orientation = LinearLayout.HORIZONTAL
 
                         val params = LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,
@@ -64,11 +64,11 @@ class CreditFragment : Fragment() {
 
                         params.setMargins(0,30,0,20)
 
-                        val lnlleftinformation = LinearLayout(activity)
-                        lnlleftinformation.orientation = LinearLayout.VERTICAL
+                        val lnl_left_information = LinearLayout(activity)
+                        lnl_left_information.orientation = LinearLayout.VERTICAL
 
-                        val number = TextView(activity)
-                        val state = TextView(activity)
+                        val text_number = TextView(activity)
+                        val icon_state = TextView(activity)
 
                         val bg = GradientDrawable()
                         bg.cornerRadii = floatArrayOf(
@@ -79,98 +79,98 @@ class CreditFragment : Fragment() {
                         )
                         bg.setColor(Color.parseColor("#008945"))
 
-                        number.text = ("CREDITO\n"+ data.getJSONObject(i).get("credNumero").toString())
-                        number.gravity = Gravity.CENTER
-                        number.setTypeface(null, Typeface.BOLD)
-                        number.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
-                        number.setTextColor(Color.parseColor("#FFFFFD"))
-                        number.setLayoutParams(LinearLayout.LayoutParams(
+                        text_number.text = ("CREDITO\n"+ data.getJSONObject(i).get("credNumero").toString())
+                        text_number.gravity = Gravity.CENTER
+                        text_number.setTypeface(null, Typeface.BOLD)
+                        text_number.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
+                        text_number.setTextColor(Color.parseColor("#FFFFFD"))
+                        text_number.setLayoutParams(LinearLayout.LayoutParams(
                             220,
                             LinearLayout.LayoutParams.WRAP_CONTENT
                         ))
 
-                        state.text = ("Estado\n"+ data.getJSONObject(i).get("crediEstado").toString())
-                        state.gravity = Gravity.CENTER
-                        state.setTypeface(null, Typeface.BOLD)
-                        state.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
+                        icon_state.text = ("Estado\n"+ data.getJSONObject(i).get("crediEstado").toString())
+                        icon_state.gravity = Gravity.CENTER
+                        icon_state.setTypeface(null, Typeface.BOLD)
+                        icon_state.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
 
                         if(data.getJSONObject(i).get("crediEstado").toString() == "Castigado") {
-                            state.setTextColor(Color.RED)
+                            icon_state.setTextColor(Color.RED)
                         }
                         if(data.getJSONObject(i).get("crediEstado").toString() == "Retraso") {
-                            state.setTextColor(Color.RED)
+                            icon_state.setTextColor(Color.RED)
                         }
                         if(data.getJSONObject(i).get("crediEstado").toString() == "Ejecución") {
-                            state.setTextColor(Color.RED)
+                            icon_state.setTextColor(Color.RED)
                         }
                         if(data.getJSONObject(i).get("crediEstado").toString() == "Cancelado") {
-                            state.setTextColor(Color.RED)
+                            icon_state.setTextColor(Color.RED)
                         }
                         if(data.getJSONObject(i).get("crediEstado").toString() == "Activo") {
-                            state.setTextColor(Color.parseColor("#2ed111"))
+                            icon_state.setTextColor(Color.parseColor("#2ed111"))
                         }
-                        state.setLayoutParams(LinearLayout.LayoutParams(
+                        icon_state.setLayoutParams(LinearLayout.LayoutParams(
                             220,
                             LinearLayout.LayoutParams.WRAP_CONTENT
                         ))
 
-                        val lnlsection = LinearLayout(activity)
-                        lnlsection.orientation = LinearLayout.VERTICAL
+                        val lnl_section = LinearLayout(activity)
+                        lnl_section.orientation = LinearLayout.VERTICAL
 
-                        val paramsSection = LinearLayout.LayoutParams(
+                        val params_section = LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,
                             LinearLayout.LayoutParams.MATCH_PARENT,
                         )
 
-                        val paramsLeft = LinearLayout.LayoutParams(
+                        val params_left = LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.MATCH_PARENT,
                         )
 
                         //Body left
-                        lnlleftinformation.setPadding(5)
-                        lnlleftinformation.gravity = Gravity.CENTER
-                        lnlleftinformation.background = bg
-                        lnlleftinformation.addView(number)
-                        lnlleftinformation.addView(state)
-                        lnlBody.setLayoutParams(params)
-                        lnlBody.addView(lnlleftinformation,paramsLeft)
-                        lnlBody.addView(lnlsection,paramsSection)
+                        lnl_left_information.setPadding(5)
+                        lnl_left_information.gravity = Gravity.CENTER
+                        lnl_left_information.background = bg
+                        lnl_left_information.addView(text_number)
+                        lnl_left_information.addView(icon_state)
+                        lnl_body.setLayoutParams(params)
+                        lnl_body.addView(lnl_left_information,params_left)
+                        lnl_body.addView(lnl_section,params_section)
 
-                        val bgmoneda = GradientDrawable()
-                        bgmoneda.cornerRadii = floatArrayOf(
+                        val background_moneda = GradientDrawable()
+                        background_moneda.cornerRadii = floatArrayOf(
                             0f,0f,
                             20f,20f,
                             0f,0f,
                             0f,0f
                         )
-                        bgmoneda.setTint(Color.parseColor("#BCBCBC"))
+                        background_moneda.setTint(Color.parseColor("#BCBCBC"))
 
-                        val moneda = TextView(activity)
-                        moneda.text = ("Moneda: "+data.getJSONObject(i).get("credMontoDesem").toString()+" "+data.getJSONObject(i).get("crediMoneda").toString()+".")
-                        moneda.background = bgmoneda
-                        moneda.setPadding(40,0,0,0)
-                        moneda.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
+                        val text_moneda = TextView(activity)
+                        text_moneda.text = ("Moneda: "+data.getJSONObject(i).get("credMontoDesem").toString()+" "+data.getJSONObject(i).get("crediMoneda").toString()+".")
+                        text_moneda.background = background_moneda
+                        text_moneda.setPadding(40,0,0,0)
+                        text_moneda.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
 
 
-                        val bgSection = GradientDrawable()
-                        bgSection.cornerRadii = floatArrayOf(
+                        val background_section = GradientDrawable()
+                        background_section.cornerRadii = floatArrayOf(
                             0f,0f,
                             0f,0f,
                             20f,20f,
                             0f,0f
                         )
-                        bgSection.setTint(Color.parseColor("#EFEFEF"))
+                        background_section.setTint(Color.parseColor("#EFEFEF"))
 
-                        val lnlSectionInformation = LinearLayout(activity)
-                        lnlSectionInformation.orientation = LinearLayout.HORIZONTAL
-                        lnlSectionInformation.background = bgSection
+                        val lnl_section_information = LinearLayout(activity)
+                        lnl_section_information.orientation = LinearLayout.HORIZONTAL
+                        lnl_section_information.background = background_section
 
-                        val paramsButtons = LinearLayout.LayoutParams(
+                        val params_buttons = LinearLayout.LayoutParams(
                             208,
                             LinearLayout.LayoutParams.WRAP_CONTENT)
 
-                        paramsButtons.setMargins(15,20,15,20)
+                        params_buttons.setMargins(15,20,15,20)
 
                         val shape = GradientDrawable()
                         shape.cornerRadius = 25F
@@ -180,15 +180,15 @@ class CreditFragment : Fragment() {
                         icon_detail?.setBounds(0,0,63,63)
                         icon_detail?.setTint(Color.WHITE)
 
-                        val btnDetalle = Button(activity)
-                        btnDetalle.background = shape
-                        btnDetalle.text = ("DETALLE").toString()
-                        btnDetalle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
-                        btnDetalle.setTextColor(Color.parseColor("#FFFFFD"))
-                        btnDetalle.setLayoutParams(paramsButtons)
-                        btnDetalle.setCompoundDrawables(null,icon_detail,null,null)
+                        val button_detail = Button(activity)
+                        button_detail.background = shape
+                        button_detail.text = ("DETALLE").toString()
+                        button_detail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
+                        button_detail.setTextColor(Color.parseColor("#FFFFFD"))
+                        button_detail.setLayoutParams(params_buttons)
+                        button_detail.setCompoundDrawables(null,icon_detail,null,null)
 
-                        btnDetalle.setOnClickListener {
+                        button_detail.setOnClickListener {
                             val details = data.getJSONObject(i).toString()
                             val bundle = Bundle()
                             bundle.putString("data",details)
@@ -199,15 +199,15 @@ class CreditFragment : Fragment() {
                         icon_plane_play?.setBounds(0,0,63,63)
                         icon_plane_play?.setTint(Color.WHITE)
 
-                        val btnPlanPagos = Button(activity)
-                        btnPlanPagos.background = shape
-                        btnPlanPagos.text = ("PLAN DE PAGOS").toString()
-                        btnPlanPagos.setTextColor(Color.parseColor("#FFFFFD"))
-                        btnPlanPagos.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
-                        btnPlanPagos.setLayoutParams(paramsButtons)
-                        btnPlanPagos.setCompoundDrawables(null,icon_plane_play,null,null)
+                        val button_plan_pay = Button(activity)
+                        button_plan_pay.background = shape
+                        button_plan_pay.text = ("PLAN DE PAGOS").toString()
+                        button_plan_pay.setTextColor(Color.parseColor("#FFFFFD"))
+                        button_plan_pay.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
+                        button_plan_pay.setLayoutParams(params_buttons)
+                        button_plan_pay.setCompoundDrawables(null,icon_plane_play,null,null)
 
-                        btnPlanPagos.setOnClickListener {
+                        button_plan_pay.setOnClickListener {
                             val details = data.getJSONObject(i).toString()
                             val bundle = Bundle()
                             bundle.putString("data",details)
@@ -218,48 +218,49 @@ class CreditFragment : Fragment() {
                         icon_extract?.setBounds(0,0,63,63)
                         icon_extract?.setTint(Color.WHITE)
 
-                        val btnExtracto = Button(activity)
-                        btnExtracto.background = shape
-                        btnExtracto.text = ("EXTRACTO").toString()
-                        btnExtracto.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
-                        btnExtracto.setTextColor(Color.parseColor("#FFFFFD"))
-                        btnExtracto.setLayoutParams(paramsButtons)
-                        btnExtracto.setCompoundDrawables(null,icon_extract,null,null)
+                        val button_extract = Button(activity)
+                        button_extract.background = shape
+                        button_extract.text = ("EXTRACTO").toString()
+                        button_extract.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
+                        button_extract.setTextColor(Color.parseColor("#FFFFFD"))
+                        button_extract.setLayoutParams(params_buttons)
+                        button_extract.setCompoundDrawables(null,icon_extract,null,null)
 
-                        btnExtracto.setOnClickListener {
+                        button_extract.setOnClickListener {
                             val details = data.getJSONObject(i).toString()
                             val bundle = Bundle()
                             bundle.putString("data",details)
                             view.findNavController().navigate(R.id.action_extract_credit, bundle)
                         }
 
-                        val check = ImageView(activity)
+                        val icon_check = ImageView(activity)
                         val type = data.getJSONObject(i).get("crediEstado").toString()
+
                         if(type == "Activo") {
-                            check.setBackgroundResource(R.drawable.icon_check)
+                            icon_check.setBackgroundResource(R.drawable.icon_check)
                         } else {
-                            check.setBackgroundResource(R.drawable.icon_no_check)
+                            icon_check.setBackgroundResource(R.drawable.icon_no_check)
                         }
 
-                        check.setLayoutParams(LinearLayout.LayoutParams(50,50))
+                        icon_check.setLayoutParams(LinearLayout.LayoutParams(50,50))
 
                         //Actions Buttons
-                        val paramsInformation = LinearLayout.LayoutParams(
+                        val params_information = LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,
                             265,
                             1f)
 
-                        lnlSectionInformation.setPadding(10)
-                        lnlSectionInformation.setLayoutParams(paramsInformation)
-                        lnlSectionInformation.addView(btnDetalle)
-                        lnlSectionInformation.addView(btnPlanPagos)
-                        lnlSectionInformation.addView(btnExtracto)
-                        lnlSectionInformation.addView(check)
+                        lnl_section_information.setPadding(10)
+                        lnl_section_information.setLayoutParams(params_information)
+                        lnl_section_information.addView(button_detail)
+                        lnl_section_information.addView(button_plan_pay)
+                        lnl_section_information.addView(button_extract)
+                        lnl_section_information.addView(icon_check)
                         //Body Right
-                        lnlsection.addView(moneda)
-                        lnlsection.addView(lnlSectionInformation)
+                        lnl_section.addView(text_moneda)
+                        lnl_section.addView(lnl_section_information)
                         //Insert row in table
-                        mainBody.addView(lnlBody)
+                        main_body.addView(lnl_body)
                         val progressbar = view.findViewById<ProgressBar>(R.id.progressbar_credit)
                         progressbar.visibility = View.INVISIBLE
 
