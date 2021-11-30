@@ -46,8 +46,8 @@ class ExtractCreditFragment : Fragment() {
         val json = JSONObject(data.toString())
 
         //HEADER INFORMATION
-        val lnlheader = view.findViewById<LinearLayout>(R.id.lnlheader_extract)
-        val lnlheaderinformation = view.findViewById<LinearLayout>(R.id.lnlheaderinformation)
+        val lnl_header = view.findViewById<LinearLayout>(R.id.lnl_header_credit_extract)
+        val lnl_header_information = view.findViewById<LinearLayout>(R.id.lnl_header_information_credit_extract)
 
         val bg = GradientDrawable()
         bg.cornerRadii = floatArrayOf(
@@ -58,22 +58,22 @@ class ExtractCreditFragment : Fragment() {
         )
         bg.setTint(Color.WHITE)
 
-        lnlheaderinformation.background = bg
+        lnl_header_information.background = bg
 
         val shape = GradientDrawable()
         shape.setColor(Color.parseColor("#008945"))
         shape.cornerRadius = 20f
-        lnlheader.background = shape
+        lnl_header.background = shape
 
-        val nrocred = view.findViewById<TextView>(R.id.txtnrocredito)
+        val text_nro_cred = view.findViewById<TextView>(R.id.text_nro_credit_extract)
 
-        val moneda = view.findViewById<TextView>(R.id.txtmonedacredito)
-        moneda.setTextColor(Color.WHITE)
-        moneda.setTypeface(null, Typeface.BOLD)
-        moneda.setBackgroundResource(R.drawable.circle_text_view)
+        val text_moneda = view.findViewById<TextView>(R.id.text_moneda_credit_extract)
+        text_moneda.setTextColor(Color.WHITE)
+        text_moneda.setTypeface(null, Typeface.BOLD)
+        text_moneda.setBackgroundResource(R.drawable.circle_text_view)
 
-        nrocred.text = json.get("credNumero").toString()
-        moneda.text = json.get("crediMoneda").toString()
+        text_nro_cred.text = json.get("credNumero").toString()
+        text_moneda.text = json.get("crediMoneda").toString()
 
         val user = LoyolaApplication.getInstance()?.user //docu-cage
         val number = json.get("id").toString() //cred-number
@@ -91,135 +91,135 @@ class ExtractCreditFragment : Fragment() {
                 val status = jsonObject.get("error")
                 if(status == false) {
 
-                    val dateExtract = jsonObject.getJSONArray("result")
+                    val date_extract = jsonObject.getJSONArray("result")
 
-                    for (i in 0 until dateExtract.length()) {
-                        val capital = view.findViewById<TextView>(R.id.txtcapitalextract)
-                        val plaso = view.findViewById<TextView>(R.id.txtplasoextract)
-                        val tasa = view.findViewById<TextView>(R.id.txttasaextract)
+                    for (i in 0 until date_extract.length()) {
+                        val text_capital = view.findViewById<TextView>(R.id.text_capital_credit_extract)
+                        val text_plaso = view.findViewById<TextView>(R.id.text_plazo_credit_extract)
+                        val text_tasa = view.findViewById<TextView>(R.id.txttasaextract)
 
-                        capital.text = (dateExtract.getJSONObject(i).get("credMontoDesem").toString() + " "+ moneda.text +".")
-                        plaso.text = dateExtract.getJSONObject(i).get("credPlazo").toString()
-                        tasa.text = dateExtract.getJSONObject(i).get("estado").toString()
+                        text_capital.text = (date_extract.getJSONObject(i).get("credMontoDesem").toString() + " "+ text_moneda.text +".")
+                        text_plaso.text = date_extract.getJSONObject(i).get("credPlazo").toString()
+                        text_tasa.text = date_extract.getJSONObject(i).get("estado").toString()
                     }
                     //CONSULT TABLE
                     val detail = jsonObject.getJSONArray("detail")
 
-                    val lnlmainbodydetails = view.findViewById<LinearLayout>(R.id.lnlbodydetails)
+                    val lnl_main_body_details = view.findViewById<LinearLayout>(R.id.lnl_body_details_credit_extract)
 
                     if(detail.length() == 0) {
 
-                        val txtnotdata = TextView(activity)
-                        txtnotdata.text = ("No existen extractos de creditos asignados")
-                        txtnotdata.setTextColor(Color.RED)
-                        txtnotdata.textAlignment = View.TEXT_ALIGNMENT_CENTER
-                        lnlmainbodydetails.addView(txtnotdata)
+                        val text_not_data = TextView(activity)
+                        text_not_data.text = ("No existen extractos de creditos asignados")
+                        text_not_data.setTextColor(Color.RED)
+                        text_not_data.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                        lnl_main_body_details.addView(text_not_data)
                         val progressbar = view.findViewById<ProgressBar>(R.id.progressbar_extract_credit)
                         progressbar.visibility = View.INVISIBLE
-                        val body = view.findViewById<LinearLayout>(R.id.lnlmain_body_extract)
+                        val body = view.findViewById<LinearLayout>(R.id.lnl_main_body_credit_extract)
                         body.visibility = View.VISIBLE
 
                     } else {
                         for (i in 0 until detail.length()) {
 
-                            val lnlbodydetails = LinearLayout(activity)
-                            lnlbodydetails.orientation = LinearLayout.VERTICAL
+                            val lnl_body_details = LinearLayout(activity)
+                            lnl_body_details.orientation = LinearLayout.VERTICAL
 
-                            val paramslnlody = LinearLayout.LayoutParams(
+                            val params_lnl_body = LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.MATCH_PARENT,
                                 340
                             )
 
-                            paramslnlody.setMargins(20,25,20,25)
+                            params_lnl_body.setMargins(20,25,20,25)
 
-                            lnlbodydetails.setLayoutParams(paramslnlody)
+                            lnl_body_details.setLayoutParams(params_lnl_body)
 
 
                             //HEADER
-                            val bgheader = GradientDrawable()
-                            bgheader.cornerRadii = floatArrayOf(
+                            val background_header = GradientDrawable()
+                            background_header.cornerRadii = floatArrayOf(
                                 20f,20f,
                                 20f,20f,
                                 0f,0f,
                                 0f,0f
                             )
-                            bgheader.setTint(Color.parseColor("#BCBCBC"))
+                            background_header.setTint(Color.parseColor("#BCBCBC"))
 
-                            val paramsHeader = LinearLayout.LayoutParams(
+                            val params_header = LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.MATCH_PARENT,
                                 140
                             )
 
-                            val lnlbodyhearder = LinearLayout(activity)
-                            lnlbodyhearder.orientation = LinearLayout.VERTICAL
-                            lnlbodyhearder.setLayoutParams(paramsHeader)
+                            val lnl_body_header = LinearLayout(activity)
+                            lnl_body_header.orientation = LinearLayout.VERTICAL
+                            lnl_body_header.setLayoutParams(params_header)
 
-                            val lnltitle = LinearLayout(activity)
-                            lnltitle.orientation = LinearLayout.HORIZONTAL
-                            lnltitle.setPadding(10,10,0,0)
+                            val lnl_title = LinearLayout(activity)
+                            lnl_title.orientation = LinearLayout.HORIZONTAL
+                            lnl_title.setPadding(10,10,0,0)
 
-                            val lnltitleinformation = LinearLayout(activity)
-                            lnltitleinformation.orientation = LinearLayout.HORIZONTAL
-                            lnltitleinformation.setPadding(10,10,0,0)
+                            val lnl_title_information = LinearLayout(activity)
+                            lnl_title_information.orientation = LinearLayout.HORIZONTAL
+                            lnl_title_information.setPadding(10,10,0,0)
 
-                            val paramslbls = LinearLayout.LayoutParams(
+                            val params_labels = LinearLayout.LayoutParams(
                                 620,
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                             )
 
-                            val lblfecha = TextView(activity)
-                            lblfecha.text = ("Fecha de pago").toString()
-                            lblfecha.setLayoutParams(paramslbls)
-                            lblfecha.setTextColor(Color.WHITE)
-                            lblfecha.setTypeface(null, Typeface.BOLD)
+                            val label_fecha = TextView(activity)
+                            label_fecha.text = ("Fecha de pago").toString()
+                            label_fecha.setLayoutParams(params_labels)
+                            label_fecha.setTextColor(Color.WHITE)
+                            label_fecha.setTypeface(null, Typeface.BOLD)
 
 
                             val lblnrotrans = TextView(activity)
                             lblnrotrans.text = ("N°.Transacción").toString()
-                            lblnrotrans.setLayoutParams(paramslbls)
+                            lblnrotrans.setLayoutParams(params_labels)
                             lblnrotrans.setTextColor(Color.WHITE)
                             lblnrotrans.setTypeface(null, Typeface.BOLD)
 
-                            lnltitle.addView(lblfecha)
-                            lnltitle.addView(lblnrotrans)
+                            lnl_title.addView(label_fecha)
+                            lnl_title.addView(lblnrotrans)
 
                             //Information
-                            val txtfecha = TextView(activity)
-                            val dateformat = SimpleDateFormat("dd-MMM-yyyy")
-                            val dateparse = SimpleDateFormat("yyyy-MM-dd")
-                            val date = dateformat.format(dateparse.parse(detail.getJSONObject(i).get("credFecPago").toString()))
-                            txtfecha.text = date.toString()
-                            txtfecha.setTextColor(Color.BLACK)
-                            txtfecha.setTypeface(null, Typeface.BOLD)
-                            txtfecha.setLayoutParams(paramslbls)
+                            val text_fecha = TextView(activity)
+                            val date_format = SimpleDateFormat("dd-MMM-yyyy")
+                            val date_parse = SimpleDateFormat("yyyy-MM-dd")
+                            val date = date_format.format(date_parse.parse(detail.getJSONObject(i).get("credFecPago").toString()))
+                            text_fecha.text = date.toString()
+                            text_fecha.setTextColor(Color.BLACK)
+                            text_fecha.setTypeface(null, Typeface.BOLD)
+                            text_fecha.setLayoutParams(params_labels)
 
-                            val txtnrotrans = TextView(activity)
-                            txtnrotrans.text = detail.getJSONObject(i).get("credNroTrans").toString()
-                            txtnrotrans.setTextColor(Color.BLACK)
-                            txtnrotrans.setTypeface(null, Typeface.BOLD)
-                            txtnrotrans.setLayoutParams(paramslbls)
+                            val text_nro_trans = TextView(activity)
+                            text_nro_trans.text = detail.getJSONObject(i).get("credNroTrans").toString()
+                            text_nro_trans.setTextColor(Color.BLACK)
+                            text_nro_trans.setTypeface(null, Typeface.BOLD)
+                            text_nro_trans.setLayoutParams(params_labels)
 
-                            lnltitleinformation.addView(txtfecha)
-                            lnltitleinformation.addView(txtnrotrans)
+                            lnl_title_information.addView(text_fecha)
+                            lnl_title_information.addView(text_nro_trans)
 
                             //Create Header
-                            lnlbodyhearder.background = bgheader
-                            lnlbodyhearder.addView(lnltitle)
-                            lnlbodyhearder.addView(lnltitleinformation)
+                            lnl_body_header.background = background_header
+                            lnl_body_header.addView(lnl_title)
+                            lnl_body_header.addView(lnl_title_information)
 
-                            val bgdivbody = GradientDrawable()
-                            bgdivbody.cornerRadii = floatArrayOf(
+                            val background_div_body = GradientDrawable()
+                            background_div_body.cornerRadii = floatArrayOf(
                                 0f,0f,
                                 0f,0f,
                                 20f,20f,
                                 20f,20f
                             )
-                            bgdivbody.setTint(Color.parseColor("#FFFFFF"))
+                            background_div_body.setTint(Color.parseColor("#FFFFFF"))
 
-                            val lnldivbody = LinearLayout(activity)
-                            lnldivbody.orientation = LinearLayout.HORIZONTAL
-                            lnldivbody.background = bgdivbody
-                            lnldivbody.setLayoutParams(
+                            val lnl_div_body = LinearLayout(activity)
+                            lnl_div_body.orientation = LinearLayout.HORIZONTAL
+                            lnl_div_body.background = background_div_body
+                            lnl_div_body.setLayoutParams(
                                 LinearLayout.LayoutParams(
                                     LinearLayout.LayoutParams.MATCH_PARENT,
                                     LinearLayout.LayoutParams.MATCH_PARENT
@@ -227,79 +227,79 @@ class ExtractCreditFragment : Fragment() {
                             )
 
                             //INFORMATION PARAMS
-                            val paramsinformation = LinearLayout.LayoutParams(
+                            val params_information = LinearLayout.LayoutParams(
                                 350,
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                             )
 
-                            val paramstxts = LinearLayout.LayoutParams(
+                            val params_text = LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.MATCH_PARENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                             )
 
-                            paramstxts.setMargins(10,2,10,0)
+                            params_text.setMargins(10,2,10,0)
 
                             //LNL FOR LABELS
-                            val lnllabels = LinearLayout(activity)
-                            lnllabels.orientation = LinearLayout.VERTICAL
-                            lnllabels.setLayoutParams(paramsinformation)
+                            val lnl_labels = LinearLayout(activity)
+                            lnl_labels.orientation = LinearLayout.VERTICAL
+                            lnl_labels.setLayoutParams(params_information)
 
-                            val lbldetailcapital = TextView(activity)
-                            lbldetailcapital.text = ("Capital: ").toString()
-                            lbldetailcapital.setTypeface(null, Typeface.BOLD)
-                            lbldetailcapital.setTextColor(Color.parseColor("#018645"))
-                            lbldetailcapital.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
-                            lbldetailcapital.setLayoutParams(paramstxts)
+                            val label_capital_detail = TextView(activity)
+                            label_capital_detail.text = ("Capital: ").toString()
+                            label_capital_detail.setTypeface(null, Typeface.BOLD)
+                            label_capital_detail.setTextColor(Color.parseColor("#018645"))
+                            label_capital_detail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
+                            label_capital_detail.setLayoutParams(params_text)
 
-                            val lbldetailsaldocapital = TextView(activity)
-                            lbldetailsaldocapital.text = ("Saldo Capital: ").toString()
-                            lbldetailsaldocapital.setTypeface(null, Typeface.BOLD)
-                            lbldetailsaldocapital.setTextColor(Color.parseColor("#018645"))
-                            lbldetailsaldocapital.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
-                            lbldetailsaldocapital.setLayoutParams(paramstxts)
+                            val label_saldo_capital_detail = TextView(activity)
+                            label_saldo_capital_detail.text = ("Saldo Capital: ").toString()
+                            label_saldo_capital_detail.setTypeface(null, Typeface.BOLD)
+                            label_saldo_capital_detail.setTextColor(Color.parseColor("#018645"))
+                            label_saldo_capital_detail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
+                            label_saldo_capital_detail.setLayoutParams(params_text)
 
                             //Values
-                            val lnltexts = LinearLayout(activity)
-                            lnltexts.orientation = LinearLayout.VERTICAL
-                            lnltexts.setLayoutParams(paramsinformation)
+                            val lnl_texts = LinearLayout(activity)
+                            lnl_texts.orientation = LinearLayout.VERTICAL
+                            lnl_texts.setLayoutParams(params_information)
 
-                            val txtdetailCapital = TextView(activity)
-                            txtdetailCapital.text = (detail.getJSONObject(i).get("credMontoCapi").toString() + " " + moneda.text +".")
-                            txtdetailCapital.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
-                            txtdetailCapital.setTypeface(null, Typeface.BOLD)
-                            txtdetailCapital.setTextColor(Color.BLACK)
-                            txtdetailCapital.setLayoutParams(paramstxts)
+                            val text_capital_detail = TextView(activity)
+                            text_capital_detail.text = (detail.getJSONObject(i).get("credMontoCapi").toString() + " " + text_moneda.text +".")
+                            text_capital_detail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
+                            text_capital_detail.setTypeface(null, Typeface.BOLD)
+                            text_capital_detail.setTextColor(Color.BLACK)
+                            text_capital_detail.setLayoutParams(params_text)
 
-                            val txtsaldocapitaldetail = TextView(activity)
-                            txtsaldocapitaldetail.text = (detail.getJSONObject(i).get("crediSaldoCapi").toString() + " " + moneda.text + ".")
-                            txtsaldocapitaldetail.setTypeface(null, Typeface.BOLD)
-                            txtsaldocapitaldetail.setTextColor(Color.BLACK)
-                            txtsaldocapitaldetail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
-                            txtsaldocapitaldetail.setLayoutParams(paramstxts)
+                            val text_saldo_capital_detail = TextView(activity)
+                            text_saldo_capital_detail.text = (detail.getJSONObject(i).get("crediSaldoCapi").toString() + " " + text_moneda.text + ".")
+                            text_saldo_capital_detail.setTypeface(null, Typeface.BOLD)
+                            text_saldo_capital_detail.setTextColor(Color.BLACK)
+                            text_saldo_capital_detail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
+                            text_saldo_capital_detail.setLayoutParams(params_text)
 
-                            val shapebg = GradientDrawable()
-                            shapebg.cornerRadius = 25F
-                            shapebg.setColor(Color.parseColor("#00AB45"))
+                            val background_shape = GradientDrawable()
+                            background_shape.cornerRadius = 25F
+                            background_shape.setColor(Color.parseColor("#00AB45"))
 
 
                             val icon_detail = ResourcesCompat.getDrawable(resources,R.drawable.icon_detail,context?.theme)
                             icon_detail?.setBounds(0,0,60,60)
                             icon_detail?.setTint(Color.WHITE)
 
-                            val btnDetalle = Button(activity)
-                            btnDetalle.text = ("DETALLES").toString()
-                            btnDetalle.background = shapebg
-                            btnDetalle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
-                            btnDetalle.setTextColor(Color.parseColor("#FFFFFD"))
-                            btnDetalle.setCompoundDrawables(null,icon_detail,null,null)
-                            btnDetalle.setLayoutParams(
+                            val button_open_detail = Button(activity)
+                            button_open_detail.text = ("DETALLES").toString()
+                            button_open_detail.background = background_shape
+                            button_open_detail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
+                            button_open_detail.setTextColor(Color.parseColor("#FFFFFD"))
+                            button_open_detail.setCompoundDrawables(null,icon_detail,null,null)
+                            button_open_detail.setLayoutParams(
                                 LinearLayout.LayoutParams(
                                     LinearLayout.LayoutParams.WRAP_CONTENT,
                                     LinearLayout.LayoutParams.WRAP_CONTENT
                                 )
                             )
 
-                            btnDetalle.setOnClickListener {
+                            button_open_detail.setOnClickListener {
                                 val dialog = DetailExtractCreditDialogFragment()
                                 val details = detail.getJSONObject(i).toString()
                                 val bundle = Bundle()
@@ -310,24 +310,24 @@ class ExtractCreditFragment : Fragment() {
                                 dialog.show(childFragmentManager,"Texto")
                             }
 
-                            lnltexts.addView(txtdetailCapital)
-                            lnltexts.addView(txtsaldocapitaldetail)
+                            lnl_texts.addView(text_capital_detail)
+                            lnl_texts.addView(text_saldo_capital_detail)
 
-                            lnllabels.addView(lbldetailcapital)
-                            lnllabels.addView(lbldetailsaldocapital)
+                            lnl_labels.addView(label_capital_detail)
+                            lnl_labels.addView(label_saldo_capital_detail)
 
                             //Add body
-                            lnldivbody.addView(lnllabels)
-                            lnldivbody.addView(lnltexts)
-                            lnldivbody.addView(btnDetalle)
+                            lnl_div_body.addView(lnl_labels)
+                            lnl_div_body.addView(lnl_texts)
+                            lnl_div_body.addView(button_open_detail)
                             //Add header to body
-                            lnlbodydetails.addView(lnlbodyhearder,paramsHeader)
-                            lnlbodydetails.addView(lnldivbody)
+                            lnl_body_details.addView(lnl_body_header,params_header)
+                            lnl_body_details.addView(lnl_div_body)
                             //Add Detail to main body
-                            lnlmainbodydetails.addView(lnlbodydetails)
+                            lnl_main_body_details.addView(lnl_body_details)
                             val progressbar = view.findViewById<ProgressBar>(R.id.progressbar_extract_credit)
                             progressbar.visibility = View.INVISIBLE
-                            val body = view.findViewById<LinearLayout>(R.id.lnlmain_body_extract)
+                            val body = view.findViewById<LinearLayout>(R.id.lnl_main_body_credit_extract)
                             body.visibility = View.VISIBLE
                         }
                     }
@@ -335,7 +335,7 @@ class ExtractCreditFragment : Fragment() {
                 } else {
                     val progressbar = view.findViewById<ProgressBar>(R.id.progressbar_extract_credit)
                     progressbar.visibility = View.INVISIBLE
-                    val body = view.findViewById<LinearLayout>(R.id.lnlmain_body_extract)
+                    val body = view.findViewById<LinearLayout>(R.id.lnl_main_body_credit_extract)
                     body.visibility = View.INVISIBLE
                     findNavController().popBackStack()
                     val msg = jsonObject.get("msg").toString()
@@ -348,7 +348,7 @@ class ExtractCreditFragment : Fragment() {
                 println(volleyError.message)
                 val progressbar = view.findViewById<ProgressBar>(R.id.progressbar_extract_credit)
                 progressbar.visibility = View.INVISIBLE
-                val body = view.findViewById<LinearLayout>(R.id.lnlmain_body_extract)
+                val body = view.findViewById<LinearLayout>(R.id.lnl_main_body_credit_extract)
                 body.visibility = View.VISIBLE
             })
 
@@ -369,27 +369,27 @@ class ExtractCreditFragment : Fragment() {
 
         paramsButtons.setMargins(10,10,5,10)
 
-        val btnGenerarPdf = view.findViewById<Button>(R.id.btngenerarpdf)
-        btnGenerarPdf.setTextSize(TypedValue.COMPLEX_UNIT_SP, 8F)
-        btnGenerarPdf.setTextColor(Color.parseColor("#FFFFFD"))
-        btnGenerarPdf.setLayoutParams(paramsButtons)
-        btnGenerarPdf.setCompoundDrawables(null,icon_download,null,null)
+        val button_get_pdf = view.findViewById<Button>(R.id.button_get_pdf_credit_extract)
+        button_get_pdf.setTextSize(TypedValue.COMPLEX_UNIT_SP, 8F)
+        button_get_pdf.setTextColor(Color.parseColor("#FFFFFD"))
+        button_get_pdf.setLayoutParams(paramsButtons)
+        button_get_pdf.setCompoundDrawables(null,icon_download,null,null)
 
 
-        val btnContactar = view.findViewById<Button>(R.id.btncontactar)
-        btnContactar.setTextSize(TypedValue.COMPLEX_UNIT_SP, 8F)
-        btnContactar.setTextColor(Color.parseColor("#FFFFFD"))
-        btnContactar.setLayoutParams(paramsButtons)
-        btnContactar.setCompoundDrawables(null,icon_whatsapp,null,null)
+        val button_get_contact = view.findViewById<Button>(R.id.button_get_contact_credit_extract)
+        button_get_contact.setTextSize(TypedValue.COMPLEX_UNIT_SP, 8F)
+        button_get_contact.setTextColor(Color.parseColor("#FFFFFD"))
+        button_get_contact.setLayoutParams(paramsButtons)
+        button_get_contact.setCompoundDrawables(null,icon_whatsapp,null,null)
 
-        val shapeCorner = GradientDrawable()
-        shapeCorner.cornerRadius = 25f
-        shapeCorner.setColor(Color.parseColor("#00AB45"))
+        val background_shape_corner = GradientDrawable()
+        background_shape_corner.cornerRadius = 25f
+        background_shape_corner.setColor(Color.parseColor("#00AB45"))
 
-        btnGenerarPdf.background = shapeCorner
-        btnContactar.background = shapeCorner
+        button_get_pdf.background = background_shape_corner
+        button_get_contact.background = background_shape_corner
 
-        btnGenerarPdf.setOnClickListener {
+        button_get_pdf.setOnClickListener {
 
             val STORAGE_PERMISSION_CODE = 101
 
@@ -432,7 +432,7 @@ class ExtractCreditFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val progressbar = view.findViewById<ProgressBar>(R.id.progressbar_extract_credit)
-        val body = view.findViewById<LinearLayout>(R.id.lnlmain_body_extract)
+        val body = view.findViewById<LinearLayout>(R.id.lnl_main_body_credit_extract)
         progressbar.bringToFront()
         progressbar.visibility = View.VISIBLE
         body.visibility = View.INVISIBLE
