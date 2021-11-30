@@ -29,7 +29,7 @@ class CreditFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_credit, container, false)
 
-        val main_body = view.findViewById<LinearLayout>(R.id.layout_main_body_credit_extract_dialog)
+        val main_body = view.findViewById<LinearLayout>(R.id.layout_main_body_credit_extract)
         main_body.setPadding(30,30,30,30)
 
         val user = LoyolaApplication.getInstance()?.user
