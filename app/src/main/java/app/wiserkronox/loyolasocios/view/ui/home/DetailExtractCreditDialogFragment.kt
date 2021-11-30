@@ -40,8 +40,8 @@ class DetailExtractCreditDialogFragment : DialogFragment() {
         val data = args?.get("data")
         val json = JSONObject(data.toString())
 
-        val text_ncred = view.findViewById<TextView>(R.id.label_title_nro_credit_extract_dialog)
-        text_ncred.text = ("CREDITO\n"+args?.get("nrotrans").toString())
+        val text_nro_cred = view.findViewById<TextView>(R.id.label_title_nro_credit_extract_dialog)
+        text_nro_cred.text = ("CREDITO\n"+args?.get("nrotrans").toString())
 
         val text_moneda = view.findViewById<TextView>(R.id.label_title_moneda_credit_extract_dialog)
         text_moneda.text = (args?.get("moneda").toString() + ".")
@@ -53,8 +53,8 @@ class DetailExtractCreditDialogFragment : DialogFragment() {
 
         text_fecha.text = date
 
-        val text_nro = view.findViewById<TextView>(R.id.text_nro_trans_credit_extract_dialog)
-        text_nro.text = (json.get("credNroTrans").toString())
+        val text_nro_trans = view.findViewById<TextView>(R.id.text_nro_trans_credit_extract_dialog)
+        text_nro_trans.text = (json.get("credNroTrans").toString())
 
         val text_montocapi = view.findViewById<TextView>(R.id.text_monto_capi_credit_extract_dialog)
         text_montocapi.text = (json.get("credMontoCapi").toString() + " " + text_moneda.text)
