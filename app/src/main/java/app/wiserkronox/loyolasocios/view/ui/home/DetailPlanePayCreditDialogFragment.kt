@@ -38,52 +38,52 @@ class DetailPlanePayCreditDialogFragment : DialogFragment() {
         val data = args?.get("data")
         val json = JSONObject(data.toString())
 
-        val text_ncred = view.findViewById<TextView>(R.id.titlecred)
+        val text_ncred = view.findViewById<TextView>(R.id.label_title_nro_credit_plane_pay_dialog)
         text_ncred.text = ("CREDITO\n"+args?.get("nrotrans").toString())
 
-        val text_moneda = view.findViewById<TextView>(R.id.titlemoneda)
+        val text_moneda = view.findViewById<TextView>(R.id.label_title_moneda_credit_plane_pay_dialog)
         text_moneda.text = (args?.get("moneda").toString() + ".")
 
-        val text_fecha = view.findViewById<TextView>(R.id.txtFechaP)
+        val text_fecha = view.findViewById<TextView>(R.id.text_fecha_pago_credit_plane_pay_dialog)
         val date_format = SimpleDateFormat("dd-MMM-yyyy")
         val date_parse = SimpleDateFormat("yyyy-MM-dd")
         val date = date_format.format(date_parse.parse(json.get("credFecVenci").toString()))
 
         text_fecha.text = date
 
-        val text_nro = view.findViewById<TextView>(R.id.txtNro)
+        val text_nro = view.findViewById<TextView>(R.id.text_nro_trans_credit_plane_pay_dialog)
         text_nro.text = (json.get("credNumCuota").toString())
 
-        val text_montocapi = view.findViewById<TextView>(R.id.txtMontoCapi)
-        text_montocapi.text = (json.get("credMontoCapi").toString() + " " + text_moneda.text)
+        val text_monto_capi = view.findViewById<TextView>(R.id.text_monto_capi_credit_plane_pay_dialog)
+        text_monto_capi.text = (json.get("credMontoCapi").toString() + " " + text_moneda.text)
 
-        val text_montointer = view.findViewById<TextView>(R.id.txtMontoInteres)
-        text_montointer.text = (json.get("credMontoInte").toString()+ " " + text_moneda.text)
+        val text_monto_interes = view.findViewById<TextView>(R.id.text_monto_interes_credit_plane_pay_dialog)
+        text_monto_interes.text = (json.get("credMontoInte").toString()+ " " + text_moneda.text)
 
-        val text_montopenal = view.findViewById<TextView>(R.id.txtTotalCuota)
-        text_montopenal.text = (json.get("crediTotaCuota").toString()+ " " + text_moneda.text)
+        val text_monto_penal = view.findViewById<TextView>(R.id.text_total_cuota_credit_plane_pay_dialog)
+        text_monto_penal.text = (json.get("crediTotaCuota").toString()+ " " + text_moneda.text)
 
-        val text_montocargo = view.findViewById<TextView>(R.id.txtMontoCargos)
-        text_montocargo.text = (json.get("crediMontoCargos").toString()+ " " + text_moneda.text)
+        val text_monto_cargo = view.findViewById<TextView>(R.id.text_monto_cargos_credit_plane_pay_dialog)
+        text_monto_cargo.text = (json.get("crediMontoCargos").toString()+ " " + text_moneda.text)
 
-        val text_totalpago = view.findViewById<TextView>(R.id.txtTotalpago)
-        text_totalpago.text = (json.get("crediTotalCuota").toString()+ " " + text_moneda.text)
+        val text_total_pago = view.findViewById<TextView>(R.id.text_total_pago_credit_plane_pay_dialog)
+        text_total_pago.text = (json.get("crediTotalCuota").toString()+ " " + text_moneda.text)
 
-        val text_saldocargo = view.findViewById<TextView>(R.id.txtSaldoCredi)
-        text_saldocargo.text = (json.get("crediSaldoCredi").toString()+ " " + text_moneda.text)
+        val text_saldo_cargo = view.findViewById<TextView>(R.id.text_saldo_credi_credit_plane_pay_dialog)
+        text_saldo_cargo.text = (json.get("crediSaldoCredi").toString()+ " " + text_moneda.text)
 
-        val spanbutton = GradientDrawable()
-        spanbutton.cornerRadius = 20f
-        spanbutton.setColor(Color.parseColor("#00AB45"))
+        val background_shape = GradientDrawable()
+        background_shape.cornerRadius = 20f
+        background_shape.setColor(Color.parseColor("#00AB45"))
 
-        val button = view.findViewById<Button>(R.id.btnCloseDialog)
-        button.text = ("CERRAR").toString()
-        button.setTypeface(null, Typeface.BOLD)
-        button.setTextColor(Color.parseColor("#FFFFFF"))
-        button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
-        button.background = spanbutton
+        val button_close = view.findViewById<Button>(R.id.button_close_plane_pay_dialog)
+        button_close.text = ("CERRAR").toString()
+        button_close.setTypeface(null, Typeface.BOLD)
+        button_close.setTextColor(Color.parseColor("#FFFFFF"))
+        button_close.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
+        button_close.background = background_shape
 
-        button.setOnClickListener {
+        button_close.setOnClickListener {
             this.dismiss()
         }
 
