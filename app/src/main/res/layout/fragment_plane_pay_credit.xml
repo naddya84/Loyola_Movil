@@ -2,29 +2,27 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/plane_pay_credit_layout"
+    android:id="@+id/layout_credit_plan_pay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D2D3D5">
 
-
-
     <LinearLayout
-        android:id="@+id/lnlmain_body_plan_pay"
+        android:id="@+id/lnl_main_boy_credit_plan_pay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="20dp">
 
         <LinearLayout
-            android:id="@+id/lnlheader_plan_pay"
+            android:id="@+id/lnl_header_credit_plan_pay"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:backgroundTint="#008945"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/titleCredito"
+                android:id="@+id/label_title_credit_plan_pay"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
@@ -36,7 +34,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txtnrocredito"
+                android:id="@+id/text_nro_credit_plan_pay"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -47,7 +45,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txtmonedacredito"
+                android:id="@+id/text_moneda_credit_plan_pay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -63,7 +61,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/lnlheaderinformation"
+            android:id="@+id/lnl_header_information_credit_plan_pay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -81,7 +79,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/lblcapital"
+                        android:id="@+id/label_capital_credit_plan_pay"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -92,7 +90,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/txtcapital"
+                        android:id="@+id/text_capital_credit_plan_pay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -109,7 +107,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/lbltasa"
+                        android:id="@+id/label_tasa_credit_plan_pay"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -120,7 +118,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/txttasa"
+                        android:id="@+id/text_tasa_credit_plan_pay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -137,7 +135,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/lblformapago"
+                        android:id="@+id/label_forma_pago_credit_plan_pay"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -148,7 +146,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/txtformapago"
+                        android:id="@+id/text_forma_pago_credit_plan_pay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -166,7 +164,7 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/btngenerarpdf"
+                    android:id="@+id/button_get_pdf_credit_plan_pay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -175,7 +173,7 @@
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/btncontactar"
+                    android:id="@+id/button_get_contact_credit_plan_pay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#00AB45"
@@ -190,7 +188,7 @@
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/lnlbodydetails"
+                android:id="@+id/lnl_body_details_credit_plan_pay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
