@@ -36,8 +36,8 @@ import java.text.SimpleDateFormat
 class PlanePayCreditFragment : Fragment() {
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_plane_pay_credit, container, false)
 
