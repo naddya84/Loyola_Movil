@@ -60,6 +60,16 @@
         android:label="Detalles de credito"
         tools:layout="@layout/fragment_detail_credit"
         >
+
+        <action
+            android:id="@+id/action_plane_pay_credit"
+            app:destination="@id/nav_plane_pay_credit">
+        </action>
+        <action
+            android:id="@+id/action_extract_credit"
+            app:destination="@id/nav_extract_credito">
+        </action>
+
     </fragment>
 
     <fragment

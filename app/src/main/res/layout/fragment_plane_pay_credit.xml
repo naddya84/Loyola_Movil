@@ -7,17 +7,20 @@
     android:layout_height="match_parent"
     android:background="#D2D3D5">
 
+
+
     <LinearLayout
-        android:id="@+id/lnlmain_body_extract"
+        android:id="@+id/lnlmain_body_plan_pay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="20dp">
 
         <LinearLayout
-            android:id="@+id/lnlheader_extract"
+            android:id="@+id/lnlheader_plan_pay"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:backgroundTint="#008945"
             android:orientation="horizontal">
 
             <TextView
@@ -167,7 +170,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="GENERAR PDF"
+                    android:text="IMPRIMIR PDF"
                     android:textColor="#FFF"
                     android:textStyle="bold" />
 
@@ -193,5 +196,19 @@
                 android:orientation="vertical" />
         </ScrollView>
 
+
+
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressbar_plane_credit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
