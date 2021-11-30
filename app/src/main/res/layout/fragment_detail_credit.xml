@@ -34,7 +34,7 @@
             android:background="#029648">
 
             <TextView
-                android:id="@+id/crednumber"
+                android:id="@+id/text_cred_number_detail"
                 android:layout_width="230dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="16dp"
@@ -49,7 +49,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/crediEstado"
+                android:id="@+id/text_cred_state_detail"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="53dp"
@@ -62,10 +62,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/txttitleestado" />
+                app:layout_constraintTop_toTopOf="@+id/label_cred_state_detail" />
 
             <TextView
-                android:id="@+id/txttitleestado"
+                android:id="@+id/label_cred_state_detail"
                 android:layout_width="230dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="8dp"
@@ -76,7 +76,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/crednumber" />
+                app:layout_constraintTop_toBottomOf="@+id/text_cred_number_detail" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -90,22 +90,7 @@
             android:background="#EEEEEE">
 
             <TextView
-                android:id="@+id/txtMoneda"
-                android:layout_width="120dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="110dp"
-                android:text="Moneda:"
-                android:textColor="#09824C"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/crediMoneda"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtMonto" />
-
-            <TextView
-                android:id="@+id/txtMonto"
+                android:id="@+id/label_monto_detail"
                 android:layout_width="120dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="5dp"
@@ -115,65 +100,73 @@
                 android:textColor="#09824C"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/credMontoDesem"
+                app:layout_constraintEnd_toStartOf="@+id/text_mono_desem_detail"
                 app:layout_constraintHorizontal_bias="0.625"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/crediMoneda"
-                android:layout_width="130dp"
+                android:id="@+id/label_moneda_detail"
+                android:layout_width="120dp"
                 android:layout_height="25dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="25dp"
-                android:layout_marginEnd="5dp"
-                android:text="Moneda"
-                android:textColor="#000000"
+                android:layout_marginEnd="110dp"
+                android:text="Moneda:"
+                android:textColor="#09824C"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/credMontoDesem" />
+                app:layout_constraintEnd_toStartOf="@+id/text_cred_moneda_detail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_monto_detail" />
 
             <TextView
-                android:id="@+id/crediSaldo"
-                android:layout_width="130dp"
+                android:id="@+id/label_saldo_detail"
+                android:layout_width="120dp"
                 android:layout_height="25dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="25dp"
-                android:layout_marginEnd="5dp"
-                android:text="Saldo"
-                android:textColor="#000000"
+                android:layout_marginEnd="110dp"
+                android:text="Saldo Restante:"
+                android:textColor="#09824C"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/crediMoneda" />
+                app:layout_constraintEnd_toStartOf="@+id/text_saldo_detail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_moneda_detail" />
 
             <TextView
-                android:id="@+id/credFecDesem"
-                android:layout_width="130dp"
+                android:id="@+id/label_fecha_desembolso_detail"
+                android:layout_width="165dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="65dp"
+                android:text="Fecha de Desembolso:"
+                android:textColor="#09824C"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/text_fecha_desem_detail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_saldo_detail" />
+
+            <TextView
+                android:id="@+id/label_fecha_cancelacion_detail"
+                android:layout_width="160dp"
                 android:layout_height="40dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="25dp"
-                android:layout_marginEnd="5dp"
-                android:text="FechaD"
-                android:textColor="#000000"
+                android:layout_marginEnd="65dp"
+                android:text="Fecha de Cancelación:"
+                android:textColor="#09824C"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/crediSaldo" />
+                app:layout_constraintEnd_toStartOf="@+id/text_fecha_cancel_detail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_fecha_desembolso_detail" />
 
             <TextView
-                android:id="@+id/crediFecCancel"
-                android:layout_width="130dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="5dp"
-                android:text="FechaC"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/credFecDesem" />
-
-            <TextView
-                android:id="@+id/credMontoDesem"
+                android:id="@+id/text_mono_desem_detail"
                 android:layout_width="130dp"
                 android:layout_height="25dp"
                 android:layout_marginTop="10dp"
@@ -186,49 +179,57 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/txtSaldo"
-                android:layout_width="120dp"
+                android:id="@+id/text_cred_moneda_detail"
+                android:layout_width="130dp"
                 android:layout_height="25dp"
-                android:layout_marginStart="5dp"
                 android:layout_marginTop="25dp"
-                android:layout_marginEnd="110dp"
-                android:text="Saldo Restante:"
-                android:textColor="#09824C"
+                android:layout_marginEnd="5dp"
+                android:text="Moneda"
+                android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/crediSaldo"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtMoneda" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_mono_desem_detail" />
 
             <TextView
-                android:id="@+id/txtFechaD"
-                android:layout_width="165dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="5dp"
+                android:id="@+id/text_saldo_detail"
+                android:layout_width="130dp"
+                android:layout_height="25dp"
                 android:layout_marginTop="25dp"
-                android:layout_marginEnd="65dp"
-                android:text="Fecha de Desembolso:"
-                android:textColor="#09824C"
+                android:layout_marginEnd="5dp"
+                android:text="Saldo"
+                android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/credFecDesem"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtSaldo" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_cred_moneda_detail" />
 
             <TextView
-                android:id="@+id/txtFechaC"
-                android:layout_width="160dp"
+                android:id="@+id/text_fecha_desem_detail"
+                android:layout_width="130dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="5dp"
                 android:layout_marginTop="25dp"
-                android:layout_marginEnd="65dp"
-                android:text="Fecha de Cancelación:"
-                android:textColor="#09824C"
+                android:layout_marginEnd="5dp"
+                android:text="FechaD"
+                android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/crediFecCancel"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtFechaD" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_saldo_detail" />
+
+            <TextView
+                android:id="@+id/text_fecha_cancel_detail"
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="5dp"
+                android:text="FechaC"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_fecha_desem_detail" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
@@ -237,14 +238,14 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btntocreditplanepay"
+                android:id="@+id/button_to_credit_plan_pay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Plan de pagos" />
 
             <Button
-                android:id="@+id/btntocreditextract"
+                android:id="@+id/button_to_credit_extract"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
