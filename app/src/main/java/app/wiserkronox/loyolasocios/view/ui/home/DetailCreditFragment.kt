@@ -27,7 +27,7 @@ class DetailCreditFragment : Fragment() {
         val data = args?.get("data")
         val json = JSONObject(data.toString())
 
-        val text_cred_numero = view.findViewById<TextView>(R.id.text_cred_number_detail)
+        val text_cred_nro_cuenta = view.findViewById<TextView>(R.id.text_cred_number_detail)
         val text_cred_fech_desem = view.findViewById<TextView>(R.id.text_fecha_desem_detail)
         val text_cred_monto_desem = view.findViewById<TextView>(R.id.text_mono_desem_detail)
         val text_cred_moneda = view.findViewById<TextView>(R.id.text_cred_moneda_detail)
@@ -42,7 +42,7 @@ class DetailCreditFragment : Fragment() {
         val date_fech_cancel = date_format.format(date_parse.parse(json.get("crediFechaCancel").toString()))
 
         // Change text
-        text_cred_numero.text = ("N°CTA: " + json.get("credNumero").toString())
+        text_cred_nro_cuenta.text = ("N°CTA: " + json.get("credNumero").toString())
         text_cred_fech_desem.text = date_fecha_desem.toString()
         text_cred_monto_desem.text = json.get("credMontoDesem").toString()
         text_cred_moneda.text = json.get("crediMoneda").toString()
