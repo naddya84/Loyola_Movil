@@ -73,13 +73,13 @@ class ExtractCreditFragment : Fragment() {
         moneda.setBackgroundResource(R.drawable.circle_text_view)
 
         nrocred.text = json.get("credNumero").toString()
-        moneda.text = json.get("credMoneda").toString()
+        moneda.text = json.get("crediMoneda").toString()
 
         val user = LoyolaApplication.getInstance()?.user //docu-cage
         val number = json.get("id").toString() //cred-number
 
         //HEADER PLAN DE PAGOS
-        val url = "${getString(R.string.host_service)}services/credit_extract.php?docu-cage=${user!!.id_member}&cred-number=${number}"
+        val url = "${getString(R.string.host_service)}services/get_credit_extract.php?docu-cage=${user!!.id_member}&cred-number=${number}"
         val queue = Volley.newRequestQueue(activity)
 
         val planePayCreditRequest = JsonObjectRequest(
@@ -271,7 +271,7 @@ class ExtractCreditFragment : Fragment() {
                             txtdetailCapital.setLayoutParams(paramstxts)
 
                             val txtsaldocapitaldetail = TextView(activity)
-                            txtsaldocapitaldetail.text = (detail.getJSONObject(i).get("credSaldoCapi").toString() + " " + moneda.text + ".")
+                            txtsaldocapitaldetail.text = (detail.getJSONObject(i).get("crediSaldoCapi").toString() + " " + moneda.text + ".")
                             txtsaldocapitaldetail.setTypeface(null, Typeface.BOLD)
                             txtsaldocapitaldetail.setTextColor(Color.BLACK)
                             txtsaldocapitaldetail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
@@ -304,7 +304,7 @@ class ExtractCreditFragment : Fragment() {
                                 val details = detail.getJSONObject(i).toString()
                                 val bundle = Bundle()
                                 bundle.putString("data",details)
-                                bundle.putString("moneda", json.get("credMoneda").toString())
+                                bundle.putString("moneda", json.get("crediMoneda").toString())
                                 bundle.putString("nrotrans", json.get("credNumero").toString())
                                 dialog.arguments = bundle
                                 dialog.show(childFragmentManager,"Texto")
@@ -407,10 +407,10 @@ class ExtractCreditFragment : Fragment() {
                     }
                 }
 
-                val urlDowload = "${getString(R.string.host_service)}services/credit_extract_generate_pdf.php?docu-cage=${user!!.id_member}&cred-number=${number}"
+                val url_dowload = "${getString(R.string.host_service)}services/get_credit_extract_pdf.php?docu-cage=${user!!.id_member}&cred-number=${number}"
 
-                val cookie = CookieManager.getInstance().getCookie(urlDowload)
-                val request = DownloadManager.Request(Uri.parse(urlDowload))
+                val cookie = CookieManager.getInstance().getCookie(url_dowload)
+                val request = DownloadManager.Request(Uri.parse(url_dowload))
                     .setTitle("creExtractosCredito.pdf")
                     .setDescription("Descargando....")
                     .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "creExtractosCredito.pdf")

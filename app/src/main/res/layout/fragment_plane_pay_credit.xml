@@ -10,16 +10,17 @@
 
 
     <LinearLayout
-        android:id="@+id/lnlmain_body_extract"
+        android:id="@+id/lnlmain_body_plan_pay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="20dp">
 
         <LinearLayout
-            android:id="@+id/lnlheader_extract"
+            android:id="@+id/lnlheader_plan_pay"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:backgroundTint="#008945"
             android:orientation="horizontal">
 
             <TextView

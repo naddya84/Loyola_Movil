@@ -33,7 +33,7 @@ class CreditFragment : Fragment() {
         mainBody.setPadding(30,30,30,30)
 
         val user = LoyolaApplication.getInstance()?.user
-        val url = "${getString(R.string.host_service)}services/credit_history.php?docu-cage=${user!!.id_member}"
+        val url = "${getString(R.string.host_service)}services/get_credit_history.php?docu-cage=${user!!.id_member}"
         val queue = Volley.newRequestQueue(activity)
         val creditRequest = JsonObjectRequest(
             Request.Method.GET,
@@ -89,24 +89,24 @@ class CreditFragment : Fragment() {
                             LinearLayout.LayoutParams.WRAP_CONTENT
                         ))
 
-                        state.text = ("Estado\n"+ data.getJSONObject(i).get("credEstado").toString())
+                        state.text = ("Estado\n"+ data.getJSONObject(i).get("crediEstado").toString())
                         state.gravity = Gravity.CENTER
                         state.setTypeface(null, Typeface.BOLD)
                         state.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13F)
 
-                        if(data.getJSONObject(i).get("credEstado").toString() == "Castigado") {
+                        if(data.getJSONObject(i).get("crediEstado").toString() == "Castigado") {
                             state.setTextColor(Color.RED)
                         }
-                        if(data.getJSONObject(i).get("credEstado").toString() == "Retraso") {
+                        if(data.getJSONObject(i).get("crediEstado").toString() == "Retraso") {
                             state.setTextColor(Color.RED)
                         }
-                        if(data.getJSONObject(i).get("credEstado").toString() == "Ejecución") {
+                        if(data.getJSONObject(i).get("crediEstado").toString() == "Ejecución") {
                             state.setTextColor(Color.RED)
                         }
-                        if(data.getJSONObject(i).get("credEstado").toString() == "Cancelado") {
+                        if(data.getJSONObject(i).get("crediEstado").toString() == "Cancelado") {
                             state.setTextColor(Color.RED)
                         }
-                        if(data.getJSONObject(i).get("credEstado").toString() == "Activo") {
+                        if(data.getJSONObject(i).get("crediEstado").toString() == "Activo") {
                             state.setTextColor(Color.parseColor("#2ed111"))
                         }
                         state.setLayoutParams(LinearLayout.LayoutParams(
@@ -147,7 +147,7 @@ class CreditFragment : Fragment() {
                         bgmoneda.setTint(Color.parseColor("#BCBCBC"))
 
                         val moneda = TextView(activity)
-                        moneda.text = ("Moneda: "+data.getJSONObject(i).get("credMontoDesem").toString()+" "+data.getJSONObject(i).get("credMoneda").toString()+".")
+                        moneda.text = ("Moneda: "+data.getJSONObject(i).get("credMontoDesem").toString()+" "+data.getJSONObject(i).get("crediMoneda").toString()+".")
                         moneda.background = bgmoneda
                         moneda.setPadding(40,0,0,0)
                         moneda.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
@@ -234,7 +234,7 @@ class CreditFragment : Fragment() {
                         }
 
                         val check = ImageView(activity)
-                        val type = data.getJSONObject(i).get("credEstado").toString()
+                        val type = data.getJSONObject(i).get("crediEstado").toString()
                         if(type == "Activo") {
                             check.setBackgroundResource(R.drawable.icon_check)
                         } else {

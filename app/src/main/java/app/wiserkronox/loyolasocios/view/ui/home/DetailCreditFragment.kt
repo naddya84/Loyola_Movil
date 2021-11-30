@@ -39,14 +39,14 @@ class DetailCreditFragment : Fragment() {
         val dateformat = SimpleDateFormat("dd-MMM-yyyy")
         val dateparse = SimpleDateFormat("yyyy-MM-dd")
         val datefechdesem = dateformat.format(dateparse.parse(json.get("credFechaDesem").toString()))
-        val datefechcancel = dateformat.format(dateparse.parse(json.get("credFechaCancel").toString()))
+        val datefechcancel = dateformat.format(dateparse.parse(json.get("crediFechaCancel").toString()))
         // Change text
         credNumero.text = ("N°CTA: " + json.get("credNumero").toString())
         credFecDesem.text = datefechdesem.toString()
         credMontoDesem.text = json.get("credMontoDesem").toString()
-        crediMoneda.text = json.get("credMoneda").toString()
-        crediSaldo.text = json.get("credSaldo").toString()
-        crediEstado.text = json.get("credEstado").toString()
+        crediMoneda.text = json.get("crediMoneda").toString()
+        crediSaldo.text = json.get("crediSaldo").toString()
+        crediEstado.text = json.get("crediEstado").toString()
         crediFecCancel.text = datefechcancel.toString()
 
         val paramsButtons = LinearLayout.LayoutParams(

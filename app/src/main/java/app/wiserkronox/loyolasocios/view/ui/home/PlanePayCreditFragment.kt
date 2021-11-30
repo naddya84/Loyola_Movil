@@ -46,7 +46,7 @@ class PlanePayCreditFragment : Fragment() {
         val data = args?.get("data")
         val json = JSONObject(data.toString())
 
-        val lnlheader = view.findViewById<LinearLayout>(R.id.lnlheader_extract)
+        val lnlheader = view.findViewById<LinearLayout>(R.id.lnlheader_plan_pay)
         val lnlheaderinformation = view.findViewById<LinearLayout>(R.id.lnlheaderinformation)
 
         val bg = GradientDrawable()
@@ -76,14 +76,14 @@ class PlanePayCreditFragment : Fragment() {
         moneda.background = bg_moneda
 
         nrocred.text = json.get("credNumero").toString()
-        moneda.text = json.get("credMoneda").toString()
+        moneda.text = json.get("crediMoneda").toString()
 
 
         val user = LoyolaApplication.getInstance()?.user //docu-cage
         val number = json.get("id").toString() //cred-number
 
         //HEADER PLAN DE PAGOS
-        val url: String = "${getString(R.string.host_service)}services/credit_plan_pay.php?docu-cage=${user!!.id_member}&cred-number=${number}"
+        val url: String = "${getString(R.string.host_service)}services/get_credit_plan_pay.php?docu-cage=${user!!.id_member}&cred-number=${number}"
         val queue = Volley.newRequestQueue(activity)
 
         val planePayCreditRequest = JsonObjectRequest(
@@ -122,7 +122,7 @@ class PlanePayCreditFragment : Fragment() {
                         lnlmainbodydetails.addView(txtnotdata)
                         val progressbar = view.findViewById<ProgressBar>(R.id.progressbar_plane_credit)
                         progressbar.visibility = View.INVISIBLE
-                        val body = view.findViewById<LinearLayout>(R.id.lnlmain_body_extract)
+                        val body = view.findViewById<LinearLayout>(R.id.lnlmain_body_plan_pay)
                         body.visibility = View.VISIBLE
 
                     } else {
@@ -277,7 +277,7 @@ class PlanePayCreditFragment : Fragment() {
                             txtdetailCapital.setLayoutParams(paramstxts)
 
                             val txtsaldocapitaldetail = TextView(activity)
-                            txtsaldocapitaldetail.text = (detail.getJSONObject(i).get("credSaldoCredi").toString() + " " + moneda.text + ".")
+                            txtsaldocapitaldetail.text = (detail.getJSONObject(i).get("crediSaldoCredi").toString() + " " + moneda.text + ".")
                             txtsaldocapitaldetail.setTypeface(null, Typeface.BOLD)
                             txtsaldocapitaldetail.setTextColor(Color.BLACK)
                             txtsaldocapitaldetail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
@@ -309,7 +309,7 @@ class PlanePayCreditFragment : Fragment() {
                                 val details = detail.getJSONObject(i).toString()
                                 val bundle = Bundle()
                                 bundle.putString("data",details)
-                                bundle.putString("moneda", json.get("credMoneda").toString())
+                                bundle.putString("moneda", json.get("crediMoneda").toString())
                                 bundle.putString("nrotrans", json.get("credNumero").toString())
                                 dialog.arguments = bundle
                                 dialog.show(childFragmentManager,"Texto")
@@ -333,7 +333,7 @@ class PlanePayCreditFragment : Fragment() {
 
                             val progressbar = view.findViewById<ProgressBar>(R.id.progressbar_plane_credit)
                             progressbar.visibility = View.INVISIBLE
-                            val body = view.findViewById<LinearLayout>(R.id.lnlmain_body_extract)
+                            val body = view.findViewById<LinearLayout>(R.id.lnlmain_body_plan_pay)
                             body.visibility = View.VISIBLE
                         }
                     }
@@ -341,7 +341,7 @@ class PlanePayCreditFragment : Fragment() {
                 } else {
                     val progressbar = view.findViewById<ProgressBar>(R.id.progressbar_plane_credit)
                     progressbar.visibility = View.INVISIBLE
-                    val body = view.findViewById<LinearLayout>(R.id.lnlmain_body_extract)
+                    val body = view.findViewById<LinearLayout>(R.id.lnlmain_body_plan_pay)
                     body.visibility = View.INVISIBLE
                     findNavController().popBackStack()
                     val msg = jsonObject.get("msg").toString()
@@ -354,7 +354,7 @@ class PlanePayCreditFragment : Fragment() {
                 println(volleyError.message)
                 val progressbar = view.findViewById<ProgressBar>(R.id.progressbar_plane_credit)
                 progressbar.visibility = View.INVISIBLE
-                val body = view.findViewById<LinearLayout>(R.id.lnlmain_body_extract)
+                val body = view.findViewById<LinearLayout>(R.id.lnlmain_body_plan_pay)
                 body.visibility = View.VISIBLE
             })
 
@@ -411,9 +411,9 @@ class PlanePayCreditFragment : Fragment() {
                     }
                 }
 
-                val urlDowload = "${getString(R.string.host_service)}services/credit_plan_pay_generate_pdf.php?docu-cage=${user!!.id_member}&cred-number=${number}"
-                val cookie = CookieManager.getInstance().getCookie(urlDowload)
-                val request = DownloadManager.Request(Uri.parse(urlDowload))
+                val url_dowload = "${getString(R.string.host_service)}services/get_credit_plan_pay_pdf.php?docu-cage=${user!!.id_member}&cred-number=${number}"
+                val cookie = CookieManager.getInstance().getCookie(url_dowload)
+                val request = DownloadManager.Request(Uri.parse(url_dowload))
                     .setTitle("crePlanPagos.pdf")
                     .setDescription("Descargando....")
                     .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "crePlanPagos.pdf")
@@ -425,6 +425,11 @@ class PlanePayCreditFragment : Fragment() {
                 dowloadid = dm.enqueue(request)
 
                 activity?.registerReceiver(new, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+
+                val shape = GradientDrawable()
+                shape.setColor(Color.parseColor("#008945"))
+                shape.cornerRadius = 20f
+                lnlheader.background = shape
             }
         }
 
@@ -433,11 +438,11 @@ class PlanePayCreditFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val body = view.findViewById<LinearLayout>(R.id.lnlmain_body_extract)
+        val body = view.findViewById<LinearLayout>(R.id.lnlmain_body_plan_pay)
         val progressbar = view.findViewById<ProgressBar>(R.id.progressbar_plane_credit)
         progressbar.bringToFront()
         progressbar.visibility = View.VISIBLE
         body.visibility = View.INVISIBLE
-    }
 
+    }
 }
