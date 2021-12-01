@@ -81,7 +81,7 @@ class CertificateRest(val context: Activity){
         LoyolaService.getInstance(context).addToRequestQueue(request)
     }
 
-    fun getListCertificatesToPdf(docuCage: String =""):Long {
+    fun getListCertificatesToPdf(docuCage: String ="") {
         var dowloadid:Long = 0
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(context as Activity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), STORAGE_PERMISSION_CODE)
@@ -109,10 +109,9 @@ class CertificateRest(val context: Activity){
 
             context.registerReceiver(new, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
         }
-        return  dowloadid
     }
 
-    fun getCertificatePdf(certificateNumber: String =""):Long {
+    fun getCertificatePdf(certificateNumber: String ="") {
         var dowloadid:Long = 0
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(context as Activity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), STORAGE_PERMISSION_CODE)
@@ -140,7 +139,6 @@ class CertificateRest(val context: Activity){
 
             context.registerReceiver(new, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
         }
-        return  dowloadid
     }
 
 }
