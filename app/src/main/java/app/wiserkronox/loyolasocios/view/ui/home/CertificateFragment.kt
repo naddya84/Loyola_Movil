@@ -49,10 +49,11 @@ class CertificateFragment : Fragment() {
             {
                 certificates->
                 progressBar.visibility = View.INVISIBLE
-                if (certificates != null) {
+                if (certificates != null && certificates.isNotEmpty())
                     recyclerView.adapter = CertificateAdapter(requireContext(), certificates)
-                }
-
+                else
+                    (activity as HomeActivity).goHome()
+                buttonDowloadListPdf.visibility = View.VISIBLE
             },
             {
                 error, certificates ->
@@ -61,7 +62,7 @@ class CertificateFragment : Fragment() {
                 if (certificates?.size == 0)
                     (activity as HomeActivity).goHome()
                 recyclerView.adapter = CertificateAdapter(requireContext(), certificates!!)
-
+                buttonDowloadListPdf.visibility = View.VISIBLE
             }
         )
     }
