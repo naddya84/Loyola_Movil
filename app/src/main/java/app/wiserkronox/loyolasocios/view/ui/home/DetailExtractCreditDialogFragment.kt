@@ -37,8 +37,14 @@ class DetailExtractCreditDialogFragment : DialogFragment() {
         val view : View = inflater.inflate(R.layout.fragment_detail_extract_credit_dialog, container, false)
 
         val args = this.arguments
-        val data = args?.get("data")
-        val json = JSONObject(data.toString())
+        val cred_fec_pago = args?.get("credFecPago").toString()
+        val cred_nro_trans = args?.get("credNroTrans").toString()
+        val cred_monto_capi = args?.get("credMontoCapi").toString()
+        val cred_monto_inte = args?.get("credMontoInte").toString()
+        val credi_monto_penal = args?.get("crediMontoPenal").toString()
+        val credi_monto_cargos = args?.get("crediMontoCargos").toString()
+        val credi_total_pago = args?.get("crediTotalpago").toString()
+        val credi_saldo_capi = args?.get("crediSaldoCapi").toString()
 
         val text_ncred = view.findViewById<TextView>(R.id.titlecred)
         text_ncred.text = ("CREDITO\n"+args?.get("nrotrans").toString())
@@ -49,30 +55,30 @@ class DetailExtractCreditDialogFragment : DialogFragment() {
         val text_fecha = view.findViewById<TextView>(R.id.txtFechaP)
         val date_format = SimpleDateFormat("dd-MMM-yyyy")
         val date_parse = SimpleDateFormat("yyyy-MM-dd")
-        val date = date_format.format(date_parse.parse(json.get("credFecPago").toString()))
+        val date = date_format.format(date_parse.parse(cred_fec_pago))
 
         text_fecha.text = date
 
         val text_nro = view.findViewById<TextView>(R.id.txtNro)
-        text_nro.text = (json.get("credNroTrans").toString())
+        text_nro.text = cred_nro_trans
 
         val text_montocapi = view.findViewById<TextView>(R.id.txtMontoCapi)
-        text_montocapi.text = (json.get("credMontoCapi").toString() + " " + text_moneda.text)
+        text_montocapi.text = (cred_monto_capi + " " + text_moneda.text)
 
         val text_montointer = view.findViewById<TextView>(R.id.txtMontoInteres)
-        text_montointer.text = (json.get("crediMontoInte").toString() + " " + text_moneda.text)
+        text_montointer.text = (cred_monto_inte + " " + text_moneda.text)
 
         val text_montopenal = view.findViewById<TextView>(R.id.txtTotalCuota)
-        text_montopenal.text = (json.get("crediMontoPenal").toString() + " " + text_moneda.text)
+        text_montopenal.text = (credi_monto_penal + " " + text_moneda.text)
 
         val text_montocargo = view.findViewById<TextView>(R.id.txtMontoCargos)
-        text_montocargo.text = (json.get("credMontoCargos").toString() + " " + text_moneda.text)
+        text_montocargo.text = (credi_monto_cargos + " " + text_moneda.text)
 
         val text_totalpago = view.findViewById<TextView>(R.id.txtTotalpago)
-        text_totalpago.text = (json.get("crediTotalPago").toString() + " " + text_moneda.text)
+        text_totalpago.text = (credi_total_pago + " " + text_moneda.text)
 
         val text_saldocargo = view.findViewById<TextView>(R.id.txtSaldoCredi)
-        text_saldocargo.text = (json.get("crediSaldoCapi").toString() + " " + text_moneda.text)
+        text_saldocargo.text = (credi_saldo_capi + " " + text_moneda.text)
 
         val spanbutton = GradientDrawable()
         spanbutton.cornerRadius = 20f
