@@ -13,6 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import app.wiserkronox.loyolasocios.R
 import org.json.JSONObject
+import java.math.RoundingMode
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -26,8 +29,16 @@ class DetailCreditFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_detail_credit, container, false)
         val args = this.arguments
-        val data = args?.get("data")
-        val json = JSONObject(data.toString())
+
+        val cred_id = args?.get("id")
+        val cred_number = args?.get("credNumero")
+        val cred_fec_desem = args?.get("credFecDesem")
+        val cred_monto_desem = args?.get("credMontoDesem")
+        val credi_moneda = args?.get("crediMoneda")
+        val credi_saldo = args?.get("crediSaldo")
+        val credi_estado = args?.get("crediEstado")
+        val credi_fec_cancel = args?.get("crediFecCancel")
+
         val credNumero = view.findViewById<TextView>(R.id.crednumber)
         val credFecDesem = view.findViewById<TextView>(R.id.credFecDesem)
         val credMontoDesem = view.findViewById<TextView>(R.id.credMontoDesem)
@@ -38,15 +49,17 @@ class DetailCreditFragment : Fragment() {
         //Date format
         val dateformat = SimpleDateFormat("dd-MMM-yyyy")
         val dateparse = SimpleDateFormat("yyyy-MM-dd")
-        val datefechdesem = dateformat.format(dateparse.parse(json.get("credFechaDesem").toString()))
-        val datefechcancel = dateformat.format(dateparse.parse(json.get("crediFechaCancel").toString()))
+        val datefechdesem = dateformat.format(dateparse.parse(cred_fec_desem.toString()))
+        val datefechcancel = dateformat.format(dateparse.parse(credi_fec_cancel.toString()))
+        //Number format
+
         // Change text
-        credNumero.text = ("N°CTA: " + json.get("credNumero").toString())
+        credNumero.text = ("N°CTA: " + cred_number.toString())
         credFecDesem.text = datefechdesem.toString()
-        credMontoDesem.text = json.get("credMontoDesem").toString()
-        crediMoneda.text = json.get("crediMoneda").toString()
-        crediSaldo.text = json.get("crediSaldo").toString()
-        crediEstado.text = json.get("crediEstado").toString()
+        credMontoDesem.text = cred_monto_desem.toString()
+        crediMoneda.text = credi_moneda.toString()
+        crediSaldo.text = credi_saldo.toString()
+        crediEstado.text = credi_estado.toString()
         crediFecCancel.text = datefechcancel.toString()
 
         val paramsButtons = LinearLayout.LayoutParams(
@@ -75,9 +88,17 @@ class DetailCreditFragment : Fragment() {
         btnplanepay.setLayoutParams(paramsButtons)
 
         btnplanepay.setOnClickListener {
-            val details = data.toString()
+
             val bundle = Bundle()
-            bundle.putString("data",details)
+            bundle.putString("id",cred_id.toString())
+            bundle.putString("number",cred_number.toString())
+            bundle.putString("credFechDesem",cred_fec_desem.toString())
+            bundle.putString("credmontodesem",cred_monto_desem.toString())
+            bundle.putString("crediMoneda",credi_moneda.toString())
+            bundle.putString("crediSaldo",credi_saldo.toString())
+            bundle.putString("crediEstado",credi_estado.toString())
+            bundle.putString("crediFecCancel",credi_fec_cancel.toString())
+
             view.findNavController().navigate(R.id.action_plane_pay_credit, bundle)
         }
 
@@ -89,9 +110,17 @@ class DetailCreditFragment : Fragment() {
         btncreditextract.setLayoutParams(paramsButtons)
 
         btncreditextract.setOnClickListener {
-            val details = data.toString()
+
             val bundle = Bundle()
-            bundle.putString("data",details)
+            bundle.putString("id",cred_id.toString())
+            bundle.putString("number",cred_number.toString())
+            bundle.putString("credFechDesem",cred_fec_desem.toString())
+            bundle.putString("credmontodesem",cred_monto_desem.toString())
+            bundle.putString("crediMoneda",credi_moneda.toString())
+            bundle.putString("crediSaldo",credi_saldo.toString())
+            bundle.putString("crediEstado",credi_estado.toString())
+            bundle.putString("crediFecCancel",credi_fec_cancel.toString())
+
             view.findNavController().navigate(R.id.action_extract_credit, bundle)
         }
 
