@@ -14,9 +14,14 @@ import kotlinx.coroutines.launch
         User::class,
         Assembly::class,
         Course::class,
-        Certificate::class
+        Certificate::class,
+        Credit::class,
+        CreditPlanPay::class,
+        CreditPlanPayDetail::class,
+        CreditExtract::class,
+        CreditExtractDetail::class
     ),
-    version = 13,
+    version = 23,
     exportSchema = false
 )
 
@@ -26,6 +31,11 @@ import kotlinx.coroutines.launch
     abstract fun assemblyDao(): AssemblyDao
     abstract fun courseDao(): CourseDao
     abstract fun certificateDao():CertificateDao
+    abstract fun creditDao():CreditDao
+    abstract fun creditPlanPayDao():CreditPlanPayDao
+    abstract fun creditPlanPayDetailDao():CreditPlanPayDetailDao
+    abstract fun creditExtractDao():CreditExtractDao
+    abstract fun creditExtractDetailDao():CreditExtractDetailDao
 
     companion object {
         @Volatile

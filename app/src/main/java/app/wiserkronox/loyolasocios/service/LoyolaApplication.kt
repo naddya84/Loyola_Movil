@@ -17,7 +17,12 @@ class LoyolaApplication : Application () {
             dataBase.userDao(),
             dataBase.assemblyDao(),
             dataBase.courseDao(),
-            dataBase.certificateDao()
+            dataBase.certificateDao(),
+            dataBase.creditDao(),
+            dataBase.creditPlanPayDao(),
+            dataBase.creditPlanPayDetailDao(),
+            dataBase.creditExtractDao(),
+            dataBase.creditExtractDetailDao(),
         )
     }
 
