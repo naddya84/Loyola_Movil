@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
         CreditExtract::class,
         CreditExtractDetail::class
     ),
-    version = 23,
+    version = 24,
     exportSchema = false
 )
 

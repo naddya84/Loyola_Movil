@@ -7,7 +7,7 @@ import androidx.room.Query
 
 @Dao
 interface CreditDao {
-    @Query("select * from Credit order by date_desem asc")
+    @Query("select * from Credit order by disburement_date asc")
     fun getAllCredits(): List<Credit>
 
     @Query("delete from Credit")

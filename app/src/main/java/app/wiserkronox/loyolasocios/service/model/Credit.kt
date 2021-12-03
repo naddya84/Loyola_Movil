@@ -10,17 +10,18 @@ class Credit {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
 
+    //Atributos de la tabla
     @ColumnInfo
-    var credId: Int = 0
+    var credit_id: Int = 0
 
     @ColumnInfo
     var number:Int = 0
 
     @ColumnInfo
-    var date_desem:String = ""
+    var disburement_date:String = ""
 
     @ColumnInfo
-    var amount_desem:Double = 0.0
+    var disbursed_amount:Double = 0.0
 
     @ColumnInfo
     var coin:String = ""
@@ -32,5 +33,5 @@ class Credit {
     var state: String = ""
 
     @ColumnInfo
-    var date_cancel:String = ""
+    var cancellation_date:String = ""
 }
