@@ -76,9 +76,9 @@ class CreditExtractAdapter(
             "#,###.00", DecimalFormatSymbols.getInstance(Locale("es", "BOL")))
         money.roundingMode = RoundingMode.CEILING
 
-        holder.text_capital.text = money.format(item.cred_monto_desem).toString()
-        holder.text_plazo.text = item.cred_plazo.toString()
-        holder.text_tasa.text = item.cred_estado.toString()
+        holder.text_capital.text = money.format(item.disbursed_amount).toString()
+        holder.text_plazo.text = item.term.toString()
+        holder.text_tasa.text = item.state.toString()
 
         holder.text_nro_credit.text = cred_number
         holder.text_moneda_credit.text = credi_moneda

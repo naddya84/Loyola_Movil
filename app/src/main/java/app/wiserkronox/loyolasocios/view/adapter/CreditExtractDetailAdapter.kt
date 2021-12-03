@@ -82,15 +82,15 @@ class CreditExtractDetailAdapter(
         val date_format = SimpleDateFormat("dd-MMM-yyyy")
         val date_parse = SimpleDateFormat("yyyy-MM-dd")
 
-        val date = date_format.format(date_parse.parse(item.cred_fec_pago.toString()))
+        val date = date_format.format(date_parse.parse(item.payment_date.toString()))
 
         //Header
         holder.text_fecha_pago.text = date.toString()
-        holder.text_nro_trans.text = item.cred_nro_trans.toString()
+        holder.text_nro_trans.text = item.number_transaction.toString()
 
         //Body
-        holder.text_capital.text = money.format(item.cred_monto_capi).toString() + " " + moneda.toString() + "."
-        holder.text_saldo_capital.text = money.format(item.credi_saldo_capi).toString() + " " + moneda.toString() + "."
+        holder.text_capital.text = money.format(item.principal_amount).toString() + " " + moneda.toString() + "."
+        holder.text_saldo_capital.text = money.format(item.principal_balance).toString() + " " + moneda.toString() + "."
 
 
         val background_shape = GradientDrawable()
@@ -126,15 +126,15 @@ class CreditExtractDetailAdapter(
             bundle.putString("nrotrans", nrotrans.toString())
             bundle.putString("moneda", moneda.toString())
 
-            bundle.putString("credId",item.id_credit_extract_detail.toString())
-            bundle.putString("credNroTrans",item.cred_nro_trans.toString())
-            bundle.putString("credFecPago",item.cred_fec_pago.toString())
-            bundle.putString("credMontoCapi",money.format(item.cred_monto_capi).toString())
-            bundle.putString("credMontoInte",money.format(item.cred_monto_inte).toString())
-            bundle.putString("crediMontoPenal",money.format(item.credi_monto_penal).toString())
-            bundle.putString("crediMontoCargos",money.format(item.credi_monto_cargos).toString())
-            bundle.putString("crediTotalpago",money.format(item.credi_total_pago).toString())
-            bundle.putString("crediSaldoCapi",money.format(item.credi_saldo_capi).toString())
+            bundle.putString("credId",item.credit_extract_detail_id.toString())
+            bundle.putString("credNroTrans",item.number_transaction.toString())
+            bundle.putString("credFecPago",item.payment_date.toString())
+            bundle.putString("credMontoCapi",money.format(item.principal_amount).toString())
+            bundle.putString("credMontoInte",money.format(item.interest_amount).toString())
+            bundle.putString("crediMontoPenal",money.format(item.penalty_amount).toString())
+            bundle.putString("crediMontoCargos",money.format(item.amount_of_charges).toString())
+            bundle.putString("crediTotalpago",money.format(item.total_to_pay).toString())
+            bundle.putString("crediSaldoCapi",money.format(item.principal_balance).toString())
 
             dialog.arguments = bundle
             dialog.show((holder.itemView.context as FragmentActivity).supportFragmentManager,"Texto")

@@ -7,7 +7,7 @@ import androidx.room.Query
 
 @Dao
 interface CreditExtractDetailDao {
-    @Query("select * from CreditExtractDetail order by id asc")
+    @Query("select * from CreditExtractDetail order by number_transaction asc")
     fun getAllCreditsExtractDetail(): List<CreditExtractDetail>
 
     @Query("delete from CreditExtractDetail")

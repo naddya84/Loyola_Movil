@@ -10,34 +10,35 @@ class CreditExtractDetail {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
 
+    //LLAVES FORANEAS
     @ColumnInfo
-    var id_credit_extract:Int = 0
+    var credit_extract_id:Int = 0
 
     @ColumnInfo
-    var id_credit_extract_detail:Int = 0
+    var credit_extract_detail_id:Int = 0
 
     //DATA
     @ColumnInfo
-    var cred_fec_pago:String = ""
+    var payment_date:String = ""
 
     @ColumnInfo
-    var cred_nro_trans:Int = 0
+    var number_transaction:Int = 0
 
     @ColumnInfo
-    var cred_monto_capi:Double = 0.0
+    var principal_amount:Double = 0.0
 
     @ColumnInfo
-    var cred_monto_inte:Double = 0.0
+    var interest_amount:Double = 0.0
 
     @ColumnInfo
-    var credi_monto_penal:Double = 0.0
+    var penalty_amount:Double = 0.0
 
     @ColumnInfo
-    var credi_monto_cargos:Double = 0.0
+    var amount_of_charges:Double = 0.0
 
     @ColumnInfo
-    var credi_total_pago:Double = 0.0
+    var total_to_pay:Double = 0.0
 
     @ColumnInfo
-    var credi_saldo_capi:Double = 0.0
+    var principal_balance:Double = 0.0
 }

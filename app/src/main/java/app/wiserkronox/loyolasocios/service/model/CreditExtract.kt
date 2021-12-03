@@ -11,23 +11,22 @@ class CreditExtract {
     var id: Long = 0
 
     @ColumnInfo
-    var id_credit:Int = 0
+    var credit_id:Int = 0
 
     @ColumnInfo
-    var id_credit_extract:Int = 0
+    var credit_extract_id:Int = 0
 
     @ColumnInfo
-    var cred_numero:Int = 0
+    var number:Int = 0
 
     @ColumnInfo
-    var cred_plazo:String = ""
-
-
-    @ColumnInfo
-    var cred_monto_desem:Double = 0.0
+    var term:String = ""
 
     @ColumnInfo
-    var cred_estado:String = ""
+    var disbursed_amount:Double = 0.0
+
+    @ColumnInfo
+    var state:String = ""
 
 
 }
