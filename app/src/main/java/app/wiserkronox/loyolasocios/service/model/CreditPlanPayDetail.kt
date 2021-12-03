@@ -10,33 +10,36 @@ class CreditPlanPayDetail {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
 
+    //PRIMARY KEY
     @ColumnInfo
-    var id_credit_plan_pay:Int = 0
+    var credit_plan_pay_id:Int = 0
+
+    //FK KEY
+    @ColumnInfo
+    var credit_plan_pay_detail_id:Int = 0
+
+    //DATA
+    @ColumnInfo
+    var installment_number:Int = 0
 
     @ColumnInfo
-    var id_credit_plan_pay_detail:Int = 0
+    var due_date:String = ""
 
     @ColumnInfo
-    var cred_num_cuota:Int = 0
+    var principal_amount:Double = 0.0
 
     @ColumnInfo
-    var cred_fecha_venc:String = ""
+    var interest_amount:Double = 0.0
 
     @ColumnInfo
-    var cred_monto_capi:Double = 0.0
+    var tota_fee:Double = 0.0
 
     @ColumnInfo
-    var cred_monto_inte:Double = 0.0
+    var amount_of_charges:Double = 0.0
 
     @ColumnInfo
-    var credi_tota_cuota:Double = 0.0
+    var total_fee:Double = 0.0
 
     @ColumnInfo
-    var credi_monto_cargos:Double = 0.0
-
-    @ColumnInfo
-    var credi_total_cuota:Double = 0.0
-
-    @ColumnInfo
-    var credi_saldo_credi:Double = 0.0
+    var principal_balance:Double = 0.0
 }

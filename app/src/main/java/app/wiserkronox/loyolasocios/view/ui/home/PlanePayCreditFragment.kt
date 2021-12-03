@@ -83,6 +83,7 @@ class PlanePayCreditFragment : Fragment() {
         val cred_number = args?.get("credNumero").toString()
         val cred_moneda = args?.get("crediMoneda").toString()
 
+        println(credit_id)
         CreditRest(requireActivity()).getCreditsPlanPay(
             user!!.id_member,
             credit_id.toString(),

@@ -11,24 +11,24 @@ class CreditPlanPay {
     var id: Long = 0
 
     @ColumnInfo
-    var id_credit:Int = 0
+    var credit_id:Int = 0
 
     @ColumnInfo
-    var id_credit_plan_pay:Int = 0
+    var credit_plan_pay_id:Int = 0
 
     @ColumnInfo
-    var amount_desem:Double = 0.0
+    var disbursed_amount:Double = 0.0
 
     @ColumnInfo
-    var plazo:Int = 0
+    var term:Int = 0
 
     @ColumnInfo
-    var tasa:Double = 0.0
+    var rate:Double = 0.0
 
     @ColumnInfo
-    var periodo_pago:String = ""
+    var payment_period:String = ""
 
     @ColumnInfo
-    var for_pago:String = ""
+    var way_to_pay:String = ""
 
 }

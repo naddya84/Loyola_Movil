@@ -75,9 +75,9 @@ class CreditPlanPayAdapter(
             "#,###.00", DecimalFormatSymbols.getInstance(Locale("es", "BOL")))
         money.roundingMode = RoundingMode.CEILING
 
-        holder.text_capital.text = money.format(item.amount_desem).toString()
-        holder.text_forma_pago.text = item.for_pago.toString()
-        holder.text_tasa.text = money.format(item.tasa).toString()
+        holder.text_capital.text = money.format(item.disbursed_amount).toString()
+        holder.text_forma_pago.text = item.way_to_pay.toString()
+        holder.text_tasa.text = money.format(item.term).toString()
 
         holder.text_nro_credit.text = cred_number
         holder.text_moneda_credit.text = credi_moneda

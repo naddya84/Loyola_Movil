@@ -81,15 +81,15 @@ class CreditPlanPayDetailAdapter(
         val date_format = SimpleDateFormat("dd-MMM-yyyy")
         val date_parse = SimpleDateFormat("yyyy-MM-dd")
 
-        val date = date_format.format(date_parse.parse(item.cred_fecha_venc.toString()))
+        val date = date_format.format(date_parse.parse(item.due_date.toString()))
 
         //Header
         holder.text_fecha_pago.text = date.toString()
-        holder.text_nro_trans.text = item.cred_num_cuota.toString()
+        holder.text_nro_trans.text = item.installment_number.toString()
 
         //Body
-        holder.text_capital.text = money.format(item.cred_monto_capi).toString() + " " + moneda.toString() + "."
-        holder.text_saldo_capital.text = money.format(item.credi_saldo_credi).toString() + " " + moneda.toString() + "."
+        holder.text_capital.text = money.format(item.principal_amount).toString() + " " + moneda.toString() + "."
+        holder.text_saldo_capital.text = money.format(item.principal_balance).toString() + " " + moneda.toString() + "."
 
 
         val background_shape = GradientDrawable()
@@ -125,15 +125,15 @@ class CreditPlanPayDetailAdapter(
             bundle.putString("nrotrans", nrotrans.toString())
             bundle.putString("moneda", moneda.toString())
 
-            bundle.putString("credId",item.id_credit_plan_pay_detail.toString())
-            bundle.putString("credNumCuota",item.cred_num_cuota.toString())
-            bundle.putString("credFecVenci",item.cred_fecha_venc.toString())
-            bundle.putString("credMontoCapi",money.format(item.cred_monto_capi).toString())
-            bundle.putString("credMontoInte",money.format(item.cred_monto_inte).toString())
-            bundle.putString("crediTotaCuota",money.format(item.credi_tota_cuota).toString())
-            bundle.putString("crediMontoCargos",money.format(item.credi_monto_cargos).toString())
-            bundle.putString("crediTotalCuota",money.format(item.credi_total_cuota).toString())
-            bundle.putString("crediSaldoCredi",money.format(item.credi_saldo_credi).toString())
+            bundle.putString("credId",item.credit_plan_pay_detail_id.toString())
+            bundle.putString("credNumCuota",item.installment_number.toString())
+            bundle.putString("credFecVenci",item.due_date.toString())
+            bundle.putString("credMontoCapi",money.format(item.principal_amount).toString())
+            bundle.putString("credMontoInte",money.format(item.interest_amount).toString())
+            bundle.putString("crediTotaCuota",money.format(item.tota_fee).toString())
+            bundle.putString("crediMontoCargos",money.format(item.amount_of_charges).toString())
+            bundle.putString("crediTotalCuota",money.format(item.total_fee).toString())
+            bundle.putString("crediSaldoCredi",money.format(item.principal_balance).toString())
 
             dialog.arguments = bundle
 
