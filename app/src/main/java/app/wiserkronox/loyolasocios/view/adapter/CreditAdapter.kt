@@ -38,7 +38,6 @@ class CreditAdapter(
         private val view: View
     ): RecyclerView.ViewHolder(view) {
 
-        val label_cred_number: TextView = view.findViewById(R.id.label_credit_number)
         val text_cred_number: TextView = view.findViewById(R.id.text_credit_number)
         val text_cred_moneda: TextView = view.findViewById(R.id.text_credit_moneda)
 
@@ -61,7 +60,7 @@ class CreditAdapter(
         val item = dataset[position]
 
         holder.text_cred_number.text = item.number.toString()
-        holder.text_cred_moneda.text = "Moneda: "+item.amount_desem.toString()+" "+item.coin.toString()+"."
+        holder.text_cred_moneda.text = "Moneda: "+item.disbursed_amount.toString()+" "+item.coin.toString()+"."
 
         val money = DecimalFormat(
             "#,###.00", DecimalFormatSymbols.getInstance(Locale("es", "BOL")))
@@ -87,47 +86,55 @@ class CreditAdapter(
 
         holder.button_to_detail.setOnClickListener { view ->
             val bundle = Bundle()
-            val amount_desem = money.format(item.amount_desem)
+
+            val amount_desem = money.format(item.disbursed_amount)
             val balance = money.format(item.balance)
-            bundle.putString("credId",item.credId.toString())
+
+            bundle.putString("credId",item.credit_id.toString())
             bundle.putString("credNumero",item.number.toString())
-            bundle.putString("credFecDesem",item.date_desem.toString())
+            bundle.putString("credFecDesem",item.disburement_date.toString())
             bundle.putString("credMontoDesem",amount_desem.toString())
             bundle.putString("crediMoneda",item.coin.toString())
             bundle.putString("crediSaldo",balance.toString())
             bundle.putString("crediEstado",item.state.toString())
-            bundle.putString("crediFecCancel",item.date_cancel.toString())
+            bundle.putString("crediFecCancel",item.cancellation_date.toString())
+
             view.findNavController().navigate(R.id.action_detaill,bundle)
         }
 
         holder.button_to_credit_plan_pay.setOnClickListener { view ->
+
             val bundle = Bundle()
-            val amount_desem = money.format(item.amount_desem)
+            val amount_desem = money.format(item.disbursed_amount)
             val balance = money.format(item.balance)
-            bundle.putString("credId",item.credId.toString())
+
+            bundle.putString("credId",item.credit_id.toString())
             bundle.putString("credNumero",item.number.toString())
-            bundle.putString("credFecDesem",item.date_desem.toString())
+            bundle.putString("credFecDesem",item.disburement_date.toString())
             bundle.putString("credMontoDesem",amount_desem.toString())
             bundle.putString("crediMoneda",item.coin.toString())
             bundle.putString("crediSaldo",balance.toString())
             bundle.putString("crediEstado",item.state.toString())
-            bundle.putString("crediFecCancel",item.date_cancel.toString())
+            bundle.putString("crediFecCancel",item.cancellation_date.toString())
 
             view.findNavController().navigate(R.id.action_plane_pay_credit,bundle)
         }
 
         holder.button_to_credit_extract.setOnClickListener {view ->
+
             val bundle = Bundle()
-            val amount_desem = money.format(item.amount_desem)
+            val amount_desem = money.format(item.disbursed_amount)
             val balance = money.format(item.balance)
-            bundle.putString("credId",item.credId.toString())
+
+            bundle.putString("credId",item.credit_id.toString())
             bundle.putString("credNumero",item.number.toString())
-            bundle.putString("credFecDesem",item.date_desem.toString())
+            bundle.putString("credFecDesem",item.disburement_date.toString())
             bundle.putString("credMontoDesem",amount_desem.toString())
             bundle.putString("crediMoneda",item.coin.toString())
             bundle.putString("crediSaldo",balance.toString())
             bundle.putString("crediEstado",item.state.toString())
-            bundle.putString("crediFecCancel",item.date_cancel.toString())
+            bundle.putString("crediFecCancel",item.cancellation_date.toString())
+
             view.findNavController().navigate(R.id.action_extract_credit,bundle)
         }
 

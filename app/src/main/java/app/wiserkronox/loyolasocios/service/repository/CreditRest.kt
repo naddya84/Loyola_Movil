@@ -8,13 +8,10 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Bundle
 import android.os.Environment
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import app.wiserkronox.loyolasocios.R
 import app.wiserkronox.loyolasocios.service.LoyolaApplication
 import app.wiserkronox.loyolasocios.service.model.*
@@ -22,11 +19,8 @@ import com.android.volley.Request
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.google.gson.Gson
-import com.google.gson.JsonObject
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.json.JSONObject
-import java.text.SimpleDateFormat
 
 class CreditRest(val context: Activity){
 
@@ -37,7 +31,6 @@ class CreditRest(val context: Activity){
         const val GET_CREDITS_EXTRACT = "get_credit_extract.php"
         const val GET_CREDITS_EXTRACTS_PDF = "get_credit_extract_pdf.php"
         const val STORAGE_PERMISSION_CODE = 101
-        private lateinit var navController: NavController
     }
 
     private fun getCreditURL(): String {
@@ -63,20 +56,22 @@ class CreditRest(val context: Activity){
             Request.Method.GET,
             url,
             { response ->
+
                 var response = Gson().fromJson(
                     response.toString(),
                     CreditRequestModel::class.java
                 )
+
                 val credits = response.result.map { credit ->
                     var new_credit = Credit()
-                    new_credit.credId = credit.id.toInt()
+                    new_credit.credit_id = credit.id.toInt()
                     new_credit.number = credit.credNumero.toInt()
-                    new_credit.date_desem = credit.credFechaDesem.toString()
-                    new_credit.amount_desem = credit.credMontoDesem.toDouble()
+                    new_credit.disburement_date = credit.credFechaDesem.toString()
+                    new_credit.disbursed_amount = credit.credMontoDesem.toDouble()
                     new_credit.coin = credit.crediMoneda.toString()
                     new_credit.balance = credit.crediSaldo.toDouble()
                     new_credit.state = credit.crediEstado.toString()
-                    new_credit.date_cancel = credit.crediFecCancel.toString()
+                    new_credit.cancellation_date = credit.crediFecCancel.toString()
                     return@map new_credit
                 }
                 GlobalScope.launch {
@@ -110,11 +105,13 @@ class CreditRest(val context: Activity){
     ) {
         val url = "${getCreditPlanPayURL()}?docu_cage=$docuCage&cred_number=$credNumber"
 
+        println(url);
         var request = StringRequest(
             Request.Method.GET,
             url,
             { response ->
 
+                println(response.toString())
                 var response = Gson().fromJson(
                     response.toString(),
                     CreditPlanPayRequestModel::class.java
@@ -128,28 +125,28 @@ class CreditRest(val context: Activity){
 
                     val credits_plan_pay = response.result.map { credit_plan_pay ->
                         var new_credit_plan_pay = CreditPlanPay()
-                        new_credit_plan_pay.id_credit = credit_plan_pay.id_credit.toInt()
-                        new_credit_plan_pay.id_credit_plan_pay = credit_plan_pay.id.toInt()
-                        new_credit_plan_pay.amount_desem = credit_plan_pay.credMontoDesem.toDouble()
-                        new_credit_plan_pay.plazo = credit_plan_pay.credPlazo.toInt()
-                        new_credit_plan_pay.tasa = credit_plan_pay.credTasa.toDouble()
-                        new_credit_plan_pay.periodo_pago = credit_plan_pay.credPeriPago.toString()
-                        new_credit_plan_pay.for_pago = credit_plan_pay.credForPago.toString()
+                        new_credit_plan_pay.credit_id = credit_plan_pay.id_credit.toInt()
+                        new_credit_plan_pay.credit_plan_pay_id = credit_plan_pay.id.toInt()
+                        new_credit_plan_pay.disbursed_amount = credit_plan_pay.credMontoDesem.toDouble()
+                        new_credit_plan_pay.term = credit_plan_pay.credPlazo.toInt()
+                        new_credit_plan_pay.rate = credit_plan_pay.credTasa.toDouble()
+                        new_credit_plan_pay.payment_period = credit_plan_pay.credPeriPago.toString()
+                        new_credit_plan_pay.way_to_pay = credit_plan_pay.credForPago.toString()
                         return@map new_credit_plan_pay
                     }
 
                     val credits_plan_pay_detail = response.detail.map{ credit_plan_pay_detail ->
                         var new_credit_plan_pay_detail = CreditPlanPayDetail()
-                        new_credit_plan_pay_detail.id_credit_plan_pay = credit_plan_pay_detail.id_credit_plan_pay.toInt()
-                        new_credit_plan_pay_detail.id_credit_plan_pay_detail = credit_plan_pay_detail.id.toInt()
-                        new_credit_plan_pay_detail.cred_num_cuota = credit_plan_pay_detail.credNumCuota.toInt()
-                        new_credit_plan_pay_detail.cred_fecha_venc = credit_plan_pay_detail.credFecVenci.toString()
-                        new_credit_plan_pay_detail.cred_monto_capi = credit_plan_pay_detail.credMontoCapi.toDouble()
-                        new_credit_plan_pay_detail.cred_monto_inte = credit_plan_pay_detail.credMontoInte.toDouble()
-                        new_credit_plan_pay_detail.credi_tota_cuota = credit_plan_pay_detail.crediTotaCuota.toDouble()
-                        new_credit_plan_pay_detail.credi_monto_cargos = credit_plan_pay_detail.crediMontoCargos.toDouble()
-                        new_credit_plan_pay_detail.credi_total_cuota = credit_plan_pay_detail.crediTotalCuota.toDouble()
-                        new_credit_plan_pay_detail.credi_saldo_credi = credit_plan_pay_detail.crediSaldoCredi.toDouble()
+                        new_credit_plan_pay_detail.credit_plan_pay_detail_id = credit_plan_pay_detail.id.toInt()
+                        new_credit_plan_pay_detail.credit_plan_pay_id = credit_plan_pay_detail.id_credit_plan_pay.toInt()
+                        new_credit_plan_pay_detail.installment_number = credit_plan_pay_detail.credNumCuota.toInt()
+                        new_credit_plan_pay_detail.due_date = credit_plan_pay_detail.credFecVenci.toString()
+                        new_credit_plan_pay_detail.principal_amount = credit_plan_pay_detail.credMontoCapi.toDouble()
+                        new_credit_plan_pay_detail.interest_amount = credit_plan_pay_detail.credMontoInte.toDouble()
+                        new_credit_plan_pay_detail.tota_fee = credit_plan_pay_detail.crediTotaCuota.toDouble()
+                        new_credit_plan_pay_detail.amount_of_charges = credit_plan_pay_detail.crediMontoCargos.toDouble()
+                        new_credit_plan_pay_detail.total_fee = credit_plan_pay_detail.crediTotalCuota.toDouble()
+                        new_credit_plan_pay_detail.principal_balance = credit_plan_pay_detail.crediSaldoCredi.toDouble()
                         return@map new_credit_plan_pay_detail
                     }
 
@@ -217,28 +214,27 @@ class CreditRest(val context: Activity){
                     val credits_extract = response.result.map { credit_extract ->
 
                         var new_credit_extract = CreditExtract()
-                        new_credit_extract.id_credit = credit_extract.id_credit.toInt()
-                        new_credit_extract.id_credit_extract = credit_extract.id.toInt()
-                        new_credit_extract.cred_monto_desem = credit_extract.credMontoDesem.toDouble()
-                        new_credit_extract.cred_plazo = credit_extract.credPlazo.toString()
-                        new_credit_extract.cred_estado = credit_extract.estado.toString()
+                        new_credit_extract.credit_id = credit_extract.id_credit.toInt()
+                        new_credit_extract.credit_extract_id = credit_extract.id.toInt()
+                        new_credit_extract.disbursed_amount = credit_extract.credMontoDesem.toDouble()
+                        new_credit_extract.term = credit_extract.credPlazo.toString()
+                        new_credit_extract.state = credit_extract.estado.toString()
                         return@map new_credit_extract
                     }
 
                     val credits_extract_detail = response.detail.map{ credit_extract_detail ->
 
                         var new_credit_extract_detail = CreditExtractDetail()
-
-                        new_credit_extract_detail.id_credit_extract = credit_extract_detail.id_credit_extract.toInt()
-                        new_credit_extract_detail.id_credit_extract_detail = credit_extract_detail.id.toInt()
-                        new_credit_extract_detail.cred_fec_pago = credit_extract_detail.credFecPago.toString()
-                        new_credit_extract_detail.cred_nro_trans = credit_extract_detail.credNroTrans.toInt()
-                        new_credit_extract_detail.cred_monto_capi = credit_extract_detail.credMontoCapi.toDouble()
-                        new_credit_extract_detail.cred_monto_inte = credit_extract_detail.crediMontoInte.toDouble()
-                        new_credit_extract_detail.credi_monto_penal = credit_extract_detail.crediMontoPenal.toDouble()
-                        new_credit_extract_detail.credi_monto_cargos = credit_extract_detail.crediMontoCargos.toDouble()
-                        new_credit_extract_detail.credi_total_pago = credit_extract_detail.crediTotalPago.toDouble()
-                        new_credit_extract_detail.credi_saldo_capi = credit_extract_detail.crediSaldoCapi.toDouble()
+                        new_credit_extract_detail.credit_extract_detail_id = credit_extract_detail.id.toInt()
+                        new_credit_extract_detail.credit_extract_id = credit_extract_detail.id_credit_extract.toInt()
+                        new_credit_extract_detail.payment_date = credit_extract_detail.credFecPago.toString()
+                        new_credit_extract_detail.number_transaction = credit_extract_detail.credNroTrans.toInt()
+                        new_credit_extract_detail.principal_amount = credit_extract_detail.credMontoCapi.toDouble()
+                        new_credit_extract_detail.interest_amount = credit_extract_detail.crediMontoInte.toDouble()
+                        new_credit_extract_detail.penalty_amount = credit_extract_detail.crediMontoPenal.toDouble()
+                        new_credit_extract_detail.amount_of_charges = credit_extract_detail.crediMontoCargos.toDouble()
+                        new_credit_extract_detail.total_to_pay = credit_extract_detail.crediTotalPago.toDouble()
+                        new_credit_extract_detail.principal_balance = credit_extract_detail.crediSaldoCapi.toDouble()
 
                         return@map new_credit_extract_detail
                     }
@@ -283,7 +279,7 @@ class CreditRest(val context: Activity){
         var dowloadid:Long = 0
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(context as Activity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                CertificateRest.STORAGE_PERMISSION_CODE
+                CreditRest.STORAGE_PERMISSION_CODE
             )
         } else {
             val new = object: BroadcastReceiver() {
@@ -317,7 +313,7 @@ class CreditRest(val context: Activity){
         var dowloadid:Long = 0
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(context as Activity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                CertificateRest.STORAGE_PERMISSION_CODE
+                CreditRest.STORAGE_PERMISSION_CODE
             )
         } else {
             val new = object: BroadcastReceiver() {
