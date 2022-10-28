@@ -21,17 +21,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:gravity="center_vertical"
             app:layout_constraintTop_toBottomOf="@id/infoTvTitleMission" >
+
                 <ImageView
-                    android:src="@drawable/icon_mission"
                     android:id="@+id/infoIVMission"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    android:layout_width="90sp"
+                    android:layout_height="90sp"
+                    android:src="@drawable/mission_icon"
+                    app:layout_constraintStart_toStartOf="parent" />
                 <TextView
                     android:id="@+id/infoTVContentMission"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:justificationMode="inter_word"
                     android:text="@string/info_content_mission"
                     android:padding="8sp"
                     app:layout_constraintStart_toEndOf="@+id/infoIVMission"/>
@@ -53,18 +56,19 @@
             android:id="@+id/info_vision_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             app:layout_constraintTop_toBottomOf="@+id/infoTVTitleVision">
                 <ImageView
                     android:id="@+id/icon_vision"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:src="@drawable/icon_vision" />
+                    android:layout_width="90sp"
+                    android:layout_height="90sp"
+                    android:src="@drawable/vision_icon" />
                 <TextView
                     android:id="@+id/infoTVContentVision"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="8sp"
+                    android:justificationMode="inter_word"
                     android:text="@string/info_content_vision"/>
         </LinearLayout>
 
@@ -82,17 +86,19 @@
             android:id="@+id/info_values_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             app:layout_constraintTop_toBottomOf="@+id/infoTVTitleValues">
                 <ImageView
                     android:id="@+id/icon_values"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/icon_values" />
+                    android:layout_width="90sp"
+                    android:layout_height="90sp"
+                    android:src="@drawable/values_icon" />
                 <TextView
                     android:id="@+id/infoTVContentValues"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="8sp"
+                    android:justificationMode="inter_word"
                     android:text="@string/info_content_values"
                     app:layout_constraintTop_toBottomOf="@+id/infoTVTitleValues"/>
         </LinearLayout>
