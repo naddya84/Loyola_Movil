@@ -27,6 +27,11 @@ import app.wiserkronox.loyolasocios.service.model.User
 import app.wiserkronox.loyolasocios.service.repository.LoyolaService
 import com.android.volley.*
 import com.android.volley.toolbox.HttpHeaderParser
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -139,6 +144,10 @@ class HomeActivity : AppCompatActivity() {
     }
     fun goCourse( ){
         navController.navigate(R.id.nav_course, null, null);
+    }
+
+    fun goMaps(){
+        navController.navigate(R.id.nav_map, null, null);
     }
 
 

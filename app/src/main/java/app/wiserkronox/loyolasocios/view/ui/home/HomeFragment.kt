@@ -39,6 +39,7 @@ class HomeFragment : Fragment() {
     private  lateinit var btn_certificado: LinearLayout
     private  lateinit var btn_credit: LinearLayout
     private  lateinit var btn_course: LinearLayout
+    private  lateinit var btn_sucursales: LinearLayout
 
     companion object {
         private const val TAG = "HomeFragment"
@@ -62,6 +63,7 @@ class HomeFragment : Fragment() {
         btn_certificado = root.findViewById(R.id.btn_certificados)
         btn_credit = root.findViewById(R.id.btn_credito)
         btn_course = root.findViewById(R.id.btn_curso)
+        btn_sucursales = root.findViewById(R.id.btn_sucursales)
         val user = LoyolaApplication.getInstance()?.user
 
         btnReview.setOnClickListener{
@@ -75,6 +77,9 @@ class HomeFragment : Fragment() {
         }
         btn_course.setOnClickListener{
             (activity as HomeActivity).goCourse()
+        }
+        btn_sucursales.setOnClickListener{
+            (activity as HomeActivity).goMaps()
         }
         user?.let {
             userName.text = it.names+" "+it.last_name_1+" "+it.last_name_2

@@ -150,4 +150,45 @@
     <string name="text_name_c">TextView</string>
     <string name="fecha_inicio">Fecha Inicio:</string>
     <string name="text_horario">horarios</string>
+
+    <!--    More Info Tab-->
+    <string name="info_tab_mision_vision_valores">Mision, Vision, Valores</string>
+    <string name="info_tab_voluntariado">Voluntariado</string>
+    <string name="info_tab_responsabilidad_social">Responsabilidad Social</string>
+
+    <!--    Mission, vision, values -->
+    <string name="menu_more_info">Mas Informacion</string>
+    <string name="info_title_mission">Misión</string>
+    <string name="info_content_mission">Mediante sólidos principios cooperativistas y administración financiera eficiente, sana y transparente de los recursos, ofrecemos productos y servicios financieros competitivos que permitan el crecimiento regional y nacional.</string>
+    <string name="info_title_vision">Vision</string>
+    <string name="info_content_vision">Consolidarse como una de las primeras cooperativas de Cochabamba, con suficiente capacidad humana, financiera y tecnológica, contribuyendo al beneficio económico y bienestar de nuestros socios y clientes.</string>
+    <string name="info_title_values">Valores</string>
+    <string name="info_content_values">Las cooperativas se basan en los valores de ayuda mutua, responsabilidad, democracia, igualdad, equidad y solidaridad. Siguiendo la tradición de sus fundadores sus miembros creen en los valores éticos de honestidad, transparencia, responsabilidad social y preocupación por los demás.</string>
+
+    <!--    Environment variables -->
+<!--    <string name="photo_directory">/</string>-->
+<!--    <string name="host_service">http://192.168.0.125/</string>-->
+<!--    <string name="home_service">Loyola_Web/services/</string>-->
+<!--    <string name="home_aplication">Loyola_Web/</string>-->
+<!--    <string name="dir_photo_course" >uploads/</string>-->
+<!--    <string name="dir_photo_service" >photo_perfil/</string>-->
+<!--    <string name="zoom_app_key" />-->
+<!--    <string name="zoom_app_secret" />-->
+<!--    <string name="google_id_token" />-->
+        <string name="photo_directory">/</string>
+        <string name="host_service">https://www.quarksocialcloud.com/</string>
+        <string name="home_service">apps_server/loyola/services/</string>
+        <string name="home_aplication">apps_server/loyola/</string>
+        <string name="dir_photo_course">apps_server/loyola/uploads/</string>
+        <string name="dir_photo_service">apps_server/loyola/photo_perfil/</string>
+        <string name="dir_social_responsibility_files">apps_server/loyola/social-responsibility/</string>
+        <string name="zoom_app_key" />
+        <string name="zoom_app_secret" />
+        <string name="google_id_token" />
+
+    <!-- Permissions -->
+    <string name="permission_rationale_location">Acceso a la localización es requerido.</string>
+    <string name="location_permission_denied">Se necesita habilitar la localización.</string>
+    <string name="permission_required_toast">Acceso a la localización es requerido.</string>
+
 </resources>

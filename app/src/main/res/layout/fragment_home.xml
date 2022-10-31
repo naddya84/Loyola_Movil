@@ -88,8 +88,8 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/carView"
-        android:layout_width="374dp"
-        android:layout_height="136dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:layout_marginTop="24dp"
         android:background="@color/background_card"
@@ -100,126 +100,169 @@
         app:layout_constraintTop_toBottomOf="@+id/text_inactive_status">
 
         <LinearLayout
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView19"
-                android:layout_width="204dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+    <!--Socio Number Row-->
+            <LinearLayout
+                android:id="@+id/nav_socio_number_row"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="8dp"
-                android:gravity="end"
-                android:text="@string/text_id_member"
-                android:textColor="@color/main_green" />
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="204dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="end"
+                    android:text="@string/text_id_member"
+                    android:textColor="@color/main_green" />
 
-            <TextView
-                android:id="@+id/text_user_id_member"
-                android:layout_width="36dp"
+                <TextView
+                    android:id="@+id/text_user_id_member"
+                    android:layout_width="36dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/main_green"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+    <!--Nav first row-->
+            <LinearLayout
+                android:id="@+id/nav_first_row"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="16dp"
-                android:textColor="@color/main_green"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:id="@+id/btn_certificados"
+                    android:layout_width="110dp"
+                    android:layout_height="97dp"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="4dp"
+                    android:elevation="@dimen/nav_header_height"
+                    android:orientation="vertical"
+                    android:background="@drawable/shape_radius_layout">
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="12dp"
+                        android:contentDescription="TODO"
+                        android:src="@drawable/btn_certificacion" />
+
+                    <TextView
+                        android:id="@+id/textView42"
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:layout_marginTop="1dp"
+                        android:gravity="center"
+                        android:text="CERTIFICADOS DE APORTACIÓN"
+                        android:textColor="#0B0101"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_credito"
+                    android:layout_width="107dp"
+                    android:layout_height="97dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/shape_radius_layout">
+
+                    <ImageView
+                        android:id="@+id/ico_credito"
+                        android:layout_width="match_parent"
+                        android:layout_height="31dp"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/btn_credito" />
+
+                    <TextView
+                        android:id="@+id/textView44"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:gravity="center"
+                        android:text="@string/text_creditos"
+                        android:textColor="#040404"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_curso"
+                    android:layout_width="109dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/shape_radius_layout">
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="16dp"
+                        android:contentDescription="TODO"
+                        android:src="@drawable/btn_cursos" />
+
+                    <TextView
+                        android:id="@+id/textView45"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center"
+                        android:text="CURSOS"
+                        android:textColor="#090808"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </LinearLayout>
+    <!--Nav Second Row-->
+            <LinearLayout
+                android:id="@+id/nav_second_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:id="@+id/btn_sucursales"
+                    android:layout_width="110dp"
+                    android:layout_height="97dp"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="4dp"
+                    android:elevation="@dimen/nav_header_height"
+                    android:orientation="vertical"
+                    android:background="@drawable/shape_radius_layout">
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/btn_certificacion" />
+
+                    <TextView
+                        android:id="@+id/textView43"
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:layout_marginTop="1dp"
+                        android:gravity="center"
+                        android:text="Sucursales"
+                        android:textColor="#0B0101"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="374dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="22dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/btn_certificados"
-                android:layout_width="110dp"
-                android:layout_height="97dp"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="4dp"
-                android:elevation="@dimen/nav_header_height"
-                android:orientation="vertical"
-                android:background="@drawable/shape_radius_layout">
-
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="32dp"
-                    android:layout_marginTop="12dp"
-                    android:contentDescription="TODO"
-                    android:src="@drawable/btn_certificacion" />
-
-                <TextView
-                    android:id="@+id/textView42"
-                    android:layout_width="match_parent"
-                    android:layout_height="34dp"
-                    android:layout_marginTop="1dp"
-                    android:gravity="center"
-                    android:text="CERTIFICADOS DE APORTACIÓN"
-                    android:textColor="#0B0101"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/btn_credito"
-                android:layout_width="107dp"
-                android:layout_height="97dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:orientation="vertical"
-                android:background="@drawable/shape_radius_layout">
-
-                <ImageView
-                    android:id="@+id/ico_credito"
-                    android:layout_width="match_parent"
-                    android:layout_height="31dp"
-                    android:layout_marginTop="16dp"
-                    android:src="@drawable/btn_credito" />
-
-                <TextView
-                    android:id="@+id/textView44"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:gravity="center"
-                    android:text="@string/text_creditos"
-                    android:textColor="#040404"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/btn_curso"
-                android:layout_width="109dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:orientation="vertical"
-                android:background="@drawable/shape_radius_layout">
-
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:layout_marginTop="16dp"
-                    android:contentDescription="TODO"
-                    android:src="@drawable/btn_cursos" />
-
-                <TextView
-                    android:id="@+id/textView45"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:gravity="center"
-                    android:text="CURSOS"
-                    android:textColor="#090808"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-        </LinearLayout>
-
     </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,7 +20,7 @@ import app.wiserkronox.loyolasocios.R
 class SocialResponsabilityRest(val context: Activity) {
 
     private fun getPdfURL(): String {
-        return "${context.getString(R.string.host_service)}uploads/social-responsibility/"
+        return "${context.getString(R.string.host_service)}${context.getString(R.string.dir_social_responsibility_files)}"
     }
     fun getPdf(pdfName: String = "") {
         if (isNetworkAvailable(context)) {
@@ -64,7 +64,7 @@ class SocialResponsabilityRest(val context: Activity) {
                     new,
                     IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
                 )
-                Toast.makeText(context, "Archivo descargado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Descargando...", Toast.LENGTH_SHORT).show()
             }
         } else {
             Toast.makeText(context, "Error de conexión con el servidor", Toast.LENGTH_SHORT).show()
